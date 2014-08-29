@@ -850,51 +850,57 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 <span class="hljs-preprocessor"><span class="hljs-keyword">import</span> std.conv;</span>
 <span class="hljs-preprocessor"><span class="hljs-keyword">import</span> std.string;</span>
 </code></pre>
-<p> This program is documented in a literate fashion.<br> In this case we prefix all lines that belong to the doc with a &#39;//&#39;<br> I might change that behaviour and will atleast make it optional.</p>
-<pre><code class="lang-d">
-<span class="hljs-typename">string</span> docLinePrefix = <span class="hljs-string">"//"</span>;
+<p>This program is documented in a literate fashion.<br>In this case we prefix all lines that belong to the doc with a &#39;// &#39;<br>note that extra space at the back, that means you can still comment lines away without them getting in the docs, just don&#39;t put a space<br>jus do //hidden</p>
+<pre><code class="lang-d"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">needlessExample</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-comment">//hiya!</span>
+}
 </code></pre>
-<p> The whole idea offcourse is to document this program and write it at the same time.<br> When you&#39;re reading this <em>nicely</em> formatted it means it worked.<br> We&#39;ll see how it goes!</p>
-<pre><code class="lang-d">
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">string</span> args[])</span>
+<p>I might change that behaviour and will atleast make it optional.</p>
+<pre><code class="lang-d"><span class="hljs-typename">string</span> docLinePrefix = <span class="hljs-string">"// "</span>;
+</code></pre>
+<p>The whole idea offcourse is to document this program and write it at the same time.<br>When you&#39;re reading this <em>nicely</em> formatted it means it worked.<br>We&#39;ll see how it goes!</p>
+<pre><code class="lang-d"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">string</span> args[])</span>
 </span>{
     <span class="hljs-keyword">if</span> (args.length &lt; <span class="hljs-number">2</span>)
     {
         writeln(<span class="hljs-string">"Program expects a source file!"</span>);
     }<span class="hljs-keyword">else</span>{
 </code></pre>
-<p> I open the file and read it in in lines.</p>
+<p>I open the file and read it in in lines.</p>
 <pre><code class="lang-d">        <span class="hljs-literal">auto</span> sourceFile = <span class="hljs-keyword">File</span>(args[<span class="hljs-number">1</span>]).byLine()<span class="hljs-comment">;</span>
 </code></pre>
-<p> Before I start reading these lines like crazy, what will I do?<br> I have two states: documentation or code.<br> For every line I care if it is documentation.</p>
+<p>Before I start reading these lines like crazy, what will I do?<br>I have two states: documentation or code.<br>For every line I care if it is documentation.</p>
 <pre><code class="lang-d">        <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isDocumentation</span><span class="hljs-params">(<span class="hljs-keyword">string</span> line)</span>
         </span>{
             <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-title">startsWith</span><span class="hljs-params">(stripLeft(line)</span>, docLinePrefix)</span>;
         }
 </code></pre>
-<p> If it is documentation I want to get a cleaned up string to write.</p>
+<p>If it is documentation I want to get a cleaned up string to write.</p>
 <pre><code class="lang-d">        <span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">cleanDocString</span><span class="hljs-params">(<span class="hljs-keyword">string</span> line)</span>
         </span>{
             <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-title">stripLeft</span><span class="hljs-params">(line)</span>[docLinePrefix.length .. $]</span>;
         }
 </code></pre>
-<p> And I have opened a file to write to.</p>
+<p>And I have opened a file to write to.</p>
 <pre><code class="lang-d">        <span class="hljs-literal">auto</span> destFile = <span class="hljs-keyword">File</span>(<span class="hljs-string">"output.md"</span>, <span class="hljs-string">"w"</span>)<span class="hljs-comment">;</span>
 </code></pre>
-<p> In the output file I need to write all code surrounded by a github markdown d code tags.</p>
+<p>In the output file I need to write all code surrounded by a github markdown d code tags.</p>
 <pre><code class="lang-d">        string code_open_tag = <span class="hljs-string">"<span class="hljs-escape">``</span><span class="hljs-escape">` </span>d"</span><span class="hljs-comment">;</span>
         string code_close_tag = <span class="hljs-string">"<span class="hljs-escape">``</span><span class="hljs-escape">`"</span>;</span>
 </code></pre>
-<p> that means I&#39;ll have to remember state too.</p>
-<pre><code class="lang-d">        <span class="hljs-built_in">bool</span> wasWritingDoc = <span class="hljs-literal">true</span>;
+<p>that means I&#39;ll have to remember state too.</p>
+<pre><code class="lang-d">        <span class="hljs-keyword">bool</span> wasWritingDoc = <span class="hljs-literal">true</span>;
 
         <span class="hljs-keyword">foreach</span>(line; sourceFile){
-
-            <span class="hljs-keyword">if</span> (isDocumentation(to!<span class="hljs-built_in">string</span>(line)))
+</code></pre>
+<p>If we were writing docs and just put in some white lines you don&#39;t want empty code boxes.<br>Not even beginning about the case when you just comment out a bunch of lines</p>
+<pre><code class="lang-d">            <span class="hljs-keyword">if</span> (strip(<span class="hljs-built_in">line</span>) == <span class="hljs-string">""</span> &amp;&amp; wasWritingDoc){
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isDocumentation(<span class="hljs-built_in">to</span>!<span class="hljs-keyword">string</span>(<span class="hljs-built_in">line</span>)))
             {
                 <span class="hljs-keyword">if</span> (! wasWritingDoc){
 </code></pre>
-<p> Then we were writing code, so I&#39;ll have to close the code tag.</p>
+<p>Then we were writing code, so I&#39;ll have to close the code tag.</p>
 <pre><code class="lang-d">                    destFile<span class="hljs-built_in">.</span>writeln(code_close_tag);
                 }
                 destFile<span class="hljs-built_in">.</span>writeln(cleanDocString(<span class="hljs-keyword">to</span><span class="hljs-subst">!</span><span class="hljs-built_in">string</span>(line)));
@@ -902,7 +908,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
             }<span class="hljs-keyword">else</span>{
                 <span class="hljs-keyword">if</span> (wasWritingDoc){
 </code></pre>
-<p> Then we need to open a code tag</p>
+<p>Then we need to open a code tag</p>
 <pre><code class="lang-d">                    destFile.writeln(code_open_tag);
                 }
                 destFile.writeln(line);
@@ -910,7 +916,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
             }
         }
 </code></pre>
-<p> when we are done and we were writing code then we close the code tag.</p>
+<p>when we are done and we were writing code then we close the code tag.</p>
 <pre><code class="lang-d">        <span class="hljs-keyword">if</span> (! wasWritingDoc){
             destFile.writeln(code_close_tag);
         }
