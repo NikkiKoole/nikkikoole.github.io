@@ -1,42 +1,29 @@
 
-
-
-
-
-// OPTIMIZATION #2
-// dont toggle the classNames directly, instead use an array to keep track and apply at the end.
-// it makes toggling much faster
-var toggle_optimized = function(classNames) {
-    // I will receive an array of classNames, toggle them and return the new array.
+var toggleStrings = function(name1, name2, collection) {
     var toggled = [];
     var name;
-    for (var i in classNames) {
-        name = classNames[i];
-        if (name === 'todoItem') {
-            toggled.push('todoItemDone');
-        } else if (name === 'todoItemDone') {
-            toggled.push('todoItem');
+    for (var i in collection) {
+        name = collection[i];
+        if (name === name1) {
+            toggled.push(name2);
+        } else if (name === name2) {
+            toggled.push(name1);
         }
     }
     return toggled;
 };
-var log_time = function(duration) {
+var logTime = function(duration) {
     document.getElementById('time_feedback').innerHTML = 'that took just '+ (duration)+' millisecs';
 };
-var log_count_data = function() {
+var logCountData = function(root) {
     var children = root.childNodes;
     var done = root.getElementsByClassName('todoItemDone').length;
-    var text = 'of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.';
+    var text = 'of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted+' are deleted.';
      document.getElementById('items_done_feedback').innerHTML = text;
 };
 
-
-var add_amount = 10;
 var todoItem;
-var root;
-//var time_feedback;
-//var items_done_feedback;
-var deleted_count = 0;
+var deleted = 0;
 
 var element = function(tag, id, className) {
     var element = document.createElement(tag);
@@ -70,8 +57,8 @@ var setProps = function(element, properties) {
     }
 };
 
-var replace = function(elem_old, elem_new) {
-    elem_old.parentNode.replaceChild(elem_new, elem_old);
+var replace = function(elemOld, elemNew) {
+    elemOld.parentNode.replaceChild(elemNew, elemOld);
 };
 
 window.onload = function() {
@@ -82,7 +69,7 @@ window.onload = function() {
 
     append(element('h1', 'time_feedback'), document.body);
     append(element('h3', 'items_done_feedback'), document.body);
-    root = element('div', 'root', 'one');
+    var root = element('div', 'root', 'one');
     append(root, document.body);
 
     root.onmouseover = function(e){
@@ -94,12 +81,12 @@ window.onload = function() {
         changeClass(e.target, 'markButton over', 'markButton out');
     };
     root.onclick = function(e){
-        if (e.target.className === 'todoText' || e.target.className === 'todoText done') {
-            var todoText = e.target;
+        var clicked = e.target;
+        if (clicked.className === 'todoText' || clicked.className === 'todoText done') {
             var input = element('input');
-            setProps(input, {type:'text', value:todoText.innerHTML, oldClass:todoText.className});
-            replace(todoText, input);
-            var newText = element('h2', '', todoText.className);
+            setProps(input, {type:'text', value:clicked.innerHTML, oldClass:clicked.className});
+            replace(clicked, input);
+            var newText = element('h2', '', clicked.className);
             input.onblur = input.onkeydown =   function(e2) {
                 newText.innerHTML = input.value;
                 if (e2.type === 'blur' || e2.keyCode === 13) {
@@ -108,130 +95,88 @@ window.onload = function() {
                 }
             };
         }
-        if (e.target.className ===  'closeButton over') {
-            delete_single_item( e.target.parentNode);
+        if (clicked.className ===  'closeButton over') {
+            deleteSingle( e.target.parentNode);
         }
-        if (e.target.className ===  'markButton over') {
+        if (clicked.className ===  'markButton over') {
             swapClass(e.target.parentNode, 'todoItem', 'todoItemDone');
         }
-        log_count_data();
-
+        logCountData(root);
     };
 };
 
 
-var deleteAllItems = function() {
-    deleted_count += root.childNodes.length;
-    root.innerHTML = '';
-    //root = root.cloneNode(true);
+var deleteAllChildren = function(element) {
+    deleted += element.childNodes.length;
+    element.innerHTML = '';
 };
-window.deleteAllItems = deleteAllItems;
-var delete_single_item = function (item) {
+
+var deleteSingle = function (item) {
     item.parentNode.removeChild(item);
-    deleted_count += 1;
+    deleted += 1;
 };
 
-var create200TodoItems = function(){
-    var newDiv;
-    var amountAlreadyHere = root.childNodes.length;
-    //deleteAllItems();
-
-
-    for (var i = 1; i <= add_amount; i++) {
-        newDiv = todoItem.cloneNode(true);
-        newDiv.childNodes[2].innerHTML = (amountAlreadyHere+i)+ ') write text here';
-        root.appendChild(newDiv);
+var batchCloneTodoItems = function(amount) {
+    var clone;
+    var docFragment = document.createDocumentFragment();
+    for (var i = 0; i < amount; i+=1) {
+        clone = todoItem.cloneNode(true);
+        clone.childNodes[2].innerHTML = 'write your todo here.';
+        docFragment.appendChild(clone);
     }
-    log_count_data();
-    //items_done_feedback.innerHTML = getItemsDoneFeedback();
+    return docFragment;
 };
 
-var toggleAll = function() {
-    var classNames = [];
-    var children = root.childNodes;
-
-    for(var i = 0; i < children.length; i+=1){
-        classNames.push(children[i].className);
+var getClassNamesInArray = function(collection){
+    var names = [];
+    for (var i = 0; i < collection.length; i+=1) {
+        names.push(collection[i].className);
     }
-
-    classNames = toggle_optimized(classNames);
-
-    for (i in classNames) {
-        children[i].className = classNames[i];
-    }
-    //log_count_data();
+    return names;
 };
 
-var create200TodoItemsAndToggleFiveTimes = function() {
-    var newDiv;
-    var amountAlreadyHere = root.childNodes.length;
-    var i;
-    for (i = 1; i <= add_amount; i++) {
-        newDiv = todoItem.cloneNode(true);
-        newDiv.childNodes[2].innerHTML = (amountAlreadyHere+i)+ ') write text here';
-        root.appendChild(newDiv);
+var applyClassNameArrayToCollection = function(array, collection) {
+    for (var i in array) {
+        collection[i].className = array[i];
     }
-    var classNames = [];
-    var children = root.childNodes;
-
-    for(var i = 0; i < children.length; i+=1){
-        classNames.push(children[i].className);
-    }
-
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-
-    for (i in classNames) {
-        children[i].className = classNames[i];
-    }
-
-    log_count_data();
-    //items_done_feedback.innerHTML = getItemsDoneFeedback();
-
 };
-
 
 window.runBenchmark1 = function() {
-    var d = new Date();
-    var before = d.getTime();
-    add_amount = 200;
-    create200TodoItems();
-    var d2 = new Date();
-    var after = d2.getTime();
-    //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
-
-    log_time(after-before);
-    log_count_data();
+    var root = document.getElementById('root');
+    var before = (new Date()).getTime();
+    append(batchCloneTodoItems(100), root);
+    var after = (new Date()).getTime();
+    logTime(after-before);
+    logCountData(root);
 };
+
 window.runBenchmark2 = function() {
-    var d = new Date();
-    var before = d.getTime();
-    add_amount = 200;
-    create200TodoItemsAndToggleFiveTimes();
-    var d2 = new Date();
-    var after = d2.getTime();
-    //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    var root = document.getElementById('root');
+    var before = (new Date()).getTime();
 
-    log_time(after-before);
-    log_count_data();
-
-};
-window.runBenchmark3 = function() {
-    var d = new Date();
-    var before = d.getTime();
-    add_amount = 100;
-    for (var i = 0; i < 10; i+=1) {
-        create200TodoItems();
-        toggleAll();
-        deleteAllItems();
+    append(batchCloneTodoItems(100), root);
+    var classNames = getClassNamesInArray(root.childNodes);
+    for (var i = 0; i < 5; i+=1) {
+        classNames = toggleStrings('todoItem', 'todoItemDone', classNames);
     }
-    var d2 = new Date();
-    var after = d2.getTime();
-    //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    applyClassNameArrayToCollection(classNames, root.childNodes);
 
-    log_time(after-before);
-    log_count_data();
+    var after = (new Date()).getTime();
+    logTime(after-before);
+    logCountData(root);
+};
+
+window.runBenchmark3 = function() {
+    var root = document.getElementById('root');
+    var before = (new Date()).getTime();
+    for (var i = 0; i < 10; i+=1) {
+        append(batchCloneTodoItems(100), root);
+        var classNames = getClassNamesInArray(root.childNodes);
+        classNames = toggleStrings('todoItem', 'todoItemDone', classNames);
+        applyClassNameArrayToCollection(classNames, root.childNodes);
+        deleteAllChildren(root);
+    }
+    var after = (new Date()).getTime();
+    logTime(after-before);
+    logCountData(root);
 };
