@@ -1,23 +1,29 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var hello = require('./simple_lib').hello;
+var toggleStrings = require('./simple_lib').toggleStrings;
+var deleteAllChildren = require('./simple_lib').deleteAllChildren;
+var deleteSingle = require('./simple_lib').deleteSingle;
+var getClassNamesInArray = require('./simple_lib').getClassNamesInArray;
+var applyClassNameArrayToCollection = require('./simple_lib').applyClassNameArrayToCollection;
+var element = require('./simple_lib').element;
+var append = require('./simple_lib').append;
+var changeClass = require('./simple_lib').changeClass;
+var swapClass = require('./simple_lib').swapClass;
+var setProps = require('./simple_lib').setProps;
+var replace = require('./simple_lib').replace;
 
-
-hello();
 var todoItem;
-var deleted = 0;
+var deleteCount = 0;
 
-var logResult = function(duration) {
-    document.getElementById('time_feedback').innerHTML = 'That took just '+ (duration)+' millisecs.';
-};
-var logCounts = function(root) {
-    var children = root.childNodes;
-    var done = root.getElementsByClassName('todoItemDone').length;
-    var text =
-            'Of a total of '+ root.childNodes.length +
-            ' stuffs that need doing, '+
-            done +' stuffs are marked done, ' +
-            deleted + ' are deleted.';
-     document.getElementById('items_done_feedback').innerHTML = text;
+
+var batchCloneTodoItems = function(amount) {
+    var clone;
+    var docFragment = document.createDocumentFragment();
+    for (var i = 0; i < amount; i+=1) {
+        clone = todoItem.cloneNode(true);
+        clone.childNodes[2].innerHTML = 'write your todo here.';
+        docFragment.appendChild(clone);
+    }
+    return docFragment;
 };
 
 
@@ -26,9 +32,9 @@ window.onload = function() {
     append(element('div', '', 'closeButton out'), todoItem);
     append(element('div', '', 'markButton out'), todoItem);
     append(element('h2', '', 'todoText'), todoItem);
-
     append(element('h1', 'time_feedback'), document.body);
     append(element('h3', 'items_done_feedback'), document.body);
+
     var root = element('div', 'root', 'one');
     append(root, document.body);
 
@@ -56,7 +62,7 @@ window.onload = function() {
             };
         }
         if (clicked.className ===  'closeButton over') {
-            deleteSingle( e.target.parentNode);
+            deleteCount += deleteSingle( e.target.parentNode);
         }
         if (clicked.className ===  'markButton over') {
             swapClass(e.target.parentNode, 'todoItem', 'todoItemDone');
@@ -65,7 +71,19 @@ window.onload = function() {
     };
 };
 
-
+var logResult = function(duration) {
+    document.getElementById('time_feedback').innerHTML = 'That took just '+ (duration)+' millisecs.';
+};
+var logCounts = function(root) {
+    var children = root.childNodes;
+    var done = root.getElementsByClassName('todoItemDone').length;
+    var text =
+            'Of a total of '+ root.childNodes.length +
+            ' stuffs that need doing, '+
+            done +' stuffs are marked done, ' +
+            deleteCount + ' are deleted.';
+     document.getElementById('items_done_feedback').innerHTML = text;
+};
 
 window.runBenchmark1 = function() {
     var root = document.getElementById('root');
@@ -100,13 +118,14 @@ window.runBenchmark3 = function() {
         var classNames = getClassNamesInArray(root.childNodes);
         classNames = toggleStrings('todoItem', 'todoItemDone', classNames);
         applyClassNameArrayToCollection(classNames, root.childNodes);
-        deleteAllChildren(root);
+        deleteCount += deleteAllChildren(root);
     }
     var after = (new Date()).getTime();
     logResult(after-before);
     logCounts(root);
 };
 
+},{"./simple_lib":2}],2:[function(require,module,exports){
 
 
 
@@ -126,25 +145,17 @@ var toggleStrings = function(name1, name2, collection) {
 };
 
 var deleteAllChildren = function(element) {
-    deleted += element.childNodes.length;
+    var deleted = element.childNodes.length;
     element.innerHTML = '';
+    return deleted;
 };
 
 var deleteSingle = function (item) {
     item.parentNode.removeChild(item);
-    deleted += 1;
+    return 1;
 };
 
-var batchCloneTodoItems = function(amount) {
-    var clone;
-    var docFragment = document.createDocumentFragment();
-    for (var i = 0; i < amount; i+=1) {
-        clone = todoItem.cloneNode(true);
-        clone.childNodes[2].innerHTML = 'write your todo here.';
-        docFragment.appendChild(clone);
-    }
-    return docFragment;
-};
+
 
 var getClassNamesInArray = function(collection){
     var names = [];
@@ -196,9 +207,18 @@ var replace = function(elemOld, elemNew) {
     elemOld.parentNode.replaceChild(elemNew, elemOld);
 };
 
-},{"./simple_lib":2}],2:[function(require,module,exports){
 module.exports = {
-    hello:function(){console.log("ah yes")}
+    toggleStrings:toggleStrings,
+    deleteAllChildren:deleteAllChildren,
+    deleteSingle:deleteSingle,
+    getClassNamesInArray:getClassNamesInArray,
+    applyClassNameArrayToCollection:applyClassNameArrayToCollection,
+    element:element,
+    append:append,
+    changeClass:changeClass,
+    swapClass:swapClass,
+    setProps:setProps,
+    replace:replace
 };
 
 },{}]},{},[1])

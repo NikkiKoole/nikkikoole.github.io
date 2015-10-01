@@ -1,225 +1,125 @@
+var toggleStrings = require('./simple_lib').toggleStrings;
+var deleteAllChildren = require('./simple_lib').deleteAllChildren;
+var deleteSingle = require('./simple_lib').deleteSingle;
+var getClassNamesInArray = require('./simple_lib').getClassNamesInArray;
+var applyClassNameArrayToCollection = require('./simple_lib').applyClassNameArrayToCollection;
+var element = require('./simple_lib').element;
+var append = require('./simple_lib').append;
+var changeClass = require('./simple_lib').changeClass;
+var swapClass = require('./simple_lib').swapClass;
+var setProps = require('./simple_lib').setProps;
+var replace = require('./simple_lib').replace;
 
-
-
-var getItemsDoneFeedback = function () {
-    var done = 0;
-    var children = root.childNodes;
-    for(var child in children){
-        if (children[child].className === 'todoItemDone') {
-            done += 1;
-        }
-    }
-
-    return ('of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.');
-};
-
-
-
-// OPTIMIZATION #2
-// dont toggle the classNames directly, instead use an array to keep track and apply at the end.
-// it makes toggling much faster
-var toggle_optimized = function(classNames) {
-    // I will receive an array of classNames, toggle them and return the new array.
-    var toggled = [];
-    var name;
-    for (var i in classNames) {
-        name = classNames[i];
-        if (name === 'todoItem') {
-            toggled.push('todoItemDone');
-        } else if (name === 'todoItemDone') {
-            toggled.push('todoItem');
-        }
-    }
-    return toggled;
-};
-
-var add_amount = 10;
 var todoItem;
-var root;
-var time_feedback;
-var items_done_feedback;
-var deleted_count = 0;
+var deleteCount = 0;
+
+
+var batchCloneTodoItems = function(amount) {
+    var clone;
+    var docFragment = document.createDocumentFragment();
+    for (var i = 0; i < amount; i+=1) {
+        clone = todoItem.cloneNode(true);
+        clone.childNodes[2].innerHTML = 'write your todo here.';
+        docFragment.appendChild(clone);
+    }
+    return docFragment;
+};
+
 
 window.onload = function() {
-    time_feedback =  document.createElement('h1');
-    document.body.appendChild(time_feedback);
-    items_done_feedback =  document.createElement('h3');
-    document.body.appendChild(items_done_feedback);
-    todoItem = document.createElement('div');
-    todoItem.className = 'todoItem';
-    var todoClose = document.createElement('div');
-    todoClose.className = 'closeButton out';
-    todoItem.appendChild(todoClose);
+    todoItem = element('div', '', 'todoItem');
+    append(element('div', '', 'closeButton out'), todoItem);
+    append(element('div', '', 'markButton out'), todoItem);
+    append(element('h2', '', 'todoText'), todoItem);
+    append(element('h1', 'time_feedback'), document.body);
+    append(element('h3', 'items_done_feedback'), document.body);
 
-    var todoMark = document.createElement('div');
-    todoMark.className = 'markButton out';
-    todoItem.appendChild(todoMark);
+    var root = element('div', 'root', 'one');
+    append(root, document.body);
 
-    var todoText = document.createElement('h2');
-    todoText.className = 'todoText';
-    todoItem.appendChild(todoText);
-    root = document.createElement('div');
-    root.id = 'root';
-    root.className = "one";
-    document.body.appendChild(root);
-
-    // OPTIMIZATION #1
-    // add eventhandlers to the root iinstead of to the individual Nodes,
-    // it makes cloning many nodes much faster.
     root.onmouseover = function(e){
-        if (e.target.className ===  'closeButton out') {
-            e.target.className =  'closeButton over';
-        }
-        if (e.target.className ===  'markButton out') {
-            e.target.className =  'markButton over';
-        }
+        changeClass(e.target, 'closeButton out', 'closeButton over');
+        changeClass(e.target, 'markButton out', 'markButton over');
     };
     root.onmouseout = function(e){
-        if (e.target.className ===  'closeButton over') {
-            e.target.className =  'closeButton out';
-        }
-        if (e.target.className ===  'markButton over') {
-            e.target.className =  'markButton out';
-        }
+        changeClass(e.target, 'closeButton over', 'closeButton out');
+        changeClass(e.target, 'markButton over', 'markButton out');
     };
     root.onclick = function(e){
-        if (e.target.className === 'todoText' || e.target.className === 'todoText done') {
-            var input =  document.createElement('input');
-            input.type = 'text';
-            input.value = e.target.innerHTML;
-            input.oldClass = e.target.className;
-            e.target.parentNode.replaceChild(input, e.target);
-
-            input.onchange = input.onblur = input.oninput =  function(e2) {
-                var text = document.createElement('h2');
-                text.className = e2.target.oldClass;
-                text.innerHTML = e2.target.value;
-                e2.target.parentNode.replaceChild(text, e2.target);
+        var clicked = e.target;
+        if (clicked.className === 'todoText' || clicked.className === 'todoText done') {
+            var input = element('input');
+            setProps(input, {type:'text', value:clicked.innerHTML, oldClass:clicked.className});
+            replace(clicked, input);
+            var newText = element('h2', '', clicked.className);
+            input.onblur = input.onkeydown =   function(e2) {
+                newText.innerHTML = input.value;
+                if (e2.type === 'blur' || e2.keyCode === 13) {
+                    input.onblur = null;
+                    replace(input, newText);
+                }
             };
-
-
         }
-        if (e.target.className ===  'closeButton over') {
-            delete_single_item( e.target.parentNode);
-            items_done_feedback.innerHTML = getItemsDoneFeedback();
+        if (clicked.className ===  'closeButton over') {
+            deleteCount += deleteSingle( e.target.parentNode);
         }
-        if (e.target.className ===  'markButton over') {
-            //here we set an item to todo or done and NOT delete it
-            if (e.target.parentNode.className === 'todoItem') {
-                e.target.parentNode.className = 'todoItemDone';
-            } else if (e.target.parentNode.className === 'todoItemDone') {
-                e.target.parentNode.className = 'todoItem';
-            }
-            items_done_feedback.innerHTML = getItemsDoneFeedback();
+        if (clicked.className ===  'markButton over') {
+            swapClass(e.target.parentNode, 'todoItem', 'todoItemDone');
         }
-
+        logCounts(root);
     };
 };
 
-
-var deleteAllItems = function() {
-    deleted_count += root.childNodes.length;
-    root = root.cloneNode(false);
+var logResult = function(duration) {
+    document.getElementById('time_feedback').innerHTML = 'That took just '+ (duration)+' millisecs.';
 };
-
-var delete_single_item = function (item) {
-    item.parentNode.removeChild(item);
-    deleted_count += 1;
-};
-
-var create200TodoItems = function(){
-    var newDiv;
-    var amountAlreadyHere = root.childNodes.length;
-    //deleteAllItems();
-
-
-    for (var i = 1; i <= add_amount; i++) {
-        newDiv = todoItem.cloneNode(true);
-        newDiv.childNodes[2].innerHTML = (amountAlreadyHere+i)+ ') write text here';
-        root.appendChild(newDiv);
-    }
-
-    items_done_feedback.innerHTML = getItemsDoneFeedback();
-};
-
-var toggleAll = function() {
-    var classNames = [];
+var logCounts = function(root) {
     var children = root.childNodes;
-
-    for(var i = 0; i < children.length; i+=1){
-        classNames.push(children[i].className);
-    }
-
-    classNames = toggle_optimized(classNames);
-
-    for (i in classNames) {
-        children[i].className = classNames[i];
-    }
+    var done = root.getElementsByClassName('todoItemDone').length;
+    var text =
+            'Of a total of '+ root.childNodes.length +
+            ' stuffs that need doing, '+
+            done +' stuffs are marked done, ' +
+            deleteCount + ' are deleted.';
+     document.getElementById('items_done_feedback').innerHTML = text;
 };
-
-var create200TodoItemsAndToggleFiveTimes = function() {
-    var newDiv;
-    var amountAlreadyHere = root.childNodes.length;
-    var i;
-    for (i = 1; i <= add_amount; i++) {
-        newDiv = todoItem.cloneNode(true);
-        newDiv.childNodes[2].innerHTML = (amountAlreadyHere+i)+ ') write text here';
-        root.appendChild(newDiv);
-    }
-    var classNames = [];
-    var children = root.childNodes;
-
-    for(var i = 0; i < children.length; i+=1){
-        classNames.push(children[i].className);
-    }
-
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-    classNames = toggle_optimized(classNames);
-
-    for (i in classNames) {
-        children[i].className = classNames[i];
-    }
-
-
-    items_done_feedback.innerHTML = getItemsDoneFeedback();
-
-};
-
 
 window.runBenchmark1 = function() {
-    var d = new Date();
-    var before = d.getTime();
-    add_amount = 200;
-    create200TodoItems();
-    var d2 = new Date();
-    var after = d2.getTime();
-    time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
-    ;
+    var root = document.getElementById('root');
+    var before = (new Date()).getTime();
+    append(batchCloneTodoItems(200), root);
+    var after = (new Date()).getTime();
+    logResult(after-before);
+    logCounts(root);
 };
+
 window.runBenchmark2 = function() {
-    var d = new Date();
-    var before = d.getTime();
-    add_amount = 200;
-    create200TodoItemsAndToggleFiveTimes();
-    var d2 = new Date();
-    var after = d2.getTime();
-    time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    var root = document.getElementById('root');
+    var before = (new Date()).getTime();
 
-};
-window.runBenchmark3 = function() {
-    var d = new Date();
-    var before = d.getTime();
-    add_amount = 100;
-    for (var i = 0; i < 10; i+=1) {
-        create200TodoItems();
-        toggleAll();
-        deleteAllItems();
+    append(batchCloneTodoItems(200), root);
+    var classNames = getClassNamesInArray(root.childNodes);
+    for (var i = 0; i < 5; i+=1) {
+        classNames = toggleStrings('todoItem', 'todoItemDone', classNames);
     }
-    var d2 = new Date();
-    var after = d2.getTime();
-    time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    applyClassNameArrayToCollection(classNames, root.childNodes);
 
+    var after = (new Date()).getTime();
+    logResult(after-before);
+    logCounts(root);
+};
+
+window.runBenchmark3 = function() {
+    var root = document.getElementById('root');
+    var before = (new Date()).getTime();
+    for (var i = 0; i < 10; i+=1) {
+        append(batchCloneTodoItems(100), root);
+        var classNames = getClassNamesInArray(root.childNodes);
+        classNames = toggleStrings('todoItem', 'todoItemDone', classNames);
+        applyClassNameArrayToCollection(classNames, root.childNodes);
+        deleteCount += deleteAllChildren(root);
+    }
+    var after = (new Date()).getTime();
+    logResult(after-before);
+    logCounts(root);
 };
