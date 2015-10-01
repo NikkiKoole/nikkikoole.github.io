@@ -1,18 +1,6 @@
 
 
 
-var getItemsDoneFeedback = function () {
-    var done = 0;
-    var children = root.childNodes;
-    for(var child in children){
-        if (children[child].className === 'todoItemDone') {
-            done += 1;
-        }
-    }
-
-    return ('of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.');
-};
-
 
 
 // OPTIMIZATION #2
@@ -40,10 +28,38 @@ var time_feedback;
 var items_done_feedback;
 var deleted_count = 0;
 
+var element = function(tag, id, className) {
+    var element = document.createElement(tag);
+    if (id) {element.id = id;}
+    if (className) {element.className = className;}
+    return element;
+};
+
+var append = function(element, parent) {
+    parent.appendChild(element);
+    return element;
+};
+
+var log_time = function(duration) {
+    document.getElementById('time_feedback').innerHTML = 'that took just '+ (duration)+' millisecs';
+};
+var log_count_data = function() {
+    var children = root.childNodes;
+    var done = root.getElementsByClassName('todoItemDone').length;
+
+    var text =  ('of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.');
+     document.getElementById('items_done_feedback').innerHTML = text;
+};
+
+
+
 window.onload = function() {
+    //append(element('h1', 'time_feedback'), document.body);
     time_feedback =  document.createElement('h1');
+    time_feedback.id = 'time_feedback';
     document.body.appendChild(time_feedback);
     items_done_feedback =  document.createElement('h3');
+    items_done_feedback.id = 'items_done_feedback';
     document.body.appendChild(items_done_feedback);
     todoItem = document.createElement('div');
     todoItem.className = 'todoItem';
@@ -101,7 +117,8 @@ window.onload = function() {
         }
         if (e.target.className ===  'closeButton over') {
             delete_single_item( e.target.parentNode);
-            items_done_feedback.innerHTML = getItemsDoneFeedback();
+            log_count_data();
+            //items_done_feedback.innerHTML = getItemsDoneFeedback();
         }
         if (e.target.className ===  'markButton over') {
             //here we set an item to todo or done and NOT delete it
@@ -110,7 +127,8 @@ window.onload = function() {
             } else if (e.target.parentNode.className === 'todoItemDone') {
                 e.target.parentNode.className = 'todoItem';
             }
-            items_done_feedback.innerHTML = getItemsDoneFeedback();
+            log_count_data();
+            //items_done_feedback.innerHTML = getItemsDoneFeedback();
         }
 
     };
@@ -138,8 +156,8 @@ var create200TodoItems = function(){
         newDiv.childNodes[2].innerHTML = (amountAlreadyHere+i)+ ') write text here';
         root.appendChild(newDiv);
     }
-
-    items_done_feedback.innerHTML = getItemsDoneFeedback();
+    log_count_data();
+    //items_done_feedback.innerHTML = getItemsDoneFeedback();
 };
 
 var toggleAll = function() {
@@ -183,8 +201,8 @@ var create200TodoItemsAndToggleFiveTimes = function() {
         children[i].className = classNames[i];
     }
 
-
-    items_done_feedback.innerHTML = getItemsDoneFeedback();
+    log_count_data();
+    //items_done_feedback.innerHTML = getItemsDoneFeedback();
 
 };
 
@@ -196,8 +214,8 @@ window.runBenchmark1 = function() {
     create200TodoItems();
     var d2 = new Date();
     var after = d2.getTime();
-    time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
-    ;
+    //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    log_time(after-before);
 };
 window.runBenchmark2 = function() {
     var d = new Date();
@@ -206,7 +224,8 @@ window.runBenchmark2 = function() {
     create200TodoItemsAndToggleFiveTimes();
     var d2 = new Date();
     var after = d2.getTime();
-    time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    log_time(after-before);
 
 };
 window.runBenchmark3 = function() {
@@ -220,6 +239,6 @@ window.runBenchmark3 = function() {
     }
     var d2 = new Date();
     var after = d2.getTime();
-    time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
-
+    //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+    log_time(after-before);
 };

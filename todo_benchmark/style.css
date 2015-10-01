@@ -44,7 +44,17 @@ body{
     text-decoration: line-through;
 }
 
-
+input[type=text] {
+    display: block;
+    font-size: 1.5em;
+    margin-before: 0.83em;
+    margin-after: 0.83em;
+    margin-start: 0;
+    margin-end: 0;
+    margin-top: -24px;
+    margin-left: 40px;
+    font-weight: bold;
+}
 .closeButton {
     position: relative;
     width:20px;
