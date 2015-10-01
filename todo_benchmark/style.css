@@ -23,11 +23,27 @@ body{
     background-color:#fdfdfd;
     border: 2px dotted #adadad;
     margin: 2px;
+    display: block;
 }
 
 .todoText {
-    margin-top:-8px;
+    margin-top: -24px;
+    margin-left: 40px;
 }
+
+
+.todoItemDone {
+    width:400px;
+    height:60px;
+    background-color:#fdfdfd;
+    border: 2px dotted #adadad;
+    margin: 2px;
+    display: block;
+}
+.todoItemDone h2 {
+    text-decoration: line-through;
+}
+
 
 .closeButton {
     position: relative;
@@ -37,16 +53,17 @@ body{
     top:20px;
 }
 
+.markButton {
+
+    width:20px;
+    height:20px;
+    left:10px;
+    top:20px;
+}
+
 .over {
     background-color:red;
 }
 .out {
     background-color: blue;
-r}
-
-.open {
-    display: block;
-}
-.closed {
-    display: none;
 }
