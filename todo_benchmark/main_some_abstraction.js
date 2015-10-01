@@ -24,8 +24,8 @@ var toggle_optimized = function(classNames) {
 var add_amount = 10;
 var todoItem;
 var root;
-var time_feedback;
-var items_done_feedback;
+//var time_feedback;
+//var items_done_feedback;
 var deleted_count = 0;
 
 var element = function(tag, id, className) {
@@ -46,41 +46,23 @@ var log_time = function(duration) {
 var log_count_data = function() {
     var children = root.childNodes;
     var done = root.getElementsByClassName('todoItemDone').length;
-
-    var text =  ('of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.');
+    var text = 'of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.';
      document.getElementById('items_done_feedback').innerHTML = text;
 };
 
-
-
 window.onload = function() {
-    //append(element('h1', 'time_feedback'), document.body);
-    time_feedback =  document.createElement('h1');
-    time_feedback.id = 'time_feedback';
-    document.body.appendChild(time_feedback);
-    items_done_feedback =  document.createElement('h3');
-    items_done_feedback.id = 'items_done_feedback';
-    document.body.appendChild(items_done_feedback);
-    todoItem = document.createElement('div');
-    todoItem.className = 'todoItem';
-    var todoClose = document.createElement('div');
-    todoClose.className = 'closeButton out';
-    todoItem.appendChild(todoClose);
+    todoItem = element('div', '', 'todoItem');
+    append(element('div', '', 'closeButton out'), todoItem);
+    append(element('div', '', 'markButton out'), todoItem);
+    append(element('h2', '', 'todoText'), todoItem);
 
-    var todoMark = document.createElement('div');
-    todoMark.className = 'markButton out';
-    todoItem.appendChild(todoMark);
-
-    var todoText = document.createElement('h2');
-    todoText.className = 'todoText';
-    todoItem.appendChild(todoText);
-    root = document.createElement('div');
-    root.id = 'root';
-    root.className = "one";
-    document.body.appendChild(root);
+    append(element('h1', 'time_feedback'), document.body);
+    append(element('h3', 'items_done_feedback'), document.body);
+    root = element('div', 'root', 'one');
+    append(root, document.body);
 
     // OPTIMIZATION #1
-    // add eventhandlers to the root iinstead of to the individual Nodes,
+    // add eventhandlers to the root instead of to the individual Nodes,
     // it makes cloning many nodes much faster.
     root.onmouseover = function(e){
         if (e.target.className ===  'closeButton out') {
@@ -100,15 +82,14 @@ window.onload = function() {
     };
     root.onclick = function(e){
         if (e.target.className === 'todoText' || e.target.className === 'todoText done') {
-            var input =  document.createElement('input');
+            var input = element('input');
             input.type = 'text';
             input.value = e.target.innerHTML;
             input.oldClass = e.target.className;
             e.target.parentNode.replaceChild(input, e.target);
 
             input.onchange = input.onblur = input.oninput =  function(e2) {
-                var text = document.createElement('h2');
-                text.className = e2.target.oldClass;
+                var text = element('h2', '', e2.target.oldClass);
                 text.innerHTML = e2.target.value;
                 e2.target.parentNode.replaceChild(text, e2.target);
             };
@@ -137,9 +118,10 @@ window.onload = function() {
 
 var deleteAllItems = function() {
     deleted_count += root.childNodes.length;
-    root = root.cloneNode(false);
+    root.innerHTML = '';
+    //root = root.cloneNode(true);
 };
-
+window.deleteAllItems = deleteAllItems;
 var delete_single_item = function (item) {
     item.parentNode.removeChild(item);
     deleted_count += 1;
@@ -173,6 +155,7 @@ var toggleAll = function() {
     for (i in classNames) {
         children[i].className = classNames[i];
     }
+    //log_count_data();
 };
 
 var create200TodoItemsAndToggleFiveTimes = function() {
@@ -215,7 +198,9 @@ window.runBenchmark1 = function() {
     var d2 = new Date();
     var after = d2.getTime();
     //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+
     log_time(after-before);
+    log_count_data();
 };
 window.runBenchmark2 = function() {
     var d = new Date();
@@ -225,7 +210,9 @@ window.runBenchmark2 = function() {
     var d2 = new Date();
     var after = d2.getTime();
     //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+
     log_time(after-before);
+    log_count_data();
 
 };
 window.runBenchmark3 = function() {
@@ -240,5 +227,7 @@ window.runBenchmark3 = function() {
     var d2 = new Date();
     var after = d2.getTime();
     //time_feedback.innerHTML = 'that took just '+ (after-before)+' millisecs';
+
     log_time(after-before);
+    log_count_data();
 };
