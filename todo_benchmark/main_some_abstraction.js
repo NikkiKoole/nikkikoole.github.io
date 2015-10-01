@@ -64,6 +64,15 @@ var swapClass = function(element, class1, class2) {
     }
 };
 
+var setProps = function(element, properties) {
+    for (var p in properties) {
+        element[p] = properties[p];
+    }
+};
+
+var replace = function(elem_old, elem_new) {
+    elem_old.parentNode.replaceChild(elem_new, elem_old);
+};
 
 window.onload = function() {
     todoItem = element('div', '', 'todoItem');
@@ -86,26 +95,26 @@ window.onload = function() {
     };
     root.onclick = function(e){
         if (e.target.className === 'todoText' || e.target.className === 'todoText done') {
+            var todoText = e.target;
             var input = element('input');
-            input.type = 'text';
-            input.value = e.target.innerHTML;
-            input.oldClass = e.target.className;
-            e.target.parentNode.replaceChild(input, e.target);
-
-            input.onchange = input.onblur = input.oninput =  function(e2) {
-                var text = element('h2', '', e2.target.oldClass);
-                text.innerHTML = e2.target.value;
-                e2.target.parentNode.replaceChild(text, e2.target);
+            setProps(input, {type:'text', value:todoText.innerHTML, oldClass:todoText.className});
+            replace(todoText, input);
+            var newText = element('h2', '', todoText.className);
+            input.onblur = input.onkeydown =   function(e2) {
+                newText.innerHTML = input.value;
+                if (e2.type === 'blur' || e2.keyCode === 13) {
+                    input.onblur = null;
+                    replace(input, newText);
+                }
             };
         }
         if (e.target.className ===  'closeButton over') {
             delete_single_item( e.target.parentNode);
-            log_count_data();
         }
         if (e.target.className ===  'markButton over') {
             swapClass(e.target.parentNode, 'todoItem', 'todoItemDone');
-            log_count_data();
         }
+        log_count_data();
 
     };
 };
