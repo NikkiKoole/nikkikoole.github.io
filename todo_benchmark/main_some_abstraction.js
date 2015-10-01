@@ -20,6 +20,16 @@ var toggle_optimized = function(classNames) {
     }
     return toggled;
 };
+var log_time = function(duration) {
+    document.getElementById('time_feedback').innerHTML = 'that took just '+ (duration)+' millisecs';
+};
+var log_count_data = function() {
+    var children = root.childNodes;
+    var done = root.getElementsByClassName('todoItemDone').length;
+    var text = 'of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.';
+     document.getElementById('items_done_feedback').innerHTML = text;
+};
+
 
 var add_amount = 10;
 var todoItem;
@@ -40,15 +50,20 @@ var append = function(element, parent) {
     return element;
 };
 
-var log_time = function(duration) {
-    document.getElementById('time_feedback').innerHTML = 'that took just '+ (duration)+' millisecs';
+var changeClass = function(element, class1, class2) {
+    if (element.className === class1) {
+        element.className = class2;
+        return true;
+    }
+    return false;
 };
-var log_count_data = function() {
-    var children = root.childNodes;
-    var done = root.getElementsByClassName('todoItemDone').length;
-    var text = 'of a total of '+children.length +' stuffs that need doing, '+ done+' stuffs are marked done.'+deleted_count+' are deleted.';
-     document.getElementById('items_done_feedback').innerHTML = text;
+
+var swapClass = function(element, class1, class2) {
+    if (!changeClass(element, class1, class2)) {
+        changeClass(element, class2, class1);
+    }
 };
+
 
 window.onload = function() {
     todoItem = element('div', '', 'todoItem');
@@ -61,24 +76,13 @@ window.onload = function() {
     root = element('div', 'root', 'one');
     append(root, document.body);
 
-    // OPTIMIZATION #1
-    // add eventhandlers to the root instead of to the individual Nodes,
-    // it makes cloning many nodes much faster.
     root.onmouseover = function(e){
-        if (e.target.className ===  'closeButton out') {
-            e.target.className =  'closeButton over';
-        }
-        if (e.target.className ===  'markButton out') {
-            e.target.className =  'markButton over';
-        }
+        changeClass(e.target, 'closeButton out', 'closeButton over');
+        changeClass(e.target, 'markButton out', 'markButton over');
     };
     root.onmouseout = function(e){
-        if (e.target.className ===  'closeButton over') {
-            e.target.className =  'closeButton out';
-        }
-        if (e.target.className ===  'markButton over') {
-            e.target.className =  'markButton out';
-        }
+        changeClass(e.target, 'closeButton over', 'closeButton out');
+        changeClass(e.target, 'markButton over', 'markButton out');
     };
     root.onclick = function(e){
         if (e.target.className === 'todoText' || e.target.className === 'todoText done') {
@@ -93,23 +97,14 @@ window.onload = function() {
                 text.innerHTML = e2.target.value;
                 e2.target.parentNode.replaceChild(text, e2.target);
             };
-
-
         }
         if (e.target.className ===  'closeButton over') {
             delete_single_item( e.target.parentNode);
             log_count_data();
-            //items_done_feedback.innerHTML = getItemsDoneFeedback();
         }
         if (e.target.className ===  'markButton over') {
-            //here we set an item to todo or done and NOT delete it
-            if (e.target.parentNode.className === 'todoItem') {
-                e.target.parentNode.className = 'todoItemDone';
-            } else if (e.target.parentNode.className === 'todoItemDone') {
-                e.target.parentNode.className = 'todoItem';
-            }
+            swapClass(e.target.parentNode, 'todoItem', 'todoItemDone');
             log_count_data();
-            //items_done_feedback.innerHTML = getItemsDoneFeedback();
         }
 
     };
