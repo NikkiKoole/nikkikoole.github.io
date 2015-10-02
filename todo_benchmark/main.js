@@ -3,6 +3,7 @@ var deleteAllChildren = require('./simple_lib').deleteAllChildren;
 var deleteSingle = require('./simple_lib').deleteSingle;
 var getClassNamesInArray = require('./simple_lib').getClassNamesInArray;
 var applyClassNameArrayToCollection = require('./simple_lib').applyClassNameArrayToCollection;
+var multiCopy = require('./simple_lib').multiCopy;
 var element = require('./simple_lib').element;
 var append = require('./simple_lib').append;
 var changeClass = require('./simple_lib').changeClass;
@@ -10,27 +11,20 @@ var swapClass = require('./simple_lib').swapClass;
 var setProps = require('./simple_lib').setProps;
 var replace = require('./simple_lib').replace;
 
-var todoItem;
+
 var deleteCount = 0;
 
 
-var batchCloneTodoItems = function(amount) {
-    var clone;
-    var docFragment = document.createDocumentFragment();
-    for (var i = 0; i < amount; i+=1) {
-        clone = todoItem.cloneNode(true);
-        clone.childNodes[2].innerHTML = 'write your todo here.';
-        docFragment.appendChild(clone);
-    }
-    return docFragment;
-};
-
-
-window.onload = function() {
-    todoItem = element('div', '', 'todoItem');
+var createTodoItem = function(){
+    var todoItem = element('div', '', 'todoItem');
     append(element('div', '', 'closeButton out'), todoItem);
     append(element('div', '', 'markButton out'), todoItem);
-    append(element('h2', '', 'todoText'), todoItem);
+    var text = append(element('h2', '', 'todoText'), todoItem);
+    text.innerHTML = 'write your todo here.';
+    return todoItem;
+};
+
+window.onload = function() {
     append(element('h1', 'time_feedback'), document.body);
     append(element('h3', 'items_done_feedback'), document.body);
 
@@ -85,19 +79,22 @@ var logCounts = function(root) {
 };
 
 window.runBenchmark1 = function() {
-    var root = document.getElementById('root');
     var before = (new Date()).getTime();
-    append(batchCloneTodoItems(200), root);
+    var root = document.getElementById('root');
+    var todoItem = createTodoItem();
+
+    append(multiCopy(todoItem, 200), root);
     var after = (new Date()).getTime();
     logResult(after-before);
     logCounts(root);
 };
 
 window.runBenchmark2 = function() {
-    var root = document.getElementById('root');
     var before = (new Date()).getTime();
+    var root = document.getElementById('root');
+    var todoItem = createTodoItem();
 
-    append(batchCloneTodoItems(200), root);
+    append(multiCopy(todoItem, 200), root);
     var classNames = getClassNamesInArray(root.childNodes);
     for (var i = 0; i < 5; i+=1) {
         classNames = toggleStrings('todoItem', 'todoItemDone', classNames);
@@ -110,10 +107,12 @@ window.runBenchmark2 = function() {
 };
 
 window.runBenchmark3 = function() {
-    var root = document.getElementById('root');
     var before = (new Date()).getTime();
+    var root = document.getElementById('root');
+    var todoItem = createTodoItem();
+
     for (var i = 0; i < 10; i+=1) {
-        append(batchCloneTodoItems(100), root);
+        append(multiCopy(todoItem, 100), root);
         var classNames = getClassNamesInArray(root.childNodes);
         classNames = toggleStrings('todoItem', 'todoItemDone', classNames);
         applyClassNameArrayToCollection(classNames, root.childNodes);

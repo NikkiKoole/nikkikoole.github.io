@@ -1,6 +1,14 @@
 
 
-
+var multiCopy = function(element, amount) {
+    var clone;
+    var docFragment = document.createDocumentFragment();
+    for (var i = 0; i < amount; i+=1) {
+        clone = element.cloneNode(true);
+        docFragment.appendChild(clone);
+    }
+    return docFragment;
+};
 
 var toggleStrings = function(name1, name2, collection) {
     var toggled = [];
@@ -80,6 +88,7 @@ var replace = function(elemOld, elemNew) {
 };
 
 module.exports = {
+    multiCopy:multiCopy,
     toggleStrings:toggleStrings,
     deleteAllChildren:deleteAllChildren,
     deleteSingle:deleteSingle,
