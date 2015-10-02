@@ -110,7 +110,7 @@ window.runBenchmark3 = function() {
     var before = (new Date()).getTime();
     var root = document.getElementById('root');
     var todoItem = createTodoItem();
-
+    deleteCount += deleteAllChildren(root);
     for (var i = 0; i < 10; i+=1) {
         append(multiCopy(todoItem, 100), root);
         var classNames = getClassNamesInArray(root.childNodes);
