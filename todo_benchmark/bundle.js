@@ -84,7 +84,7 @@ window.runBenchmark1 = function() {
     var root = document.getElementById('root');
     var todoItem = createTodoItem();
 
-    append(multiCopy(todoItem, 200), root);
+    append(multiCopy(todoItem, 20000), root);
     var after = (new Date()).getTime();
     logResult(after-before);
     logCounts(root);
@@ -154,6 +154,7 @@ var toggleStrings = function(name1, name2, collection) {
 var deleteAllChildren = function(element) {
     var deleted = element.childNodes.length;
     element.innerHTML = '';
+    //element = element.cloneNode(false);
     return deleted;
 };
 

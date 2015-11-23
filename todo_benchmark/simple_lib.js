@@ -27,6 +27,7 @@ var toggleStrings = function(name1, name2, collection) {
 var deleteAllChildren = function(element) {
     var deleted = element.childNodes.length;
     element.innerHTML = '';
+    //element = element.cloneNode(false);
     return deleted;
 };
 

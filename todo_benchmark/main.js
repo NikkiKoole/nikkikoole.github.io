@@ -83,7 +83,7 @@ window.runBenchmark1 = function() {
     var root = document.getElementById('root');
     var todoItem = createTodoItem();
 
-    append(multiCopy(todoItem, 200), root);
+    append(multiCopy(todoItem, 20000), root);
     var after = (new Date()).getTime();
     logResult(after-before);
     logCounts(root);
