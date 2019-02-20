@@ -104,6 +104,7 @@ function generatePolygon() {
     poly.beginTextureFill(tex, color, alpha, matrix);
     poly.drawPolygon(p)
     poly.endFill();
+    poly.hitArea = new PIXI.Polygon(p);
     return poly;
 }
 
@@ -114,6 +115,26 @@ function startup() {
 	poly.x = -(window.innerWidth * 15)  + Math.random() * window.innerWidth * 30;
 	poly.y = -(window.innerHeight * 15) + Math.random() * window.innerHeight * 30;
 	poly.scale = {x:0.5, y:0.5}
+	poly.interactive = true;
+	
+	poly.on('mouseover', ()=> {
+	    poly.over = true;
+	})
+	poly.on('mouseout', ()=> {
+	    poly.over = false;
+	    poly.rotation = 0;
+	    poly.scale = {x:0.5, y:0.5}
+	    poly.tint = 0xffffff;
+	})
+	poly.on('mousemove', ()=> {
+	    if (poly.over) {
+		poly.scale.x += 0.001;
+		poly.scale.y += 0.001;
+
+		poly.tint = Math.random()*0xffffff;
+	    }
+	})
+
 	view.addChild(poly);
     }
 
