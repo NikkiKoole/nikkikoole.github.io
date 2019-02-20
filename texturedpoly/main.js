@@ -120,7 +120,7 @@ function generatePolygon() {
 
 function startup() {
 
-    for (let i =0 ; i< 50000; i++) {
+    for (let i =0 ; i< 10000; i++) {
 	let poly = generatePolygon();
 	poly.x = Math.random() * 100000;
 	poly.y = Math.random() * 100000;
