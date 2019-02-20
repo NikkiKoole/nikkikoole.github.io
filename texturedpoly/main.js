@@ -6,21 +6,29 @@ var app = new PIXI.Application( {
 document.body.appendChild(app.view);
 
 let options = {
-    screenWidth: window.innerWidth,
-    screenHeight: window.innerHeight,
-    worldWidth: 1000,
-    worldHeight: 1000,
-    interaction: app.renderer.plugins.interaction // the interaction module is important for wheel() to work properly when renderer.view is placed or scaled
+    screenWidth: app.view.offsetWidth,
+    screenHeight: app.view.offsetHeight,
+    worldWidth: 100000,
+    worldHeight: 100000,
+    interaction: app.renderer.plugins.interaction 
 };
 var view = new PIXI.extras.Viewport(options);
 app.stage.addChild(view);
 
+let text = new PIXI.Text('loading',{fontFamily : 'Arial', dropShadow:true, dropShadowDistance:2, fontSize: 24, fill : 0xaaaaaa, align : 'center'});
+text.x = window.innerWidth/2
+
+app.stage.addChild(text);
+console.log(text)
 // activate plugins
 view
     .drag()
     .pinch()
     .wheel()
-    .decelerate();
+    .decelerate()
+    .moveCenter(50000, 50000);
+
+var cull = new PIXI.extras.Cull.SpatialHash();
 
 
 app.loader
@@ -112,11 +120,11 @@ function generatePolygon() {
 
 function startup() {
 
-    for (let i =0 ; i< 1000; i++) {
+    for (let i =0 ; i< 50000; i++) {
 	let poly = generatePolygon();
-	poly.x = -(window.innerWidth * 15)  + Math.random() * window.innerWidth * 30;
-	poly.y = -(window.innerHeight * 15) + Math.random() * window.innerHeight * 30;
-	poly.scale = {x:0.5, y:0.5}
+	poly.x = Math.random() * 100000;
+	poly.y = Math.random() * 100000;
+	poly.scale = {x:0.25, y:0.25}
 	poly.interactive = true;
 	
 	poly.on('mouseover', ()=> {
@@ -128,9 +136,19 @@ function startup() {
 
 	view.addChild(poly);
     }
-
+    cull.addList(view.children);
+    cull.cull(view.getVisibleBounds());
+    
     app.ticker.add((delta) => {
 	stats.begin();
+	if (view.dirty)
+	{
+	    //console.log('was dirty')
+            cull.cull(view.getVisibleBounds());
+	    let s = (cull.stats())
+	    text.text = `rendering ${s.visible} of ${s.total}`;
+            view.dirty = false;
+	}
 	stats.end()
     });
 }
