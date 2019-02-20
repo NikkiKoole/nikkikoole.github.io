@@ -101,9 +101,11 @@ function generatePolygon() {
     let color = 0xffffff;//Math.random() * 0xffffff;
     let alpha = 0.5 + Math.random()*0.5
     let matrix = new PIXI.Matrix(1,0,0,1,0,0).scale(scale * tscale[t].x, scale * tscale[t].y ).rotate(angle);
-    poly.beginTextureFill(tex, color, alpha, matrix);
+    poly.beginTextureFill(tex, color, 1.0, matrix);
     poly.drawPolygon(p)
     poly.endFill();
+    poly.originalAlpha = alpha;
+    poly.alpha = alpha;
     poly.hitArea = new PIXI.Polygon(p);
     return poly;
 }
@@ -118,21 +120,10 @@ function startup() {
 	poly.interactive = true;
 	
 	poly.on('mouseover', ()=> {
-	    poly.over = true;
+	    poly.alpha = 1;
 	})
 	poly.on('mouseout', ()=> {
-	    poly.over = false;
-	    poly.rotation = 0;
-	    poly.scale = {x:0.5, y:0.5}
-	    poly.tint = 0xffffff;
-	})
-	poly.on('mousemove', ()=> {
-	    if (poly.over) {
-		poly.scale.x += 0.001;
-		poly.scale.y += 0.001;
-
-		poly.tint = Math.random()*0xffffff;
-	    }
+	    poly.alpha = poly.originalAlpha
 	})
 
 	view.addChild(poly);
