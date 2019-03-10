@@ -1,0 +1,54 @@
+import * as dat from 'dat.gui';
+
+const app = new PIXI.Application({
+    backgroundColor: 0x16a085,
+    width: window.innerWidth,
+    height: window.innerHeight
+});
+document.body.appendChild(app.view);
+
+let room1 = {
+    width: 500,
+    height: 500,
+};
+	      
+///  ...........
+//   .	       .
+//   .	........
+//   .	.     
+//   ....     
+let room2 = { 
+    width: 500,
+    height: 500,
+	      
+}	       	 
+	      
+function draw(data) {
+    let x = 100;
+    let y = 100;
+    let shape = new PIXI.Graphics();
+    shape.lineStyle(10,0);
+    
+    shape.moveTo(x, y);
+    shape.lineTo(x+data.width, y);
+    shape.lineTo(x+data.width, y+data.height);
+    shape.lineTo(x, y+data.height);
+    shape.lineTo(x,y);
+    
+    return shape;
+}
+
+const gui = new dat.GUI();
+
+function refresh() {
+    app.stage.removeChildren();
+    app.stage.addChild(draw(room1));
+}
+
+gui.add(room1, 'width', 0, 1000).onChange(refresh)
+gui.add(room1, 'height', 0, 1000).onChange(refresh)
+
+
+
+
+app.stage.addChild(draw(room1));

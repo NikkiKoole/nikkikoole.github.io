@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>testing 123</title>
+  <style>
+    body {
+	margin: 0;
+	overflow: hidden;
+    }
+  </style>
+  
+</head>
+<body>
+  <script src="public/bundle.js"></script>
+</body>
+</html>
