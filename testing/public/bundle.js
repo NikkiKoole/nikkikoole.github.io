@@ -2496,21 +2496,39 @@
       height: window.innerHeight
   });
   document.body.appendChild(app.view);
-  	      
-  ///  ...........
-  //   .	       D
-  //   .	...C....
-  //   .	B     
-  //   .A..     
-  let room2 = {
-      type: 2,
-      width: 500,
-      height: 500,
-      hor1: 100, //a
-      ver1: 100, //b
-      hor2: 400, //c
-      ver2: 400 //d
-  };	       	 
+
+  /*
+
+       ..........
+       .        .
+       .        v1
+       .        ...h1..
+       .              .
+       ..h2.          .
+           .          .
+           v2         .                        .
+           ............
+  */
+
+  let room5 = {
+      rotation:0,
+      type: 5,
+      h: 500,
+      v: 500,
+      h1: 100,
+      v1: 100,
+      h2: 50,
+      v2: 50
+  };
+
+
+
+  let selected = room5;
+
+  function rotatePoint(point, origin, angle) {
+      let sin = Math.sin(angle), cos = Math.cos(angle), dx = point.x - origin.x, dy = point.y - origin.y;
+      return {x: origin.x + cos * dx - sin * dy, y: origin.y + sin * dx + cos * dy};
+  }
 
   function draw(data) {
       let x = 100;
@@ -2518,161 +2536,200 @@
       let shape = new PIXI.Graphics();
       shape.lineStyle(10,0);
       let points = [];
-
-      
       if (data.type == 1) {
-  	shape.moveTo(x, y);
-  	shape.lineTo(x+data.width, y);
-  	shape.lineTo(x+data.width, y+data.height);
-  	shape.lineTo(x, y+data.height);
-  	shape.lineTo(x,y);
+          points = [
+              {x:x, y:y},
+              {x:x+data.h, y:y},
+              {x:x+data.h, y:y+data.v},
+              {x:x, y:y+data.v},
+          ];
       } else if (data.type == 2) {
-  	points = [
-  	    {x: x, y:y},
-  	    {x: x+data.width, y:y},
-  	    {x: x+data.width, y:y+data.height},
-  	    {x: x+data.width-data.hor1, y:y+data.height},
-  	    {x: x+data.width-data.hor1, y:y+data.height-data.ver1},
-  	    {x: x+data.width-data.hor1-data.hor2, y:y+data.height-data.ver1},
-  	    {x: x, y:y},
+  	    points = [
+  	        {x: x, y:y},
+  	        {x: x+data.h, y:y},
+  	        {x: x+data.h, y:y+data.v},
+  	        {x: x+data.h-data.h1, y:y+data.v},
+  	        {x: x+data.h-data.h1, y:y+data.v-data.v1},
+  	        {x: x+data.h-data.h1-data.h2, y:y+data.v-data.v1},
+  	    ];
+      } else if (data.type == 3) {
+          points = [
+              {x:x, y:y},
+              {x:x+data.h, y:y},
+              {x:x+data.h, y:y+data.v - data.v1},
+              {x:x+data.h-data.h2, y:y+data.v - data.v1},
+              {x:x+data.h-data.h2, y:y+data.v},
+              {x:x+data.h1, y:y+data.v},
+              {x:x+data.h1, y:y+data.v-data.v2},
+              {x:x, y:y+data.v-data.v2},
+          ];
 
-  	    {x: x+data.width-data.hor1-data.hor2, y:y+data.height-data.ver1-data.ver2},
-  	];
-  	//console.log(points);
-  	
-  	shape.moveTo(points[0].x, points[0].y);
-  	points.forEach(p => {
-  	    shape.lineTo(p.x, p.y);
+      } else if (data.type == 4) {
+          let e = data.v - Math.max(data.v1, data.v2);
+          points = [
+              {x:x, y:y},
+              {x:x+data.h, y:y},
+              {x:x+data.h, y:y+e+data.v1},
+              {x:x+data.h-data.h2, y:y+e+data.v1},
+              {x:x+data.h-data.h2, y:y+e},
+              {x:x+data.h1, y:y+e},
+              {x:x+data.h1, y:y+e+data.v2},
+              {x:x, y:y+e+data.v2},
+          ];
+      } else if (data.type == 5) {
+          points = [
+              {x:x, y:y},
+              {x:x+ data.h - data.h1, y:y},
+              {x:x+ data.h - data.h1, y:y+ data.v1},
+              {x:x+ data.h, y:y+ data.v1},
+              {x:x+ data.h, y:y+ data.v},
+              {x:x+ data.h2, y:y+ data.v},
+              {x:x+ data.h2, y:y+ data.v - data.v2},
+              {x:x, y:y+ data.v - data.v2},
 
-  	});
+          ];
 
       }
-      
-      
+
+
+      points = points.map((p) => rotatePoint(p, {x:x+data.h/2, y:y+data.v/2}, (Math.PI*2)/4 * data.rotation ));
+
+      if (points.length > 0) {
+  	    shape.moveTo(points[0].x, points[0].y);
+  	    points.forEach(p => {
+  	        shape.lineTo(p.x, p.y);
+  	    });
+  	    shape.lineTo(points[0].x, points[0].y);
+      }
       return shape;
   }
 
   const gui$1 = new GUI$1();
 
+  let lastRotation  = 0;
   function refresh(name, v) {
 
-      
-      if (name == 'hor1') {
-  	// change the other
-  	if (v.hor1 + v.hor2 < v.width) {
-  	    v.hor2 = Math.min(v.width, Math.max(0, v.width - v.hor1));
-  	}
-  	if (v.hor1 + v.hor2 > v.width) {
-  	    v.hor2 = Math.min(v.width, Math.max(0, v.width - v.hor1));
-  	}
-  	//change myself
-  	if (v.hor1 > v.width) {
-  	    v.hor1 = v.width;
-  	}
-      }
-      if (name == 'hor2') {
-  	// change the other
-  	if (v.hor1 + v.hor2 < v.width) {
-  	    v.hor1 = Math.min(v.width, Math.max(0, v.width - v.hor2));
-  	}
-  	if (v.hor1 + v.hor2 > v.width) {
-  	    v.hor1 = Math.min(v.width, Math.max(0, v.width - v.hor2));
-  	}
-  	//change myself
-  	if (v.hor2 > v.width) {
-  	    v.hor2 = v.width;
-  	}
-      }
-      if (name == 'ver1') {
-  	// change the other
-  	if (v.ver1 + v.ver2 < v.height) {
-  	    v.ver2 = Math.min(v.height, Math.max(0, v.height - v.ver1));
-  	}
-  	if (v.ver1 + v.ver2 > v.height) {
-  	    v.ver2 = Math.min(v.height, Math.max(0, v.height - v.ver1));
-  	}
-  	//change myself
-  	if (v.ver1 > v.height) {
-  	    v.ver1 = v.height;
-  	}
-      }
-      if (name == 'ver2') {
-  	// change the other
-  	if (v.ver1 + v.ver2 < v.height) {
-  	    v.ver1 = Math.min(v.height, Math.max(0, v.height - v.ver2));
-  	}
-  	if (v.ver1 + v.ver2 > v.height) {
-  	    v.ver1 = Math.min(v.height, Math.max(0, v.height - v.ver2));
-  	}
-  	//change myself
-  	if (v.ver2 > v.height) {
-  	    v.ver2 = v.height;
-  	}
-      }
-      if (name == 'width') {
-  	// change the other
-  	if (v.width < v.hor1 + v.hor2) {
-  	    v.hor1 = Math.min(v.width, Math.max(0, v.width - v.hor2));
-  	}
-  	if (v.width < v.hor1 + v.hor2) {
-  	    v.hor2 = Math.min(v.width, Math.max(0, v.width - v.hor1));
-  	}
+      let get_space = (total, other) =>
+  	    Math.min(total, Math.max(0, total - other));
 
-  	
-  	if (v.width > v.hor1 + v.hor2) {
-  	    v.hor1 = Math.min(v.width, Math.max(0, v.width - v.hor2));
-  	}
-  	// NOTE
-  	// hor2 will not grow like this
-  	// maybe a minimum
-  	if (v.hor2 < 100 && v.width > 0) {
-  	    v.hor2 = Math.min(100, v.width);
-  	    v.hor1 = v.width-v.hor2;
-  	}
-
+      if (name == 'rotation') {
+          if (v.rotation != lastRotation) {
+              console.log('rotation change!', v.rotation);
+          }
+          lastRotation = v.rotation;
       }
-       if (name == 'height') {
-  	// change the other
-  	if (v.height < v.ver1 + v.ver2) {
-  	    v.ver1 = Math.min(v.height, Math.max(0, v.height - v.ver2));
-  	}
-  	if (v.height < v.ver1 + v.ver2) {
-  	    v.ver2 = Math.min(v.height, Math.max(0, v.height - v.ver1));
-  	}
 
-  	
-  	if (v.height > v.ver1 + v.ver2) {
-  	    v.ver1 = Math.min(v.height, Math.max(0, v.height - v.ver2));
-  	}
-  	// NOTE
-  	// ver2 will not grow like this
-  	// maybe a minimum
-  	 if (v.ver2 < 100 && v.height > 0) {
-  	    v.ver2 = Math.min( 100, v.height);
-  	    v.ver1 = v.height-v.ver2;
-  	}
+      let hor = {first:'h1', second:'h2', total:'h'};
+      let ver = {first:'v1', second:'v2', total:'v'};
+      let other = (me, pt) => (pt.first == me ? pt.second : pt.first);
 
-      }
-      
-      
-      
+      let takeFromOther = (values) =>  {
+
+  	    if (name == values.first || name == values.second) {
+
+              if (v.type <= 2) {
+  	            if (v[values.first] + v[values.second] != v[values.total]) {
+  		            v[other(name, values)] =  get_space(v[values.total], v[name]);
+  	            }
+  	            if (v[name] > v[values.total]) {
+  		            v[name] = v[values.total];
+  	            }
+  	        }
+              if (v.type == 3 || v.type == 4) {
+                  if (values.total == 'h') {
+                      if (v[values.first] + v[values.second] > v[values.total]) {
+                          v[name] = v[values.total] - v[other(name, values)];
+                      }
+                  }
+                  if (values.total == 'v') {
+                      if (v[name]  > v[values.total]) {
+                          v[name] = v[values.total] ;
+                      }
+                  }
+              }
+              if (v.type == 5) {
+                  if (v[name]  > v[values.total]) {
+                      v[name] = v[values.total] ;
+                  }
+              }
+
+          }
+      };
+
+      let shareOverOthers = (values) => {
+  	    if (name == values.total) {
+              if (v.type <= 2) {
+  	            if (v[values.total] < v[values.first] + v[values.second]) {
+  		            v[values.first] = get_space(v[values.total], v[values.second]);
+  	            }
+  	            if (v[values.total] < v[values.first] + v[values.second]) {
+  		            v[values.second] = get_space(v[values.total], v[values.first]);
+  	            }
+  	            if (v[values.total] > v[values.first] + v[values.second]) {
+  		            v[values.first] = get_space(v[values.total], v[values.second]);
+  	            }
+
+  	            if (v[values.second] < 100 && v[values.total] > 0) {
+  		            v[values.second] = Math.min(100, v[values.total]);
+  		            v[values.first] = v[values.total] - v[values.second];
+  	            }
+              }
+              if (v.type == 3 || v.type == 4) {
+                  if (values.total == 'h') {
+                      if (v[values.total] < v[values.first] + v[values.second]) {
+  		                v[values.first] = v[values.total] - v[values.second];
+                          if (v[values.first] < 0) {
+                              v[values.second] += v[values.first] ;
+                              v[values.first] = 0;
+                          }
+  	                }
+                  }
+                  if (values.total == 'v') {
+                      if (v[values.total] < v[values.first]) {
+                          v[values.first] = v[values.total];
+                      }
+                      if (v[values.total] < v[values.second]) {
+                          v[values.second] = v[values.total];
+                      }
+                  }
+              }
+              if (v.type == 5) {
+                  if (v[values.total] < v[values.first]) {
+                      v[values.first] = v[values.total];
+                  }
+                  if (v[values.total] < v[values.second]) {
+                      v[values.second] = v[values.total];
+                  }
+
+              }
+  	    }
+      };
+
+
+      takeFromOther(hor);
+      takeFromOther(ver);
+      shareOverOthers(hor);
+      shareOverOthers(ver);
+
       for (var i in gui$1.__controllers) {
-      gui$1.__controllers[i].updateDisplay();
+          gui$1.__controllers[i].updateDisplay();
       }
+
       app.stage.removeChildren();
-      app.stage.addChild(draw(room2));
+
+      app.stage.addChild(draw(selected));
   }
 
-  gui$1.add(room2, 'width', 0, 1000).onChange(() => refresh('width', room2));
-  gui$1.add(room2, 'height', 0, 1000).onChange(()=>refresh('height', room2));
-  gui$1.add(room2, 'hor1', 0, 1000).onChange(()=>refresh('hor1', room2));
-  gui$1.add(room2, 'hor2', 0, 1000).onChange(()=>refresh('hor2', room2));
-  gui$1.add(room2, 'ver1', 0, 1000).onChange(()=>refresh('ver1', room2));
-  gui$1.add(room2, 'ver2', 0, 1000).onChange(()=>refresh('ver2', room2));
-
-
-
-  app.stage.addChild(draw(room2));
+  gui$1.add(selected, 'rotation').min(0).max(3).step(1.0).onChange(()=> refresh('rotation', selected));
+  gui$1.add(selected, 'type', [ 1, 2, 3, 4 ,5 ] ).onChange(()=> refresh('h1', selected));gui$1.add(selected, 'h', 0, 1000).onChange(() => refresh('h', selected));
+  gui$1.add(selected, 'v', 0, 1000).onChange(()=>refresh('v', selected));
+  if (selected.h1) {
+      gui$1.add(selected, 'h1', 0, 1000).onChange(()=>refresh('h1', selected));
+      gui$1.add(selected, 'h2', 0, 1000).onChange(()=>refresh('h2', selected));
+      gui$1.add(selected, 'v1', 0, 1000).onChange(()=>refresh('v1', selected));
+      gui$1.add(selected, 'v2', 0, 1000).onChange(()=>refresh('v2', selected));
+  }
+  app.stage.addChild(draw(selected));
 
 }());
 //# sourceMappingURL=bundle.js.map

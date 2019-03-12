@@ -8,32 +8,113 @@ const app = new PIXI.Application({
 document.body.appendChild(app.view);
 
 let room1 = {
+    rotation: 0,
     type: 1,
-    width: 500,
-    height: 500,
+    h: 500,
+    v: 500,
 };
-	      
-///  ...........
-//   .	       D
-//   .	...C....
-//   .	B     
-//   .A..
 
+/*
 
+     .......h.........
+     v2              .
+     .               .
+     ....h2.....     v
+               .     .
+               v1    .
+               ...h1..
+*/
 
 let room2 = {
     rotation:0,
     type: 2,
-    width: 500,
-    height: 500,
-    hor1: 100, //a
-    ver1: 100, //b
-    hor2: 400, //c
-    ver2: 400 //d
-}	       	 
+    h: 500,
+    v: 500,
+    h1: 300,
+    v1: 200,
+    h2: 200,
+    v2: 300
+};
+
+/*
+
+       .........h..........
+       .                  .
+       .                  .      v
+       ..h1...      ...h2..
+             .      .
+             v2     v1
+             ........
+*/
+
+
+let room3 = {
+    rotation:0,
+    type: 3,
+    h: 500,
+    v: 500,
+    h1: 100,
+    v1: 100,
+    h2: 50,
+    v2: 50
+};
+
+/*
+      .........h.........
+      .                 .
+      .                 .
+      .    .........    .
+      .    .       .    .
+      .    v2      v1   .
+      ..h1..       ..h2..
+*/
+
+let room4 = {
+    rotation:0,
+    type: 4,
+    h: 500,
+    v: 500,
+    h1: 100,
+    v1: 100,
+    h2: 50,
+    v2: 50
+};
+
+/*
+
+     ..........
+     .        .
+     .        v1
+     .        ...h1..
+     .              .
+     ..h2.          .
+         .          .
+         v2         .                        .
+         ............
+*/
+
+let room5 = {
+    rotation:0,
+    type: 5,
+    h: 500,
+    v: 500,
+    h1: 100,
+    v1: 100,
+    h2: 50,
+    v2: 50
+};
+
+
+
+let selected = room5;
 
 function lerp(v0, v1, t) {
-    return v0*(1-t)+v1*t
+    return v0*(1-t)+v1*t;
+}
+
+function rotatePoint(point, origin, angle) {
+    let sin = Math.sin(angle), cos = Math.cos(angle), dx = point.x - origin.x, dy = point.y - origin.y;
+    return {x: origin.x + cos * dx - sin * dy, y: origin.y + sin * dx + cos * dy};
 }
 
 function draw(data) {
@@ -42,110 +123,198 @@ function draw(data) {
     let shape = new PIXI.Graphics();
     shape.lineStyle(10,0);
     let points = [];
-
-    
     if (data.type == 1) {
-	shape.moveTo(x, y);
-	shape.lineTo(x+data.width, y);
-	shape.lineTo(x+data.width, y+data.height);
-	shape.lineTo(x, y+data.height);
-	shape.lineTo(x,y);
+        points = [
+            {x:x, y:y},
+            {x:x+data.h, y:y},
+            {x:x+data.h, y:y+data.v},
+            {x:x, y:y+data.v},
+        ];
     } else if (data.type == 2) {
-	points = [
-	    {x: x, y:y},
-	    {x: x+data.width, y:y},
-	    {x: x+data.width, y:y+data.height},
-	    {x: x+data.width-data.hor1, y:y+data.height},
-	    {x: x+data.width-data.hor1, y:y+data.height-data.ver1},
-	    {x: x+data.width-data.hor1-data.hor2, y:y+data.height-data.ver1},
-	]
-	shape.moveTo(points[0].x, points[0].y);
-	points.forEach(p => {
-	    shape.lineTo(p.x, p.y);
-	})
-	shape.lineTo(points[0].x, points[0].y);
+	    points = [
+	        {x: x, y:y},
+	        {x: x+data.h, y:y},
+	        {x: x+data.h, y:y+data.v},
+	        {x: x+data.h-data.h1, y:y+data.v},
+	        {x: x+data.h-data.h1, y:y+data.v-data.v1},
+	        {x: x+data.h-data.h1-data.h2, y:y+data.v-data.v1},
+	    ];
+    } else if (data.type == 3) {
+        points = [
+            {x:x, y:y},
+            {x:x+data.h, y:y},
+            {x:x+data.h, y:y+data.v - data.v1},
+            {x:x+data.h-data.h2, y:y+data.v - data.v1},
+            {x:x+data.h-data.h2, y:y+data.v},
+            {x:x+data.h1, y:y+data.v},
+            {x:x+data.h1, y:y+data.v-data.v2},
+            {x:x, y:y+data.v-data.v2},
+        ];
+
+    } else if (data.type == 4) {
+        let e = data.v - Math.max(data.v1, data.v2);
+        points = [
+            {x:x, y:y},
+            {x:x+data.h, y:y},
+            {x:x+data.h, y:y+e+data.v1},
+            {x:x+data.h-data.h2, y:y+e+data.v1},
+            {x:x+data.h-data.h2, y:y+e},
+            {x:x+data.h1, y:y+e},
+            {x:x+data.h1, y:y+e+data.v2},
+            {x:x, y:y+e+data.v2},
+        ];
+    } else if (data.type == 5) {
+        points = [
+            {x:x, y:y},
+            {x:x+ data.h - data.h1, y:y},
+            {x:x+ data.h - data.h1, y:y+ data.v1},
+            {x:x+ data.h, y:y+ data.v1},
+            {x:x+ data.h, y:y+ data.v},
+            {x:x+ data.h2, y:y+ data.v},
+            {x:x+ data.h2, y:y+ data.v - data.v2},
+            {x:x, y:y+ data.v - data.v2},
+
+        ];
 
     }
-    
-    
+
+
+    points = points.map((p) => rotatePoint(p, {x:x+data.h/2, y:y+data.v/2}, (Math.PI*2)/4 * data.rotation ));
+
+    if (points.length > 0) {
+	    shape.moveTo(points[0].x, points[0].y);
+	    points.forEach(p => {
+	        shape.lineTo(p.x, p.y);
+	    });
+	    shape.lineTo(points[0].x, points[0].y);
+    }
     return shape;
 }
 
 const gui = new dat.GUI();
 
+let lastRotation  = 0;
 function refresh(name, v) {
-    
+
     let get_space = (total, other) =>
-	Math.min(total, Math.max(0, total - other))
+	    Math.min(total, Math.max(0, total - other));
 
     if (name == 'rotation') {
-	console.log('pch')
+        if (v.rotation != lastRotation) {
+            console.log('rotation change!', v.rotation);
+        }
+        lastRotation = v.rotation;
     }
 
-    let hor = {first:'hor1', second:'hor2', total:'width'};
-    let ver = {first:'ver1', second:'ver2', total:'height'};
-    let other = (me, pt) => (pt.first == me ? pt.second : pt.first)
+    let hor = {first:'h1', second:'h2', total:'h'};
+    let ver = {first:'v1', second:'v2', total:'v'};
+    let other = (me, pt) => (pt.first == me ? pt.second : pt.first);
 
     let takeFromOther = (values) =>  {
-	if (name == values.first || name == values.second) {
-	    if (v[values.first] + v[values.second] != v[values.total]) {
-		v[other(name, values)] =  get_space(v[values.total], v[name])
-	    }
-	    if (v[name] > v[values.total]) {
-		v[name] = v[values.total];
-	    }
-	}
-    }
+
+	    if (name == values.first || name == values.second) {
+
+            if (v.type <= 2) {
+	            if (v[values.first] + v[values.second] != v[values.total]) {
+		            v[other(name, values)] =  get_space(v[values.total], v[name]);
+	            }
+	            if (v[name] > v[values.total]) {
+		            v[name] = v[values.total];
+	            }
+	        }
+            if (v.type == 3 || v.type == 4) {
+                if (values.total == 'h') {
+                    if (v[values.first] + v[values.second] > v[values.total]) {
+                        v[name] = v[values.total] - v[other(name, values)];
+                    }
+                }
+                if (values.total == 'v') {
+                    if (v[name]  > v[values.total]) {
+                        v[name] = v[values.total] ;
+                    }
+                }
+            }
+            if (v.type == 5) {
+                if (v[name]  > v[values.total]) {
+                    v[name] = v[values.total] ;
+                }
+            }
+
+        }
+    };
+
     let shareOverOthers = (values) => {
-	if (name == values.total) {
-	    if (v[values.total] < v[values.first] + v[values.second]) {
-		v[values.first] = get_space(v[values.total], v[values.second])
-	    }
-	    if (v[values.total] < v[values.first] + v[values.second]) {
-		v[values.second] = get_space(v[values.total], v[values.first])
-	    }
-	    if (v[values.total] > v[values.first] + v[values.second]) {
-		v[values.first] = get_space(v[values.total], v[values.second])
-	    }
+	    if (name == values.total) {
+            if (v.type <= 2) {
+	            if (v[values.total] < v[values.first] + v[values.second]) {
+		            v[values.first] = get_space(v[values.total], v[values.second]);
+	            }
+	            if (v[values.total] < v[values.first] + v[values.second]) {
+		            v[values.second] = get_space(v[values.total], v[values.first]);
+	            }
+	            if (v[values.total] > v[values.first] + v[values.second]) {
+		            v[values.first] = get_space(v[values.total], v[values.second]);
+	            }
 
-	    if (v[values.second] < 100 && v[values.total] > 0) {
-		v[values.second] = Math.min(100, v[values.total])
-		v[values.first] = v[values.total] - v[values.second]
-	    }
-	}
-    }
+	            if (v[values.second] < 100 && v[values.total] > 0) {
+		            v[values.second] = Math.min(100, v[values.total]);
+		            v[values.first] = v[values.total] - v[values.second];
+	            }
+            }
+            if (v.type == 3 || v.type == 4) {
+                if (values.total == 'h') {
+                    if (v[values.total] < v[values.first] + v[values.second]) {
+		                v[values.first] = v[values.total] - v[values.second];
+                        if (v[values.first] < 0) {
+                            v[values.second] += v[values.first] ;
+                            v[values.first] = 0;
+                        }
+	                }
+                }
+                if (values.total == 'v') {
+                    if (v[values.total] < v[values.first]) {
+                        v[values.first] = v[values.total];
+                    }
+                    if (v[values.total] < v[values.second]) {
+                        v[values.second] = v[values.total];
+                    }
+                }
+            }
+            if (v.type == 5) {
+                if (v[values.total] < v[values.first]) {
+                    v[values.first] = v[values.total];
+                }
+                if (v[values.total] < v[values.second]) {
+                    v[values.second] = v[values.total];
+                }
 
-    
+            }
+	    }
+    };
+
+
     takeFromOther(hor);
     takeFromOther(ver);
-    shareOverOthers(hor)
-    shareOverOthers(ver)
+    shareOverOthers(hor);
+    shareOverOthers(ver);
 
-
-    
-   
-    
     for (var i in gui.__controllers) {
-    gui.__controllers[i].updateDisplay();
+        gui.__controllers[i].updateDisplay();
     }
 
     app.stage.removeChildren();
-    
-    app.stage.addChild(draw(room2));
+
+    app.stage.addChild(draw(selected));
 }
 
-//function rotatePlan()
-
-
-
-gui.add(room2, 'rotation').min(0).max(3).step(1.0).onChange(()=> refresh('rotation', room2))
-gui.add(room2, 'width', 0, 1000).onChange(() => refresh('width', room2))
-gui.add(room2, 'height', 0, 1000).onChange(()=>refresh('height', room2))
-gui.add(room2, 'hor1', 0, 1000).onChange(()=>refresh('hor1', room2))
-gui.add(room2, 'hor2', 0, 1000).onChange(()=>refresh('hor2', room2))
-gui.add(room2, 'ver1', 0, 1000).onChange(()=>refresh('ver1', room2))
-gui.add(room2, 'ver2', 0, 1000).onChange(()=>refresh('ver2', room2))
-
-
-
-app.stage.addChild(draw(room2));
+gui.add(selected, 'rotation').min(0).max(3).step(1.0).onChange(()=> refresh('rotation', selected));
+gui.add(selected, 'type', [ 1, 2, 3, 4 ,5 ] ).onChange(()=> refresh('h1', selected));;
+gui.add(selected, 'h', 0, 1000).onChange(() => refresh('h', selected));
+gui.add(selected, 'v', 0, 1000).onChange(()=>refresh('v', selected));
+if (selected.h1) {
+    gui.add(selected, 'h1', 0, 1000).onChange(()=>refresh('h1', selected));
+    gui.add(selected, 'h2', 0, 1000).onChange(()=>refresh('h2', selected));
+    gui.add(selected, 'v1', 0, 1000).onChange(()=>refresh('v1', selected));
+    gui.add(selected, 'v2', 0, 1000).onChange(()=>refresh('v2', selected));
+}
+app.stage.addChild(draw(selected));
