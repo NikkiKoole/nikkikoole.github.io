@@ -1,0 +1,327 @@
+@font-face {
+  font-family: cooper;
+  src: url(assets/fonts/cooper-bold-bt.ttf);
+
+}
+@font-face {
+  font-family: moonflower;
+  src: url(assets/fonts/MoonFlower-YzXXq.ttf);
+
+}
+@font-face {
+  font-family: sans-shaded;
+  src: url(assets/fonts/SansSerifShaded.ttf);
+
+}
+@font-face {
+  font-family: volta;
+  src: url(assets/fonts/VoltaT-Regu.ttf);
+
+}
+
+
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+    background: #fbf0c7;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+
+}
+
+.container {
+    background: #fbf0c7;
+    max-width: 65em;
+    margin: 0 auto;
+}
+article {
+    background: rgba(255,255,255,0.25);
+}
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+    
+    flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
+}
+
+/* begin header footer and nav */
+
+header img {
+    width: 80px;
+    height: 60px;
+
+}
+
+header {
+    background: #fbf0c7;
+    max-width: 65em;
+    margin: 0 auto;
+    display: flex;
+}
+footer {
+    margin-top: 3rem;
+    background-color: #5d5a4a;
+    color: white;
+    font-family: cooper;
+    padding-bottom: 1rem;
+}
+
+footer .content {
+    max-width: 65em;
+    margin: 0 auto;
+}
+footer nav {
+
+}
+
+footer li {
+    padding: 6px;
+}
+footer a {
+    text-decoration: none;
+    color: white;
+    
+
+}
+header {
+
+
+
+    width: 100%
+}
+
+header h1 {
+    transform: rotate(1deg);
+}
+header h1 a {
+    color: #845562;
+    text-decoration: none;
+    font-size: 4.5rem;
+}
+header nav {
+    height: 2rem;
+    display: flex;
+}
+header nav a {
+    color: #454546;
+    font-size: 2rem;
+    font-family: volta;
+    text-decoration: none;
+    margin-left: 2rem;
+    transform: translateY(100%);
+}
+header nav a:after {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 0%;
+     height: 100%;
+     background-color: #000;
+     opacity: .05;
+     transition-timing-function: ease-out;
+     -webkit-transition: width .2s; /* Safari prior 6.1 */
+     transition: width .2s;
+     z-index: -1;
+}
+header nav a:hover {
+    color: #000;
+}
+header nav a:hover:after {
+    width: 100%;
+}
+
+/* end header and nav */
+
+/* begin blog posts */
+/*
+
+/* begin app cards */
+
+.posts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.post {
+    margin: .5rem;
+    width: calc(100% - 1rem);
+    background: #fbfbfb;
+    border-radius: 10px;
+    box-shadow: 2px 2px 12px rgb(0 0 0 / 5%);
+    cursor: pointer;
+    transition: background .2s;
+    list-style-type: none;
+}
+.post a {
+    text-decoration: none;
+    color: unset;
+}
+.post .content {
+    padding: 1rem;
+}
+.post .content b {
+    color :#454546;
+    font-size: 2rem;
+    font-family: sans-shaded;
+    display: block;
+    margin: 1rem;
+    transition: all .2s;
+}
+.apps .post .content b {
+    color: #534431;
+    transform: rotate(1deg);
+
+}
+.post .content p {
+    font-family: volta;
+    transition: color .2s;
+}
+
+.picture_container {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.blog .picture_container {
+    width: 200px;
+    float: right;
+}
+.picture {
+    user-select: none;
+    pointer-events: none;
+    width: 100%;
+    transition: all .2s;
+    filter: sepia(0.25);
+
+}
+video {
+    width: 280px;
+}
+.post:hover .postimg {
+    transform: scale(1.1);
+    filter: sepia(0);
+}
+
+.post .content .date {
+   
+    font-family: volta;
+    background: rgba(90,90,70,0.5);
+    color: white;
+    width: 110px;
+    border-radius: 10px;
+    margin-top: -10px;
+    margin-left: -10px;
+    text-transform: lowercase;
+    line-height: 30px;
+    text-align: center;
+}
+
+.apps .post:hover {
+    background: #e3ca57;
+}
+.apps .post:hover b {
+    color: black;
+    transform: rotate(-1deg);
+}
+.apps .post:hover p {
+    color: white;
+}
+/* end app cards */
+
+article {
+    padding: 1rem;
+}
+
+
+b {
+    font-family: cooper;
+}
+h1 {
+    font-family: sans-shaded;
+}
+h2 {
+    font-family: volta;
+    color: #454546;
+}
+p {
+    font-family: volta;
+    color: #454546
+}
+
+
+article h2 {
+    font-size: 2rem;
+}
+article p {
+    font-size: 1.25rem;
+}
+
+/* beginning to style the google calendar */
+
+
+
+/* begin media queries */
+@media only screen and (min-width: 2em) {
+    body {
+
+    }
+    .apps .post .post {
+	width: calc(100% - 2rem);
+    }
+    header nav {
+	margin-top: -4rem;
+    }
+    header h1 a {
+	font-size: 2rem;
+    }
+    header {
+	display: block;
+    }
+}
+
+@media only screen and (min-width: 38em) {
+    body {
+
+    }
+    .apps .posts .post {
+	width: calc(50% - 2rem);
+    }
+    header {
+	display: flex;
+    }
+    header h1 a {
+	font-size: 3rem;
+    }
+
+    header nav {
+	margin-top: 0;
+    }
+}
+
+
+@media only screen and (min-width: 54em) {
+    body {
+
+    }
+    header h1 a {
+	font-size: 4.5rem;
+    }
+
+    .apps .posts .post {
+	width: calc(33% - 2rem);
+    }
+}
+/* end media queries */
+
