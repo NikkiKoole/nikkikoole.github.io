@@ -1,4 +1,4 @@
-### this is the main index file
+### this is the main index file, its being served from github atm
 
 ![tomato](../assets/images/tomatoes.gif)
 
