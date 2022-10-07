@@ -1,3 +1,8 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600;700&display=swap');
+
+
 @font-face {
   font-family: cooper;
   src: url(assets/fonts/cooper-bold-bt.ttf);
@@ -18,7 +23,6 @@
   src: url(assets/fonts/VoltaT-Regu.ttf);
 
 }
-
 
 
 html {
@@ -313,11 +317,13 @@ article p {
 }
 .deadline {
     border: 2px dotted black !important;
-    background-color: #ded869
+    background-color: #ded869;
+    border-radius: 25px;
 }
 .today {
     background: rgba(0,0,0,0.2);
     color: white;
+    border-radius: 25px;
 }
 
 /* begin media queries */
