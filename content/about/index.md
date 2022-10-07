@@ -15,6 +15,74 @@ I love math and drawing and music and programming, and how apps are this little 
 ## Making apps for young children.
 
 
-<iframe title="calendar" src="https://calendar.google.com/calendar/embed?height=400&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FParis&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=NTQxMGIwNGY5NzkxOWZmNTBmYzE0OGRjMmNiNTEzZTQyMWI4OTFiY2I4OGI1YTdlM2RmODQzZjM3OTU3NjE0MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23C0CA33" style="border:solid 4px #777;border-radius: 10px;background-color: rgba(0,0,0,0.15)" width="420" height="420" frameborder="0" scrolling="no"></iframe>
+Instead of this complex calendar, I think i rather just see a counter, how many days until the next deadline, and what will be done at that deadline
+
+
+<div class='put-calendar-in-here'></div>
+
+
+<script>
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+const dayNames = ["Sun", 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+
+function getDaysInMonth(year, month) {
+  return new Date(year, month, 0).getDate();
+}
+
+function getFirstDayOfMonth(year, month) {
+  return new Date(year, month, 1).getDay();
+}
+
+
+
+function buildCalendar() {
+const deadline = new Date(2022, 9, 31)
+console.log(deadline.getDay())
+const date = new Date();
+const firstDayCurrentMonth = getFirstDayOfMonth(
+  date.getFullYear(),
+  date.getMonth(),
+);
+let showDeadline=false;
+if (deadline.getMonth() == date.getMonth()) {
+showDeadline=deadline.getDate();
+}
+	let c = document.createElement('div');
+	c.className= 'calendar-wrapper';
+	let h = document.createElement('h1');
+	h.innerHTML = monthNames[date.getMonth()]
+	c.appendChild(h);
+	let ul = document.createElement('ul')
+	ul.className= 'calendar';
+	dayNames.forEach(name=> {
+		let li= document.createElement('li')
+		li.className='weekday';
+		li.innerHTML = name;
+		ul.appendChild(li);
+	});
+	let countTo = getDaysInMonth( date.getFullYear(),date.getMonth()+1)
+	for (let i=1;i<=countTo;i++) {
+	let li= document.createElement('li')
+	if (i==1) {
+		li.style="grid-column-start:"+(firstDayCurrentMonth+1)
+	}
+	if (showDeadline && i==showDeadline) {
+	li.className="deadline"
+	}
+	li.innerHTML = i
+	ul.appendChild(li)
+	}
+	c.appendChild(ul);
+	let node = document.querySelector('.put-calendar-in-here')
+	node.appendChild(c)
+}
+
+
+buildCalendar()
+
+</script>
 
 Read more over at [blog](/blog)
