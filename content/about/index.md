@@ -72,6 +72,9 @@ showDeadline=deadline.getDate();
 	if (showDeadline && i==showDeadline) {
 	li.className="deadline"
 	}
+	if (i==date.getDate()) {
+	li.className="today"
+	}
 	li.innerHTML = i
 	ul.appendChild(li)
 	}
