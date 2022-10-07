@@ -1,6 +1,13 @@
-### this is the main index file, its being served from github atm
+
+## okidoki, hello 
+
+I have started making 1 app a month
+
+
+<div class='put-calendar-in-here'></div>
+<script>
+buildCalendar()
+</script>
+
 
 ![tomato](../assets/images/tomatoes.gif)
-
-## a big ass video or image of happy chidlren
-## should do the trick

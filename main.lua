@@ -71,10 +71,10 @@ if arg then
 
       local answer
       repeat
-         io.write("ok, you want a new post, should it be (a) app-post, or a (b) blog-post ? ")
+         io.write("ok, you want a new post, should it be (a) app-post, or a (b) blog-post or a (c) stuff post ? ")
          io.flush()
          answer = io.read()
-      until answer == "a" or answer == "b"
+      until answer == "a" or answer == "b" or answer == "c"
 
       if not arg[2] then
          print('you forgot to write a new name')
@@ -85,10 +85,11 @@ if arg then
              "date=" .. (os.date("'%d %h %Y'")) .. "\n" ..
              "title='" .. arg[2] .. "'\n" ..
              "---\n"
-         local prefix = 'content/'
+         local prefix = 'docs/'
          if answer == 'a' then prefix = prefix .. 'apps/' end
          if answer == 'b' then prefix = prefix .. 'blog/' end
-
+         if answer == 'c' then prefix = prefix .. 'stuff/' end
+         
          local path = prefix .. arg[2]:gsub(' ', '-') .. '.md'
          print('creating ' .. path)
          writePost(path, frontmatter)
@@ -142,7 +143,9 @@ function doBunch(dir)
 
    local list = {}
    for _, post in ipairs(result) do
-      table.insert(list, { title = post.frontmatter.title, path = post.path, frontmatter = post.frontmatter })
+      if not post.frontmatter.wip then
+         table.insert(list, { title = post.frontmatter.title, path = post.path, frontmatter = post.frontmatter })
+      end
    end
 
    return list
@@ -153,6 +156,9 @@ doSimple('collection', 'apps/index', { title = "Apps", posts = list })
 
 local list = doBunch('blog')
 doSimple('collection', 'blog/index', { title = "Blog", posts = list })
+
+local list = doBunch('stuff')
+doSimple('collection', 'stuff/index', { title = "Stuff", posts = list })
 
 doSimple('general', 'about/index', { title = "About" })
 doSimple('general', 'index', { title = 'Happy apps for young children' })

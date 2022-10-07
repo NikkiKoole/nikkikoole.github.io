@@ -7,6 +7,7 @@
 	<nav>
 		<a href="/apps">apps</a>
 		<a href="/about">about</a>
+                <a href="/stuff">stuff</a>
 		<!-- <a href="storytime">storytime</a> -->
 	</nav>
 </header>

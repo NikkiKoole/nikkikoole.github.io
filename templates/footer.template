@@ -1,12 +1,14 @@
 <footer>
 <div class='content'>
-<b>© 2021 Mipolai, Nikki Koole</b>
+<b>© 2022 Mipolai, Nikki Koole</b>
 <nav>
 <ul>
        <li><a href='/apps'>apps</a></li>
        <li> <a href='/about'>about</a></li>
-       <li><a href='mailto:nikkikoole@gmail.com'>contact</a></li>
+       <li> <a href='/stuff'>stuff</a> </li>
        <li><a href='/blog'>blog</a></li>
+       <li><a href='mailto:nikkikoole@gmail.com'>contact</a></li>
+
 </ul>
 </nav>
 </div>

@@ -22,7 +22,7 @@
 
 <link rel="stylesheet" href="/normalize.css">
 <link rel="stylesheet" href="/style.css">
-
+<script src="/calendar.js"></script>
 
 	</head>
 
@@ -36,6 +36,7 @@
 	<nav>
 		<a href="/apps">apps</a>
 		<a href="/about">about</a>
+                <a href="/stuff">stuff</a>
 		<!-- <a href="storytime">storytime</a> -->
 	</nav>
 </header>
@@ -52,87 +53,14 @@
 I get fascinated by a subject, study it; read and watch things about it.
 Think about it whilst taking very hot showers.  </p>
 
-<p>But the real understanding, I think, happens after putting it into a working piece of software, describing the rules in code that runs and is interactive. </p>
+<p>But the real understanding, I think, happens after putting it into a working piece of software, describing the rules in code that runs and is interactive.</p>
 
 <p>I love math and drawing and music and programming, and how apps are this little medium that involves all of that. After I became a father, I started moving towards this idea:</p>
 
 <h2>Making apps for young children.</h2>
 
-
 <p>Instead of this complex calendar, I think i rather just see a counter, how many days until the next deadline, and what will be done at that deadline</p>
 
-
-
-<div class='put-calendar-in-here'></div>
-
-
-
-
-<script>
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-const dayNames = ["Sun", 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
-
-function getDaysInMonth(year, month) {
-  return new Date(year, month, 0).getDate();
-}
-
-function getFirstDayOfMonth(year, month) {
-  return new Date(year, month, 1).getDay();
-}
-
-function buildCalendar() {
-    const deadline = new Date(2022, 9, 31)
-    console.log(deadline.getDay())
-    const date = new Date();
-    const firstDayCurrentMonth = getFirstDayOfMonth(
-    date.getFullYear(),
-    date.getMonth(),
-    );
-    let showDeadline=false;
-    if (deadline.getMonth() == date.getMonth()) {
-    showDeadline=deadline.getDate();
-    }
-    let c = document.createElement('div');
-    c.className= 'calendar-wrapper';
-    let h = document.createElement('h1');
-    h.innerHTML = monthNames[date.getMonth()]+' '+date.getFullYear();
-    c.appendChild(h);
-    let ul = document.createElement('ul')
-    ul.className= 'calendar';
-    dayNames.forEach(name=> {
-        let li= document.createElement('li')
-        li.className='weekday';
-        li.innerHTML = name;
-        ul.appendChild(li);
-    });
-    let countTo = getDaysInMonth( date.getFullYear(),date.getMonth()+1)
-    for (let i=1;i<=countTo;i++) {
-    let li= document.createElement('li')
-    if (i==1) {
-            li.style="grid-column-start:"+(firstDayCurrentMonth+1)
-    }
-    if (showDeadline && i==showDeadline) {
-        li.className="deadline"
-    }
-    if (i==date.getDate()) {
-        li.className="today"
-    }
-    li.innerHTML = i
-    ul.appendChild(li)
-    }
-    c.appendChild(ul);
-    let node = document.querySelector('.put-calendar-in-here')
-    node.appendChild(c)
-}
-
-
-
-buildCalendar()
-
-</script>
 
 
 <p>Read more over at <a href="/blog">blog</a></p>
@@ -142,13 +70,15 @@ buildCalendar()
 		</main>
                 <footer>
 <div class='content'>
-<b>© 2021 Mipolai, Nikki Koole</b>
+<b>© 2022 Mipolai, Nikki Koole</b>
 <nav>
 <ul>
        <li><a href='/apps'>apps</a></li>
        <li> <a href='/about'>about</a></li>
-       <li><a href='mailto:nikkikoole@gmail.com'>contact</a></li>
+       <li> <a href='/stuff'>stuff</a> </li>
        <li><a href='/blog'>blog</a></li>
+       <li><a href='mailto:nikkikoole@gmail.com'>contact</a></li>
+
 </ul>
 </nav>
 </div>
