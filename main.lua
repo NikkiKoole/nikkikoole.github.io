@@ -8,6 +8,7 @@ local toml = require 'libs.toml'
 local inspect = require 'libs.inspect'
 local liluat = require 'libs.liluat'
 
+local destination ='docs/'
 function printGreen(...)
    io.write("\x1B[32m")
    print(...)
@@ -116,9 +117,9 @@ function doSimple(template, content, values, valueStorage)
 
    local compiled_template = liluat.compile(t)
    local rendered_template = liluat.render(compiled_template, values)
-   writePost('public/' .. content .. '.html', rendered_template)
+   writePost(destination .. content .. '.html', rendered_template)
    writtenFileCount = writtenFileCount + 1
-   printGreen('public/' .. content .. '.html')
+   printGreen(destination .. content .. '.html')
 end
 
 function doBunch(dir)
