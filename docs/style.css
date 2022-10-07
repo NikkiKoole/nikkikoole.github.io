@@ -308,10 +308,12 @@ article p {
     list-style: none;
 }
 .deadline {
-    border: 2px solid red !important;
+    border: 2px dotted black !important;
+    background-color: #ded869
 }
 .today {
-    background: orange;
+    background: rgba(0,0,0,0.2);
+    color: white;
 }
 
 /* begin media queries */
