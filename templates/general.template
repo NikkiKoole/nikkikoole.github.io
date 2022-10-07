@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{{= title}} | made with ♥ by Mipolai</title>
+                {{include: 'templates/headcss.template'}}
+	</head>
+
+	<body>
+                {{include: 'templates/header.template'}}
+                <main>
+		  <div class='{{= firstPathPart}} container'>
+		    <article>{{= html}}</article>
+		  </div>
+		</main>
+                {{include: 'templates/footer.template'}}
+	</body>
+</html>
