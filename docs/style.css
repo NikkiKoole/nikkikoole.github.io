@@ -67,7 +67,7 @@ header img {
     transition: filter .7s, transform .7s;
 }
 header img:hover {
-    filter: hue-rotate(45deg);
+    filter: hue-rotate(-40deg);
     transform: scale(1.3);
 }
 
