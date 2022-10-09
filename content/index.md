@@ -10,7 +10,7 @@ There are nice ones out there, but they look too generic.
 There are good looking ones, but they don't feel great.  
 There are even better ones, but they feel dumb somehow.  
 
-I've know children, I'm kind a big one myself and I love developing, drawing, animating and making music.  
+I know children, matter of fact, bit of a big one myself and I love developing, drawing, animating and making music.  
 So I feel I can do better.  
 
 I've been working for quite some time on tooling (an animation tool, a vector drawing tool, a music making tool)  
@@ -18,7 +18,10 @@ Now I feel the procrastination phase is done, and apps need to end up in the app
 
 <div class='put-calendar-in-here'></div>
 <script>
-buildCalendar()
+//let deadlines = [new Date(2022, 9, 31),new Date(2022, 9, 1), new Date(2022, 9, 15)];
+let deadlines = [new Date(2022, 9, 31)];
+
+buildCalendar(deadlines, new Date())
 </script>
 
 

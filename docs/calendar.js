@@ -12,19 +12,34 @@ function getFirstDayOfMonth(year, month) {
   return new Date(year, month, 1).getDay();
 }
 
-function buildCalendar() {
-    const deadline = new Date(2022, 9, 31)
-    console.log(deadline.getDay())
-    const date = new Date();
+
+// you feed it a list of deadlines, and a current Date
+// then you can toggle and look to older/newer months
+// the thing that isnt working right now:
+// you cant have an array of deadlines, i would want to toggel calendar to other months
+
+function buildCalendar(deadlines, date) {
+
+    function getDaysUntilNextDeadLine(){
+        // given an array of deadlines get the closest one in the future
+        let closestInFuture = Number.MAX_SAFE_INTEGER;
+        let now = new Date()
+        deadlines.forEach(d =>{
+            if (now < d) { // only interessted in future events
+            if (d.getTime() < closestInFuture) {
+                closestInFuture = d.getTime()
+            }}
+        })
+        return (new Date(new Date(closestInFuture) - new Date()).getDate())
+    }
+    
     const firstDayCurrentMonth = getFirstDayOfMonth(
 	date.getFullYear(),
 	date.getMonth(),
     );
-    let showDeadline=false;
-    if (deadline.getMonth() == date.getMonth()) {
-	showDeadline=deadline.getDate();
-    }
-    let c = document.createElement('div');
+
+    let c = undefined;
+    c = document.createElement('div');
     c.className= 'calendar-wrapper';
     let h = document.createElement('h1');
     h.innerHTML = monthNames[date.getMonth()]+' '+date.getFullYear();
@@ -43,16 +58,23 @@ function buildCalendar() {
 	if (i==1) {
             li.style="grid-column-start:"+(firstDayCurrentMonth+1)
 	}
-	if (showDeadline && i==showDeadline) {
-	    li.className="deadline"
-	}
-	if (i==date.getDate()) {
+        deadlines.forEach(deadline => {
+            if (deadline.getMonth() == date.getMonth() && i == deadline.getDate() ) { 
+	        li.className="deadline"
+            }
+        })
+        if (i==new Date().getDate() && date.getMonth() == new Date().getMonth()) {
 	    li.className="today"
 	}
 	li.innerHTML = i
 	ul.appendChild(li)
     }
     c.appendChild(ul);
+
+    let next = document.createElement('div');
+    next.innerHTML = 'the next deadline is in '+getDaysUntilNextDeadLine()+ " days."
+    c.appendChild(next)
+    
     let node = document.querySelector('.put-calendar-in-here')
     node.appendChild(c)
 }

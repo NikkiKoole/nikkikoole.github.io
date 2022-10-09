@@ -2,7 +2,7 @@
 timestamp=1637593200
 blup=123
 title='My first encounter with markdown'
-wip=true
+
 [theme]
   stuff='wild'
 
@@ -49,3 +49,5 @@ code beneden
   wqedwqdwqd
 
 
+    ls stinkywink
+    ls -al
