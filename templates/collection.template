@@ -32,7 +32,7 @@
                 </video>
                 {{end}}
 
-		{{if post.frontmatter.date then}}
+		{{if false and post.frontmatter.date then}}
                 <div class='date'>{{= post.frontmatter.date}}</div>
 		{{end}}
 		<b>{{= post.title}}</b>
