@@ -132,6 +132,7 @@ header nav {
 header nav a {
     color: #454546;
     font-size: 5vw;
+    font-size: max(5vw, 32px);
     font-family: volta;
     text-decoration: none;
     margin-left: 2rem;
@@ -275,10 +276,12 @@ p {
 
 
 article h2 {
-    font-size: 2rem;
+
+    font-size: max(2vw, 32px);
+
 }
 article p {
-    font-size: 1.25rem;
+    font-size: max(1vw, 32px);
 }
 article li {
     font-size: 1.25rem;
