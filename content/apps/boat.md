@@ -1,7 +1,7 @@
 ---
 timestamp=1637843423
 title='boat'
-webm='../assets/images/walterboat.webm'
+thumb='../assets/images/walterboat.gif'
 alt='an image of a walrus on a boat'
 ---
 second post
