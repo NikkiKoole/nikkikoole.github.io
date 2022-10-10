@@ -71,10 +71,16 @@ function buildCalendar(deadlines, date) {
     }
     c.appendChild(ul);
 
-    let next = document.createElement('div');
-    next.innerHTML = 'the next deadline is in '+getDaysUntilNextDeadLine()+ " days."
-    c.appendChild(next)
+    //c.appendChild(next)
+
+    //c is calendar wrapper
     
+
+    let next = document.createElement('h2');
+    next.innerHTML = getDaysUntilNextDeadLine()+ " days until next deadline."
+
     let node = document.querySelector('.put-calendar-in-here')
+
+    node.appendChild(next)
     node.appendChild(c)
 }

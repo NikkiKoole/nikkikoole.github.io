@@ -1,4 +1,13 @@
 
+<div class='put-calendar-in-here'></div>
+<script>
+//let deadlines = [new Date(2022, 9, 31),new Date(2022, 9, 1), new Date(2022, 9, 15)];
+let deadlines = [new Date(2022, 9, 31)];
+
+buildCalendar(deadlines, new Date())
+</script>
+
+
 ## Hello, my name is Nikki 
 
 Once a talented artist, now a front end developer.  
@@ -16,13 +25,7 @@ So I feel I can do better.
 I've been working for quite some time on tooling (an animation tool, a vector drawing tool, a music making tool)  
 Now I feel the procrastination phase is done, and apps need to end up in the app store before soon.
 
-<div class='put-calendar-in-here'></div>
-<script>
-//let deadlines = [new Date(2022, 9, 31),new Date(2022, 9, 1), new Date(2022, 9, 15)];
-let deadlines = [new Date(2022, 9, 31)];
 
-buildCalendar(deadlines, new Date())
-</script>
 
 
 So let's introduce some deadlines,  
