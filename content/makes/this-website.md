@@ -13,7 +13,7 @@ Offcourse as soon as I decided to build a static website, I've looked at some of
 
 ![xkcs](https://imgs.xkcd.com/comics/standards_2x.png)
 
-My personal projects are mostly done in Lua, so I decided on using that for this tool too.  
+My personal projects are mostly done in Lua, so I decided on using that for this tool too.
 
 **The requirements:**
   
@@ -26,7 +26,7 @@ My personal projects are mostly done in Lua, so I decided on using that for this
 I found a few pieces of code that will help:
 
 [liluat](https://github.com/FSMaxB/liluat)  
-This is a templating engine,  
+This is a templating engine,
 with it I can add templates into some html string, and like that churn out a bunch of html that is filled in.
 
 
@@ -72,8 +72,8 @@ and it turns into:
 
 note how it filled in the title of this specific page and it took another template (headcss) and filled that in place. 
 
-next on the list of handy pieces of code is:  
-[markdown lua](https://github.com/mpeterv/markdown)  
+next on the list of handy pieces of code is:
+[markdown lua](https://github.com/mpeterv/markdown)
 
 Markdown makes the process of writing html __much__ easier, I just write like a person and html comes out.
 
@@ -85,8 +85,8 @@ And it becomes:
 
     <p>Markdown makes the process of writing html <strong>much</strong> easier, I just write like a person and html comes out.</p>
 
-Ok so templating and markdown are sorted, the only thing left is something that handles [frontmatter](https://jekyllrb.com/docs/front-matter/) I found:  
-[toml](https://github.com/jonstoler/lua-toml)  
+Ok so templating and markdown are sorted, the only thing left is something that handles [frontmatter](https://jekyllrb.com/docs/front-matter/) I found:
+[toml](https://github.com/jonstoler/lua-toml)
 which is pretty good.
 
 with it i can write a little block at the beginning of a markdown document

@@ -95,7 +95,7 @@ footer a {
 }
 
 header img {
-    width: 10vw;
+    width: min(10vw, 100px);
 
     filter: hue-rotate(0deg);;
     transition: filter .7s, transform .7s;
@@ -122,7 +122,7 @@ header h1 {
 header h1 a {
     color: #845562;
     text-decoration: none;
-    font-size: 12vw;
+    font-size: min(12vw, 100px);
 }
 header nav {
 
@@ -132,7 +132,7 @@ header nav {
 header nav a {
     color: #454546;
     font-size: 5vw;
-    font-size: max(4vw, 32px);
+    font-size: min(6vw, 48px);
     font-family: volta;
     text-decoration: none;
     margin-left: 2rem;
@@ -277,11 +277,11 @@ p {
 
 article h2 {
 
-    font-size: max(3vw, 28px);
+    font-size: 24px;
 
 }
 article p {
-    font-size: max(2vw, 24px);
+    font-size: 22px;
 }
 article li {
     font-size: 1.25rem;
