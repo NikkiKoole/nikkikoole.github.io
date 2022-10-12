@@ -110,7 +110,7 @@ header img.logo:hover {
 header img.text {
     filter: brightness(0.5) sepia(1) saturate(10000%) hue-rotate(56deg);
     width: 40em;
-    max-width: 80%;
+    max-width: 73%;
 }
 
 header {
@@ -123,10 +123,10 @@ header {
 }
 
 header h1 {
-    transform: rotate(1deg);
-    margin-bottom: 0px;
+    
 }
 header h1 a {
+    display: flex;
     color: #845562;
     text-decoration: none;
 }
