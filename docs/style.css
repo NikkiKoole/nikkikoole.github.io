@@ -99,7 +99,7 @@ header img.logo {
     filter: invert(.5) sepia(1);
     transition: filter .7s, transform .7s;
     width: 150px;
-    max-width: 16%;
+    max-width: 22%;
 
 }
 header img.logo:hover {
@@ -110,15 +110,13 @@ header img.logo:hover {
 header img.text {
     filter: brightness(0.5) sepia(1) saturate(10000%) hue-rotate(56deg);
     width: 40em;
-    max-width: 50%;
+    max-width: 80%;
 }
 
 header {
     background: #fbf0c7;
     max-width: 40em;
     margin: 0 auto;
-    max-width: 60%;
-    margin-left: 20%;
 }
 header {
 
@@ -139,8 +137,8 @@ header nav {
 }
 header nav a {
     color: #454546;
-    font-size: 5vw;
-    font-size: min(6vw, 48px);
+
+    font-size: 2em;
     font-family: volta;
     text-decoration: none;
     margin-left: 2rem;
