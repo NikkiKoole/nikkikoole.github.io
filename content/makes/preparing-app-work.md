@@ -21,3 +21,7 @@ anyway these are looking ok:
 
 Ok so thinkning a bit about this; I would need some knd of cleanish logo kinda thing
 sounds a bit boring
+
+[hotpot](https://hotpot.ai)
+
+![seems ok](/assets/images/hotpot.png)
