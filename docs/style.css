@@ -100,6 +100,8 @@ header img.logo {
     transition: transform .7s;
     width: 150px;
     max-width: 22%;
+    max-height: 22%;
+    height: auto;
     object-fit: contain;
 
 }
@@ -112,6 +114,7 @@ header img.text {
     filter: brightness(0.5) sepia(1) saturate(10000%) hue-rotate(56deg);
     width: 40em;
     max-width: 73%;
+    height: auto;
     object-fit: contain;
 }
 
@@ -128,7 +131,6 @@ header h1 {
     margin-top: 0;
 }
 header h1 a {
-    display: flex;
     color: #845562;
     text-decoration: none;
 }
@@ -272,10 +274,12 @@ b {
 h1 {
     white-space:nowrap;
     font-family: sans-shaded;
+    margin-top: 0;
 }
 h2 {
     font-family: volta;
     color: #454546;
+    margin-top: 0;
 }
 p {
     font-family: volta;
