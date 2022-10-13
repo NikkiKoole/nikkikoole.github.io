@@ -316,12 +316,7 @@ article ul {
 
   padding-inline-start: 0;
 }
-.first-day1 {
-  grid-column-start: 7;
-}
-.first-day2 {
-  grid-column-start: 3;
-}
+
 
 .calendar-wrapper {
     width: 320px;
@@ -344,18 +339,34 @@ article ul {
 .calendar li {
     border: 2px solid transparent;
     list-style: none;
+
 }
 .deadline {
     border: 2px dotted black !important;
     background-color: #ded869;
     border-radius: 25px;
+    cursor: pointer;
 }
 .today {
     background: rgba(0,0,0,0.2);
     color: white;
     border-radius: 25px;
 }
-
+.calendar li .description {
+    display: none;
+    cursor: pointer;
+}
+.calendar li:hover .description {
+    display: block;
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    border: 2px dotted black !important;
+    color: black;
+    margin-top: -25px;
+    margin-left: -2px;
+    
+}
 /* begin media queries */
 /*
 @media only screen and (min-width: 2em) {
