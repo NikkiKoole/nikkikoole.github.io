@@ -365,6 +365,8 @@ article ul {
     color: black;
     margin-top: -25px;
     margin-left: -2px;
+    width: 4em;
+    transform: translateX(-1em);
     
 }
 /* begin media queries */
