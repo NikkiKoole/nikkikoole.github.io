@@ -2,7 +2,7 @@
 <div class='put-calendar-in-here'></div>
 <script>
 //let deadlines = [new Date(2022, 9, 31),new Date(2022, 9, 1), new Date(2022, 9, 15)];
-let deadlines = [new Date(2022, 9, 31)];
+let deadlines = [new Date(2022, 9, 20),new Date(2022, 9, 31)];
 
 buildCalendar(deadlines, new Date())
 </script>

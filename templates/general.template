@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>{{= title}} | made with ♥ by Mipolai</title>
+		<title>{{= title}}</title>
                 {{include: 'templates/headcss.template'}}
 	</head>
 

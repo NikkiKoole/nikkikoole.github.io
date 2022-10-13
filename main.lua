@@ -166,7 +166,7 @@ local list = doBunch('stuff')
 doSimple('collection', 'stuff/index', { title = "Stuff", posts = list })
 
 doSimple('general', 'about/index', { title = "About" })
-doSimple('general', 'index', { title = 'Happy apps for young children' })
+doSimple('general', 'index', { title = 'Mipolai makes apps' })
 
 
 
