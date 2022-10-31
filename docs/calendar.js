@@ -1,13 +1,13 @@
 const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+                    "July", "August", "September", "October", "November", "December"
+                   ];
 const dayNames = ["zo", "ma", "di", "wo", "do", "vr", "za"]
 
 function getDaysInMonth(year, month) {
-  return new Date(year, month, 0).getDate();
+    return new Date(year, month, 0).getDate();
 }
 function getFirstDayOfMonth(year, month) {
-  return new Date(year, month, 1).getDay();
+    return new Date(year, month, 1).getDay();
 }
 
 // you feed it a list of deadlines, and a current Date
@@ -23,9 +23,9 @@ function buildCalendar(deadlines, date) {
         let now = new Date()
         deadlines.forEach(d =>{
             if (now < d.date) { // only interessted in future events
-            if (d.date.getTime() < closestInFuture) {
-                closestInFuture = d.date.getTime()
-            }}
+                if (d.date.getTime() < closestInFuture) {
+                    closestInFuture = d.date.getTime()
+                }}
         })
         if (closestInFuture == Number.MAX_SAFE_INTEGER) {
             // then we just find the most recent deadline that has passed
@@ -37,9 +37,10 @@ function buildCalendar(deadlines, date) {
             if (closestInFuture == Number.MAX_SAFE_INTEGER) {
                 return undefined;
             }
-           return -1 * (new Date(new Date() - new Date(closestInFuture) ).getDate())
+
+            return -1 * (new Date(new Date() - new Date(closestInFuture) ).getDate() -1);
         } else {
-             return (new Date(new Date(closestInFuture) - new Date()).getDate())
+            return (new Date(new Date(closestInFuture) - new Date()).getDate())
         }
     }
     
@@ -76,7 +77,7 @@ function buildCalendar(deadlines, date) {
             }
         })
         if (i==new Date().getDate() && date.getMonth() == new Date().getMonth()) {
-	    li.className="today";
+	    li.className += " today";
             li.innerHTML += ` <div class='description'>today</div>` 
 	}
 
@@ -91,8 +92,12 @@ function buildCalendar(deadlines, date) {
 
     let next = document.createElement('h2');
     let daysUntil = getDaysUntilNextDeadLine()
-    next.innerHTML =  daysUntil == undefined ? ('no deadlines') : daysUntil >= 0 ?  (daysUntil+" days until next deadline.") : (-1*daysUntil+" days passed since deadline. 😔")
-
+    let dayStr = 'days'
+    if (Math.abs(daysUntil) == 1) dayStr = 'day';
+    next.innerHTML =  daysUntil == undefined ? ('no deadlines') : daysUntil >= 0 ?  (daysUntil+" " + dayStr+" until next deadline.") : (-1*daysUntil+" "+dayStr+" passed since deadline. 😔")
+    if (daysUntil == 0) {
+        next.innerHTML = 'deadline day!'
+    }
     let node = document.querySelector('.put-calendar-in-here')
 
     node.appendChild(next)

@@ -1,5 +1,6 @@
 local watcher = require 'watcher'
 
-watcher('content/', function()
+watcher('.', function()
    os.execute("lua main.lua")
 end)
+

@@ -145,7 +145,7 @@ function doBunch(dir)
 
    local list = {}
    for _, post in ipairs(result) do
-      if not post.frontmatter.wip then
+      if not post.frontmatter.draft then
          table.insert(list, { title = post.frontmatter.title, path = post.path, frontmatter = post.frontmatter })
       end
    end

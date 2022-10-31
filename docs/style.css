@@ -141,19 +141,23 @@ header nav {
 }
 header nav a {
     color: #454546;
-
+    
     font-size: 2em;
     font-family: volta;
     text-decoration: none;
     margin-left: 2rem;
-    background-color: transparent;
+    
+    background-color: rgba(0,0,0,0.15);
+    margin-bottom: 1rem;
+    padding: .5rem;
+    border-radius: 25px 25px 25px 5%;
 }
 
 
 
 header nav a:hover {
     color: white;
-    background-color: rgba(0,0,0,0.25);
+    background-color: pink;
     transition: color, background-color .2s;
 
 }
@@ -341,17 +345,23 @@ article ul {
     list-style: none;
 
 }
+
 .deadline {
     border: 2px dotted black !important;
     background-color: #ded869;
     border-radius: 25px;
     cursor: pointer;
 }
+
 .today {
     background: rgba(0,0,0,0.2);
     color: white;
     border-radius: 25px;
     cursor: pointer;
+}
+.today.deadline {
+    border: none !important;
+    background-color: pink;
 }
 .calendar li .description {
     display: none;
@@ -371,58 +381,3 @@ article ul {
     font-size: 1rem;
     
 }
-/* begin media queries */
-/*
-@media only screen and (min-width: 2em) {
-    body {
-
-    }
-    .apps .post .post {
-	width: calc(100% - 2rem);
-    }
-    header nav {
-	margin-top: 0;
-    }
-    header h1 a {
-	font-size: 4.5rem;
-    }
-    header {
-	display: block;
-    }
-}
-
-@media only screen and (min-width: 38em) {
-    body {
-
-    }
-    .apps .posts .post {
-	width: calc(50% - 2rem);
-    }
-    header {
-	display: block;
-    }
-    header h1 a {
-	font-size: 4.5rem;
-    }
-
-    header nav {
-	margin-top: 0;
-    }
-}
-
-
-@media only screen and (min-width: 54em) {
-    body {
-
-    }
-    header h1 a {
-	font-size: 4.5rem;
-    }
-
-    .apps .posts .post {
-	width: calc(33% - 2rem);
-    }
-}
-*/
-/* end media queries */
-

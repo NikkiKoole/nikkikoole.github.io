@@ -1,7 +1,7 @@
 ---
 timestamp=1637593400
 title='My second encounter with markdown'
-wip=true
+draft=true
 [theme]
   stuff='wild'
 

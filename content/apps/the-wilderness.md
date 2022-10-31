@@ -1,7 +1,7 @@
 ---
 timestamp=1637593747
 title='the wilderness'
-wip=true
+draft=true
 ---
 
 ![tomato](../assets/images/tomatoes.gif)

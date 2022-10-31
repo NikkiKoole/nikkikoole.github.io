@@ -7,9 +7,9 @@ title='this website'
 **This website**
 
 So I've been building this website, the one you are looking at **right now**.
-It's all completely static but I felt like that.
+It's all completely static, but I felt like that.
 
-Offcourse as soon as I decided to build a static website, I've looked at some of the options out there, there are just way too many ;) and all of them have something about them I odn't like. So I ended up making my own.
+Off course as soon as I decided to build a static website, I've looked at some of the options out there, there are just way too many ;) and all of them have something about them I don't like. So I ended up making my own.
 
 ![xkcs](https://imgs.xkcd.com/comics/standards_2x.png)
 
@@ -26,7 +26,7 @@ My personal projects are mostly done in Lua, so I decided on using that for this
 I found a few pieces of code that will help:
 
 [liluat](https://github.com/FSMaxB/liluat)  
-This is a templating engine,
+This is a template engine,
 with it I can add templates into some html string, and like that churn out a bunch of html that is filled in.
 
 
