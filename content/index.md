@@ -3,7 +3,7 @@
 <script>
     //remember month counting starts from 0
 	let deadlines = [{date:new Date(2022, 9, 31), description: 'this website'},
-                     ];
+                     {date:new Date(2022, 10, 30), description: 'character creation kit'}];
 	buildCalendar(deadlines, new Date());
 </script>
 

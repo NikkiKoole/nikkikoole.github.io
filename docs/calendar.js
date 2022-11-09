@@ -102,4 +102,11 @@ function buildCalendar(deadlines, date) {
 
     node.appendChild(next)
     node.appendChild(c)
-}
+
+    /*
+    let prevMonth = document.createElement('div');
+    prevMonth.className= 'prev-next-month';
+    prevMonth.innerHTML = 'prev';
+    node.appendChild(prevMonth);
+    */
+    }
