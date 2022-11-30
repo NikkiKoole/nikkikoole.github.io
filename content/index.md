@@ -3,7 +3,7 @@
 <script>
     //remember month counting starts from 0
 	let deadlines = [{date:new Date(2022, 9, 31), description: 'this website'},
-                     {date:new Date(2022, 10, 30), description: 'character creation kit'}];
+                     {date:new Date(2022, 11, 14), description: 'character creation kit'}];
 	buildCalendar(deadlines, new Date());
 </script>
 
@@ -32,7 +32,8 @@ and let's make them tight.
 See that calendar above? I'll be adding deadlines as we go.
 Pumping out apps, one per month, the first deadline is about this website, I'll be writing here about my process, and need a place where I can keep track about other stuff too. 
 
-End of the month [this website](/makes/this-website.html) will be live, and since I am quite far already and I also need some extra work for all other apps, I'll add 'figuring out how to deploy apps and do a test run' to the first deadline too.
+I failed my second deadline, the new deadline now is at 14 december.
+
 
 
 
