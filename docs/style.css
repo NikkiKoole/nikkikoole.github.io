@@ -353,6 +353,15 @@ article ul {
     cursor: pointer;
 }
 
+.deadline.past {
+    background-color: #eeeeee
+}
+.deadline.past.fail {
+    background-color: pink
+}
+.deadline.past.success {
+ background-color: lightgreen
+}
 .today {
     background: rgba(0,0,0,0.2);
     color: white;
@@ -381,4 +390,10 @@ article ul {
     filter: drop-shadow(0px 0px 2px rgba(0,0,0,.3));
     font-size: 1rem;
     
+}
+
+img.prev-next-month {
+    margin-left: 0.1em;
+    height: 1.5em;
+    cursor: pointer;
 }

@@ -2,15 +2,32 @@
 <div class='put-calendar-in-here'></div>
 <script>
     //remember month counting starts from 0
-	let deadlines = [{date:new Date(2022, 9, 31), description: 'this website'},
-	                 {date:new Date(2022, 10, 31), description: 'character creation kit -- failed'},
-                     {date:new Date(2022, 11, 14), description: 'character creation kit -- failed'},
-					 {date:new Date(2022, 11, 31), description: 'character creation kit' }];
-	buildCalendar(deadlines, new Date());
+	let deadlines = [{date:new Date(2022, 9, 31), description: 'this website', success:true},
+	                 {date:new Date(2022, 10, 31), description: 'character creation kit', success:false},
+                     {date:new Date(2022, 11, 14), description: 'character creation kit',  success:false},
+					 {date:new Date(2022, 11, 31), description: 'character creation kit',  success:false },
+					  {date:new Date(2023, 0, 14), description: 'character creation kit '}];
+	buildCalendar(deadlines);
 </script>
 
 
+
 ## Hello, my name is Nikki 
+
+
+Welcome to my little corner of the internet! I'm a one-man show on a mission to create playful and engaging apps for children.
+
+As a solo developer, I'm able to pour all of my care and attention into each of my projects. My goal is to create apps that not only entertain kids, but also help them learn and grow in meaningful ways.
+
+I think play is a crucial part of childhood, and I strive to make every one of my apps a joyful and memorable experience for kids. From interactive stories and lovable characters, to educational games that are actually fun to play, I'm constantly pushing myself to come up with new and exciting ideas.
+
+Thanks for stopping by and considering my apps for your family. I hope they bring as much joy to your kids as they do to me while I'm creating them.
+
+
+
+
+
+
 
 Once a talented artist, now a front end developer.
 I got bigger dreams though.

@@ -10,39 +10,45 @@ function getFirstDayOfMonth(year, month) {
     return new Date(year, month, 1).getDay();
 }
 
-// you feed it a list of deadlines, and a current Date
-// then you can toggle and look to older/newer months
-// the thing that isnt working right now:
-// you cant have an array of deadlines, i would want to toggel calendar to other months
+let now =  new Date();
+let date = new Date(); 
 
-function buildCalendar(deadlines, date) {
+function  removeCalendar() {
+    let node = document.querySelector('.put-calendar-in-here')
+    node.innerHTML = '';
+}
 
-    function getDaysUntilNextDeadLine(){
-        // given an array of deadlines get the closest one in the future
+function buildCalendar(deadlines) {
+
+    function getDaysUntilNextDeadLine() {
+        // Given an array of deadlines, find the closest one in the future.
         let closestInFuture = Number.MAX_SAFE_INTEGER;
-        let now = new Date()
-        deadlines.forEach(d =>{
-            if (now < d.date) { // only interessted in future events
+        let now = new Date();
+        deadlines.forEach(d => {
+            if (now < d.date) { // Only interested in future events.
                 if (d.date.getTime() < closestInFuture) {
-                    closestInFuture = d.date.getTime()
-                }}
-        })
-        if (closestInFuture == Number.MAX_SAFE_INTEGER) {
-            // then we just find the most recent deadline that has passed
-            deadlines.forEach(d =>{
+                    closestInFuture = d.date.getTime();
+                }
+            }
+        });
+        if (closestInFuture === Number.MAX_SAFE_INTEGER) {
+            // If no future deadlines, find the most recent deadline that has passed.
+            deadlines.forEach(d => {
                 if (d.date.getTime() < closestInFuture) {
-                    closestInFuture = d.date.getTime()
-                }});
-            // in case there arent any deadlines set (past or future)
-            if (closestInFuture == Number.MAX_SAFE_INTEGER) {
+                    closestInFuture = d.date.getTime();
+                }
+            });
+            // In case there are no deadlines set (past or future).
+            if (closestInFuture === Number.MAX_SAFE_INTEGER) {
                 return undefined;
             }
 
-            return -1 * (new Date(new Date() - new Date(closestInFuture) ).getDate() -1);
+            return -1 * (new Date(now - new Date(closestInFuture)).getDate() - 1);
         } else {
-            return (new Date(new Date(closestInFuture) - new Date()).getDate())
+            return (new Date(new Date(closestInFuture) - now).getDate());
         }
     }
+
     
     const firstDayCurrentMonth = getFirstDayOfMonth(
 	date.getFullYear(),
@@ -55,6 +61,27 @@ function buildCalendar(deadlines, date) {
     let h = document.createElement('h1');
     h.innerHTML = monthNames[date.getMonth()]+' '+date.getFullYear();
     c.appendChild(h);
+
+    let prevMonth = document.createElement('img');
+    prevMonth.src = 'assets/images/ui/prev.png'
+    prevMonth.className= 'prev-next-month';
+    prevMonth.onclick = function() {
+        date.setMonth((date.getMonth() - 1) );
+        removeCalendar()
+        buildCalendar(deadlines);
+    }
+    h.appendChild(prevMonth);
+
+    let nextMonth = document.createElement('img');
+    nextMonth.src = 'assets/images/ui/next.png'
+    nextMonth.className= 'prev-next-month';
+    nextMonth.onclick = function() {
+        date.setMonth((date.getMonth() + 1) );
+        removeCalendar()
+        buildCalendar(deadlines);
+    }
+    h.appendChild(nextMonth);
+    
     let ul = document.createElement('ul')
     ul.className= 'calendar';
     dayNames.forEach(name=> {
@@ -71,12 +98,25 @@ function buildCalendar(deadlines, date) {
             li.style="grid-column-start:"+(firstDayCurrentMonth+1);
 	}
         deadlines.forEach(deadline => {
-            if (deadline.date.getMonth() == date.getMonth() && i == deadline.date.getDate() ) { 
+            if (deadline.date.getMonth() == date.getMonth() && date.getFullYear() == deadline.date.getFullYear() && i == deadline.date.getDate() ) { 
 	        li.className="deadline";
+                if (deadline.date.getTime() < now.getTime()) {
+                    li.className = "deadline past"
+                    if (deadline.success === true) {
+                        li.className = "deadline past success"
+                    } else {
+
+                        li.className = "deadline past fail"
+
+                    }
+                } else {
+                    li.className = "deadline future"
+
+                }
                 li.innerHTML += ` <div class='description'>${deadline.description}</div>` 
             }
         })
-        if (i==new Date().getDate() && date.getMonth() == new Date().getMonth()) {
+        if (i==now.getDate() &&  date.getFullYear() == now.getFullYear() && date.getMonth() == now.getMonth()) {
 	    li.className += " today";
             li.innerHTML += ` <div class='description'>today</div>` 
 	}
@@ -103,10 +143,8 @@ function buildCalendar(deadlines, date) {
     node.appendChild(next)
     node.appendChild(c)
 
-    /*
-    let prevMonth = document.createElement('div');
-    prevMonth.className= 'prev-next-month';
-    prevMonth.innerHTML = 'prev';
-    node.appendChild(prevMonth);
-    */
-    }
+
+    
+    
+    
+}
