@@ -59,6 +59,7 @@ function buildCalendar(deadlines) {
     c = document.createElement('div');
     c.className= 'calendar-wrapper';
     let h = document.createElement('h1');
+    h.style.display =  'flex'
     h.innerHTML = monthNames[date.getMonth()]+' '+date.getFullYear();
     c.appendChild(h);
 
@@ -70,7 +71,9 @@ function buildCalendar(deadlines) {
         removeCalendar()
         buildCalendar(deadlines);
     }
-    h.appendChild(prevMonth);
+    let mbuttons = document.createElement('div');
+    mbuttons.style.marginLeft= 'auto'
+    mbuttons.appendChild(prevMonth);
 
     let nextMonth = document.createElement('img');
     nextMonth.src = 'assets/images/ui/next.png'
@@ -80,7 +83,8 @@ function buildCalendar(deadlines) {
         removeCalendar()
         buildCalendar(deadlines);
     }
-    h.appendChild(nextMonth);
+    mbuttons.appendChild(nextMonth);
+    h.appendChild(mbuttons)
     
     let ul = document.createElement('ul')
     ul.className= 'calendar';
