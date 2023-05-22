@@ -42,9 +42,7 @@ body {
 
 .container {
     background: #fbf0c7;
-    width: 40em;
-    max-width: 100%;
-    margin: 0 auto;
+  
 }
 article {
     background: rgba(255,255,255,0.25);
@@ -290,6 +288,11 @@ p {
     color: #454546
 }
 
+section {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: yellow;
+}
 
 article h2 {
 
@@ -298,6 +301,11 @@ article h2 {
 }
 article p {
     font-size: 22px;
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 article li {
     font-size: 1.25rem;

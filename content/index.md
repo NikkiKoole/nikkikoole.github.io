@@ -25,8 +25,38 @@ Thanks for stopping by and considering my apps for your family. I hope they brin
 
 
 
+<section class='yellow'>
+
+Stinky yinky
+wqwqewq
+wq
+edqwdqwedqw
+qwedqwed
+qwed
+qwedqwewpijopjpojweopf
+
+</section>
 
 
+<section class='green'>
+
+Stinky yinky  
+wqwqewq  
+wq  
+edqwdqwedqw
+qwedqwed
+Once a talented artist, now a front end developer.
+I got bigger dreams though.
+And they make me go mad.
+
+Anyway, I am building **better** children apps,
+There are nice ones out there, but they look too generic.
+There are good looking ones, but they don't feel great.
+There are even better ones, but they feel dumb somehow.
+qwed
+qwedqwewpijopjpojweopf
+
+</section>
 
 
 Once a talented artist, now a front end developer.
