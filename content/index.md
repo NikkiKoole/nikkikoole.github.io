@@ -1,14 +1,4 @@
 
-<div class='put-calendar-in-here'></div>
-<script>
-    //remember month counting starts from 0
-	let deadlines = [{date:new Date(2022, 9, 31), description: 'this website', success:true},
-	                 {date:new Date(2022, 10, 31), description: 'character creation kit', success:false},
-                     {date:new Date(2022, 11, 14), description: 'character creation kit',  success:false},
-					 {date:new Date(2022, 11, 31), description: 'character creation kit',  success:false },
-					  {date:new Date(2023, 0, 14), description: 'character creation kit '}];
-	buildCalendar(deadlines);
-</script>
 
 
 
@@ -35,9 +25,21 @@ qwedqwed
 qwed  
 qwedqwewpijopjpojweopf  
 
+
+<div class='put-calendar-in-here'></div>
+<script>
+    //remember month counting starts from 0
+	let deadlines = [{date:new Date(2022, 9, 31), description: 'this website', success:true},
+	                 {date:new Date(2022, 10, 31), description: 'character creation kit', success:false},
+                     {date:new Date(2022, 11, 14), description: 'character creation kit',  success:false},
+					 {date:new Date(2022, 11, 31), description: 'character creation kit',  success:false },
+					  {date:new Date(2023, 0, 14), description: 'character creation kit '}];
+	buildCalendar(deadlines);
+</script>
+
 </section>
 <section class='red'>
-
+## Oh ja jo!
 Stinky yinky
 wqwqewq  
 wq  

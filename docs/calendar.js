@@ -59,9 +59,9 @@ function buildCalendar(deadlines) {
     c = document.createElement('div');
     c.className= 'calendar-wrapper';
     let h = document.createElement('h1');
-    h.style.display =  'flex'
-    h.innerHTML = monthNames[date.getMonth()]+' '+date.getFullYear();
-    c.appendChild(h);
+  
+    
+  
 
     let prevMonth = document.createElement('img');
     prevMonth.src = 'assets/images/ui/prev.png'
@@ -72,7 +72,7 @@ function buildCalendar(deadlines) {
         buildCalendar(deadlines);
     }
     let mbuttons = document.createElement('div');
-    mbuttons.style.marginLeft= 'auto'
+    //mbuttons.style.marginLeft= 'auto'
     mbuttons.appendChild(prevMonth);
 
     let nextMonth = document.createElement('img');
@@ -84,8 +84,15 @@ function buildCalendar(deadlines) {
         buildCalendar(deadlines);
     }
     mbuttons.appendChild(nextMonth);
-    h.appendChild(mbuttons)
-    
+   
+   // h.prepend(mbuttons)
+    h.appendChild(mbuttons);
+    let str = document.createElement('div');
+    str.innerHTML = monthNames[date.getMonth()]+' '+date.getFullYear();
+    h.appendChild(str);
+
+    c.appendChild(h);
+    //h.style.display =  'flex'
     let ul = document.createElement('ul')
     ul.className= 'calendar';
     dayNames.forEach(name=> {
