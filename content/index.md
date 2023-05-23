@@ -28,16 +28,25 @@ Thanks for stopping by and considering my apps for your family. I hope they brin
 <section class='yellow'>
 
 Stinky yinky
-wqwqewq
-wq
-edqwdqwedqw
-qwedqwed
-qwed
-qwedqwewpijopjpojweopf
+wqwqewq  
+wq  
+edqwdqwedqw  
+qwedqwed  
+qwed  
+qwedqwewpijopjpojweopf  
 
 </section>
+<section class='red'>
 
+Stinky yinky
+wqwqewq  
+wq  
+edqwdqwedqw  
+qwedqwed  
+qwed  
+qwedqwewpijopjpojweopf  
 
+</section>
 <section class='green'>
 
 Stinky yinky  

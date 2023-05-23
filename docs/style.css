@@ -183,6 +183,14 @@ header nav a:hover {
     cursor: pointer;
     transition: background .2s;
     list-style-type: none;
+
+
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    
 }
 .post a {
     text-decoration: none;
@@ -265,8 +273,8 @@ video {
 /* end app cards */
 
 article {
-    padding: 1rem;
     padding-top: 5rem;
+    padding-bottom: 5rem;
 }
 
 
@@ -277,11 +285,23 @@ h1 {
     white-space:nowrap;
     font-family: sans-shaded;
     margin-top: 0;
+
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 h2 {
     font-family: volta;
     color: #454546;
     margin-top: 0;
+
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 p {
     font-family: volta;
@@ -291,7 +311,7 @@ p {
 section {
     padding-top: 1em;
     padding-bottom: 1em;
-    background-color: yellow;
+    background-color: #e3ca57;
 }
 
 article h2 {
@@ -299,6 +319,13 @@ article h2 {
     font-size: 24px;
 
 }
+
+code {
+    max-width: 40em;
+      margin-left: auto;
+    margin-right: auto;
+}
+
 article p {
     font-size: 22px;
     max-width: 40em;
@@ -315,6 +342,10 @@ article ul {
     background-color: rgba(255,255,255,0.5);
     padding-bottom: 10px;
     padding-top: 10px;
+
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
 } 
 /* beginning to style the google calendar */
 .twomonths {
@@ -329,12 +360,45 @@ article ul {
   padding-inline-start: 0;
 }
 
+.yellow {
+    background-color: #e3ca57
+}
+
+.green {
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    background-color: #798C1B;
+}
+.blue {
+    background-color: #4ACAD9;
+    background-color: #57A2FF; 
+}
+
+.red {
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    background-color: #8C5330;
+   
+}
+
+article .red p {
+    color: white;
+}
+article .green p {
+    /*color: white;*/
+}
+
 
 .calendar-wrapper {
     width: 420px;
     font-family: volta;
     background-color: rgba(255,255,255,0.5);
     padding: 1rem;
+
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    
 }
 .weekday {
   background: rgba(0,0,0,.25);
