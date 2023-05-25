@@ -1,34 +1,31 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600;700&display=swap');
-
 
 @font-face {
   font-family: cooper;
   src: url(assets/fonts/cooper-bold-bt.ttf);
-
 }
+
 @font-face {
   font-family: moonflower;
   src: url(assets/fonts/MoonFlower-YzXXq.ttf);
-
 }
+
 @font-face {
   font-family: sans-shaded;
   src: url(assets/fonts/SansSerifShaded.ttf);
-
 }
+
 @font-face {
   font-family: volta;
   src: url(assets/fonts/VoltaT-Regu.ttf);
   font-weight: 400;
 }
+
 @font-face {
   font-family: volta;
   src: url(assets/fonts/VoltaT-Bold.ttf);
   font-weight: 700;
 }
-
 
 html {
   overflow-y: scroll;
@@ -50,14 +47,16 @@ article {
 html, body {
   height: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
 }
+
 main {
-    
     flex: 1 0 auto;
 }
+
 footer {
   flex-shrink: 0;
 }
@@ -76,9 +75,11 @@ footer .content {
     max-width: 65em;
     margin: 0 auto;
 }
+
 footer nav {
 
 }
+
 footer ul {
     display: flex;
 }
@@ -86,11 +87,10 @@ footer ul {
 footer li {
     padding: 6px;
 }
+
 footer a {
     text-decoration: none;
     color: white;
-    
-
 }
 
 header img.logo {
@@ -151,16 +151,11 @@ header nav a {
     border-radius: 25px 25px 25px 5%;
 }
 
-
-
 header nav a:hover {
     color: white;
     background-color: #e3ca57;
     transition: color, background-color .2s;
-
 }
-
-
 
 /* end header and nav */
 
@@ -277,10 +272,10 @@ article {
     padding-bottom: 5rem;
 }
 
-
 b {
     font-family: cooper;
 }
+
 h1 {
     white-space:nowrap;
     font-family: sans-shaded;
@@ -315,14 +310,12 @@ section {
 }
 
 article h2 {
-
     font-size: 24px;
-
 }
 
 code {
     max-width: 40em;
-      margin-left: auto;
+    margin-left: auto;
     margin-right: auto;
 }
 
@@ -348,9 +341,11 @@ article ul {
     margin-right: auto;
 } 
 /* beginning to style the google calendar */
+
 .twomonths {
     display: flex
 }
+
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -364,10 +359,6 @@ article ul {
 
 .yellow {
     background-color: #e3ca57
-   /* background: white;
-    background-image: linear-gradient(90deg, rgba(200,0,0,.5) 50%, transparent 0),
-                      linear-gradient(rgba(200,0,0,.5) 50%, transparent 0);
-    background-size: 30px 30px;*/
 }
 
 .green {
@@ -380,10 +371,7 @@ article ul {
 }
 
 .red {
-    /*background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");*/
     background-color: #8C5330;
-
-    
 }
 
 article .red p {
@@ -393,9 +381,11 @@ article .red h2 {
     color: white;
 }
 article .green p {
-    /*color: white;*/
+    color: white;
 }
-
+article .green h2 {
+    color: white;
+}
 
 .calendar-wrapper {
     width: 420px;
@@ -418,16 +408,17 @@ article .green p {
 .calendar h1 {
   text-align: center;
 }
+
 .calendar ul {
   list-style: none;
   margin: 0;
   padding: 0;
   text-align: center;
 }
+
 .calendar li {
     border: 2px solid transparent;
     list-style: none;
-
 }
 
 .deadline {
@@ -440,25 +431,30 @@ article .green p {
 .deadline.past {
     background-color: #eeeeee
 }
+
 .deadline.past.fail {
     background-color: pink
 }
 .deadline.past.success {
- background-color: lightgreen
+    background-color: lightgreen
 }
+
 .today {
     background: rgba(0,0,0,0.2);
     color: white;
     border-radius: 25px;
     cursor: pointer;
 }
+
 .today.deadline {
     border: none !important;
     background-color: pink;
 }
+
 .calendar li .description {
     display: none;
 }
+
 .calendar li:hover .description {
     display: block;
     position: absolute;
@@ -473,7 +469,6 @@ article .green p {
     transform: translate(-1em, -1em);
     filter: drop-shadow(0px 0px 2px rgba(0,0,0,.3));
     font-size: 1rem;
-    
 }
 
 img.prev-next-month {
