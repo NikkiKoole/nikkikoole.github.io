@@ -13,8 +13,18 @@ I think play is a crucial part of childhood, and I strive to make every one of m
 
 Thanks for stopping by and considering my apps for your family. I hope they bring as much joy to your kids as they do to me while I'm creating them.
 
+<section class='green'>
 
+##Mipolai what even does that mean ?
 
+Okay, where does the name Mipolai come from and why is your website called that? 
+When I was about four years old, I had a friend named Nicolai. 
+I couldn't pronounce his name correctly, so I called him "Mipolai." 
+Even though my friend's actual name wasn't like that, I thought it was the most beautiful name I had ever heard: Mipolai. 
+My own name is Nikki, but I couldn't pronounce it either, so it became "Nitti." I remembered that name, Mipolai, for years. It was a fantastic name, and I even planned to name my future children that. I named my stuffed animal Mipolai as well, but eventually, I forgot about it. 
+
+I stopped playing with stuffed animals and could pronounce names as they were intended, and decades went by. Then, about 35 years after Nitti and Mipolai, when I had to come up with a name for this website and my future company, after making endless lists of uninspired and mediocre names, I suddenly recalled this memory. And just like that, you know you've found the **right** name. That name doesn't actually mean anything on its own, but as a little four-year-old, I thought it was the most beautiful name I knew.
+</section>
 <section class='yellow'>
 
 Stinky yinky

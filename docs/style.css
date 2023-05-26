@@ -392,9 +392,22 @@ article .red p {
 article .red h2 {
     color: white;
 }
+article .red h1 {
+    color: white;
+}
 article .green p {
     /*color: white;*/
 }
+article .green p {
+    color: white;
+}
+article .green h2 {
+    color: white;
+}
+article .green h1 {
+    color: white;
+}
+
 
 
 .calendar-wrapper {
