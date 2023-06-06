@@ -1,13 +1,28 @@
+<section class='yellow'>
+# foreword
+Alright, here we go.  
+Always a bit of a thing, writing a text.  
+The process can take months and still not be too great, well anyway.  
+First things first, I guess.  
+
+This website is here to tell you about the company **Mipolai**.  
+We make iOS apps for young children.  
+I dare say we create better apps than most, and we've only just begun.  
+</section>
+
+#Mipolai
+
+Once upon a time, deep in the 80s, I was a preschooler myself.  
+My best friend was called Nikolai. To be honest, I can't vividly recall those days; it's one of those things you remember because it's been told to you later on. Anyway, I couldn't pronounce his name, and I struggled with my own as well, so we went by Nitti and Mipolai. The sound of it held a magical allure for me.
+I was so enchanted by the name that I even gave it to my stuffed animal. I had plans to adopt it as my own name later in life.
+
+Then the 90s arrived, and I outgrew playing with stuffed animals.  
+I completely forgot about the name Mipolai until just a few months ago.  
+During the process of brainstorming a name for this company, long lists of mediocre and overly literal names emerged. Suddenly, that memory resurfaced. And just like that, you know you've found the **right** name.
+That's why we are called **Mipolai**.
+Nice to meet you ;)  
 
 
-
-
-
-
-## name mipolai
-Alright, where does the name Mikolai come from, and why is your website named that way? When I was around four years old, I had a friend named Nicolai. I couldn't pronounce his name correctly and ended up saying "mipolai" instead. Even though my friend's actual name wasn't that, I found it to be the most beautiful name I had ever heard—Mipolai. As for myself, my name is Nikki, and I also struggled with pronunciation, becoming "Nitti." For years, the name Mipolai stayed with me, a fantastic name that I even considered giving to my future children. I named my stuffed animal Mipolai, but eventually, I forgot about it. I stopped playing with stuffed animals and learned to pronounce names as they were intended, and the decades passed.
-
-When it came time to come up with a name for this website and my future company, about 35 years since Nitti and Mipolai, after creating endless lists of uninspiring and mediocre names, I suddenly recalled this memory. And then, you just know that it feels right. In essence, that name doesn't hold any specific meaning, but as a small four-year-old, I considered it the most beautiful name I knew.
 
 
 ## what are we doing here
@@ -40,18 +55,7 @@ I think play is a crucial part of childhood, and I strive to make every one of m
 
 Thanks for stopping by and considering my apps for your family. I hope they bring as much joy to your kids as they do to me while I'm creating them.
 
-<section class='green'>
 
-##Mipolai what even does that mean ?
-
-Okay, where does the name Mipolai come from and why is your website called that? 
-When I was about four years old, I had a friend named Nicolai. 
-I couldn't pronounce his name correctly, so I called him "Mipolai." 
-Even though my friend's actual name wasn't like that, I thought it was the most beautiful name I had ever heard: Mipolai. 
-My own name is Nikki, but I couldn't pronounce it either, so it became "Nitti." I remembered that name, Mipolai, for years. It was a fantastic name, and I even planned to name my future children that. I named my stuffed animal Mipolai as well, but eventually, I forgot about it. 
-
-I stopped playing with stuffed animals and could pronounce names as they were intended, and decades went by. Then, about 35 years after Nitti and Mipolai, when I had to come up with a name for this website and my future company, after making endless lists of uninspired and mediocre names, I suddenly recalled this memory. And just like that, you know you've found the **right** name. That name doesn't actually mean anything on its own, but as a little four-year-old, I thought it was the most beautiful name I knew.
-</section>
 <section class='yellow'>
 
 Stinky yinky
