@@ -2,6 +2,33 @@
 
 
 
+
+
+## name mipolai
+Alright, where does the name Mikolai come from, and why is your website named that way? When I was around four years old, I had a friend named Nicolai. I couldn't pronounce his name correctly and ended up saying "mipolai" instead. Even though my friend's actual name wasn't that, I found it to be the most beautiful name I had ever heard—Mipolai. As for myself, my name is Nikki, and I also struggled with pronunciation, becoming "Nitti." For years, the name Mipolai stayed with me, a fantastic name that I even considered giving to my future children. I named my stuffed animal Mipolai, but eventually, I forgot about it. I stopped playing with stuffed animals and learned to pronounce names as they were intended, and the decades passed.
+
+When it came time to come up with a name for this website and my future company, about 35 years since Nitti and Mipolai, after creating endless lists of uninspiring and mediocre names, I suddenly recalled this memory. And then, you just know that it feels right. In essence, that name doesn't hold any specific meaning, but as a small four-year-old, I considered it the most beautiful name I knew.
+
+
+## what are we doing here
+Alright, what are we doing here, what is this website, and what are the goals?
+
+Hey, great to have you here! Mipolai creates apps for children, exceptionally creative apps for kids, if I may say so myself. It may sound a tad cheesy to boast about it, but I genuinely believe they are superior apps for children. They are apps crafted with a personal touch, infused with that thing they call "intrinsic motivation" back in art school. We, as creators, have a deep passion for creativity, and for my own children, I wanted to offer more than the typical apps I often come across. Apart from everything else out there, we are makers, driven by love for our craft. Simply put, we create apps here with love for children.
+
+And just to make it clear, these apps are ad-free and free from microtransactions. They are made with love and are available at an affordable price. I'm thrilled that you've come here to explore.
+
+
+## What have i done
+Alright, what have I created, why, and where do I hope it goes?
+
+The first creation here is PuppetMaker, born out of my inherent laziness to draw numerous characters. So, I thought, why not create an app to assist in drawing characters? I hope you find them looking delightful and enjoyable.
+
+Next up, there's a world being crafted for these puppets to play in. I don't want to reveal too much at this point since it's still a work in progress, subject to change. However, I envision it involving bicycles or tricycles in some way.
+
+Speaking of ambition and discussing future plans, I must admit it's quite a challenge. Take this very website, for instance. It has been live for a couple of months now, and from the beginning, I kept a calendar with the wonderfully ambitious goal of launching a new app every month. However, after missing several deadlines, I decided to let go of that pressure. I'm still figuring out the rhythm of creating new apps. Perhaps after two or three more apps, I'll be able to share more details.
+
+
+
 ## Hello, my name is Nikki 
 
 
