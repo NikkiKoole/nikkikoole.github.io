@@ -26,6 +26,13 @@ Nice to meet you ;)
 
 <section class=red>
 ## what are we doing here
+
+No microtransactions, no ads.   
+I'll just say it again,   
+No microtransactions, no ads.   
+
+So, 
+
 Alright, what are we doing here, what is this website, and what are the goals?
 
 Hey, great to have you here! Mipolai creates apps for children, exceptionally creative apps for kids, if I may say so myself. It may sound a tad cheesy to boast about it, but I genuinely believe they are superior apps for children. They are apps crafted with a personal touch, infused with that thing they call "intrinsic motivation" back in art school. We, as creators, have a deep passion for creativity, and for my own children, I wanted to offer more than the typical apps I often come across. Apart from everything else out there, we are makers, driven by love for our craft. Simply put, we create apps here with love for children.

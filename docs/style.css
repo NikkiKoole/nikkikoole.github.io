@@ -371,7 +371,9 @@ article ul {
 .red {
     background-color: #8C5330;
 }
-
+.pink {
+    background-color: #e7bebe;
+}
 article .red p {
     color: white;
 }
