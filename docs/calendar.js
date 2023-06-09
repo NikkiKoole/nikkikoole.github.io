@@ -1,7 +1,7 @@
 const monthNames = ["January", "February", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December"
                    ];
-const dayNames = ["zo", "ma", "di", "wo", "do", "vr", "za"]
+const dayNames = ["su", "mo", "tu", "we", "th", "fr", "sa"]
 
 function getDaysInMonth(year, month) {
     return new Date(year, month, 0).getDate();

@@ -409,11 +409,10 @@ article .green h1 {
 
 .calendar-wrapper {
     width: 420px;
+    max-width: calc(100% - 2em);
     font-family: volta;
     background-color: rgba(255,255,255,0.5);
     padding: 1rem;
-
-    max-width: 40em;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1em;
