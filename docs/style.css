@@ -42,6 +42,7 @@ body {
   
 }
 article {
+    
     background: rgba(255,255,255,0.25);
 }
 html, body {
@@ -267,6 +268,7 @@ video {
 /* end app cards */
 
 article {
+    padding-top: 2em;
     padding-bottom: 5rem;
 }
 
@@ -300,6 +302,8 @@ p {
     font-family: volta;
     color: #454546
 }
+
+
 
 section {
     padding-top: 3em;
@@ -337,7 +341,15 @@ article ul {
     max-width: 40em;
     margin-left: auto;
     margin-right: auto;
-} 
+}
+
+.downloadApp {
+    display: block;
+    min-width: 100px;
+    max-width: 30%;
+}
+
+
 /* beginning to style the google calendar */
 
 .twomonths {

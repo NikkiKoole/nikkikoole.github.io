@@ -151,7 +151,7 @@ function buildCalendar(deadlines) {
     }
     let node = document.querySelector('.put-calendar-in-here')
 
-    node.appendChild(next)
+    //node.appendChild(next)
     node.appendChild(c)
 
 

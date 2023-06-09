@@ -3,6 +3,7 @@ timestamp=1637843423
 title='boat'
 thumb='../assets/images/walterboat.gif'
 alt='an image of a walrus on a boat'
+draft=true
 ---
 second post
 # table of contents
