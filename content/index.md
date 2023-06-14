@@ -6,17 +6,19 @@ Anyway, I am building **better** children apps, Sure there are nice ones out the
 
 I know children, as a matter of fact, I'm a bit of a big one myself, and I love developing, drawing, animating, fantasizing, philosophizing, playing chess, and making music. So I believe I can do better.
 
-So let's introduce some deadlines, and let's make them tight. ~~See that calendar here? I'll be adding deadlines as we go. Pumping out apps, one per month, or well the first deadline is about this website~~,  I'll be writing here about my process, and might need a place where I can keep track about other stuff too.
+~~So let's introduce some deadlines, and let's make them tight. See that calendar here? I'll be adding deadlines as we go. Pumping out apps, one per month, or well the first deadline is about this website~~,  Ok so instead of these deadlines, I'll just use this calendar to keep track of stuff that has been started and finished..
 
 <section class='yellow'>
 <div class='put-calendar-in-here'></div>
 <script>
     //remember month counting starts from 0
-	let deadlines = [{date:new Date(2022, 9, 31), description: 'this website', success:true},
-	                 {date:new Date(2022, 10, 31), description: 'character creation kit', success:false},
-                     {date:new Date(2022, 11, 14), description: 'character creation kit',  success:false},
-					 {date:new Date(2022, 11, 31), description: 'character creation kit',  success:false },
-					  {date:new Date(2023, 0, 14), description: 'character creation kit '}];
+	let deadlines = [
+        {date:new Date(2022, 9, 1), description: 'started working on the website', success:true},
+        {date:new Date(2022, 9, 31), description: 'website live', success:true},
+        {date:new Date(2022, 10, 1), description: 'started working on puppetmaker', success:true},
+        {date:new Date(2023, 5, 10), description: 'puppetmaker in app store!', success:true},
+        {date:new Date(2023, 5, 13), description: 'started working on next thing', success:true}
+        ];
 	buildCalendar(deadlines);
 </script>
 
