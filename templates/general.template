@@ -11,7 +11,8 @@
   gtag('config', 'G-H8SSYZJ6J2');
 </script>
 
-		<title>{{= title}}</title>
+
+<title>{{= title}}</title>
                 {{include: 'templates/headcss.template'}}
 	</head>
 

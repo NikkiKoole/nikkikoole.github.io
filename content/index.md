@@ -1,3 +1,13 @@
+---
+date='11 Aug 2023'
+title='Mipolai makes apps'
+score=1.0
+---
+
+
+
+
+
 ## Hello, my name is Nikki
 
 Once a talented artist, now a front end developer. I got bigger dreams though. And they make me go mad.

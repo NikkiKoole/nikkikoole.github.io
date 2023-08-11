@@ -2,6 +2,7 @@
 timestamp=1679233924
 date='19 Mar 2023'
 title='symbolic collection'
+draft=true
 ---
 
 Hi hello!

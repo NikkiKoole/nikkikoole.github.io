@@ -4,7 +4,7 @@ date='26 Nov 2021'
 title='fractals, fractals'
 intro='use fractals for vegetation'
 thumb='../assets/images/walterboat.gif'
-
+draft=true
 ---
 
 ## Lets give it a go

@@ -1,9 +1,10 @@
 ---
 timestamp=1686292537
 date='09 Jun 2023'
-title='puppetmaker'
+title='Puppetmaker'
 thumb='../assets/images/puppetmaker/icon-1024.jpg'
 alt='puppetmaker icon'
+score=0.9
 ---
 
 

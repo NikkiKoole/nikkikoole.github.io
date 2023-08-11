@@ -1,7 +1,8 @@
 ---
 timestamp=1686343935
 date='09 Jun 2023'
-title='privacy policy'
+title='Privacy Policy'
+score=0.6
 ---
 
 # Hi hello 

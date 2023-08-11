@@ -14,6 +14,16 @@ function printGreen(...)
    print(...)
    io.write("\x1B[m\x1B[K")
 end
+function  printPink(...)
+   io.write("\x1B[35m")
+   print(...)
+   io.write("\x1B[m\x1B[K")
+end
+function  printYellow(...)
+   io.write("\x1B[93m")
+   print(...)
+   io.write("\x1B[m\x1B[K")
+end
 
 function scandir(directory)
    local i, t, popen = 0, {}, io.popen
@@ -84,7 +94,8 @@ if arg then
          "---\n" ..
              "timestamp=" .. os.time() .. "\n" ..
              "date=" .. (os.date("'%d %h %Y'")) .. "\n" ..
-             "title='" .. arg[2] .. "'\n" ..
+	    "title='" .. arg[2] .. "'\n" ..
+	    "draft=true" ..
              "---\n"
          local prefix = 'content/'
          if answer == 'a' then prefix = prefix .. 'apps/' end
@@ -102,6 +113,57 @@ end
 
 local writtenFileCount = 0
 
+function getMonthIndex(month)
+   local months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }
+   for i = 1, 12 do
+      if month == months[i] then return i end
+   end
+   return -1
+end
+
+function frontMatterDateToTimestamp(date)
+   local s = date
+      local p="(%d+) (%a+) (%d+)"
+      local day,month,year=s:match(p)
+      local monthIndex = getMonthIndex(month)
+     -- print(day, month,year)
+     return  os.date("%Y-%m-%d", os.time({year=year, day=day, month=monthIndex}))
+end
+
+local gatheredSitemapData = {}
+
+function makeSitemapFromGatheredData(prefix)
+    table.sort(gatheredSitemapData, function(left, right)
+      return left.priority > right.priority
+   end)
+
+ for i=1, #gatheredSitemapData do
+    local loc =  gatheredSitemapData[i].loc:gsub("index", "")
+    gatheredSitemapData[i].loc = prefix..loc
+ end
+
+
+ local result = ''
+ 
+ result = result .. '<?xml version="1.0" encoding="UTF-8"?>\n'
+result = result .. '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+
+for i=1, #gatheredSitemapData do
+   result = result .. '<url>\n'
+      result = result ..'  <loc>'..gatheredSitemapData[i].loc..'</loc>\n'
+      result = result ..'  <lastmod>'..gatheredSitemapData[i].lastmod ..'</lastmod>\n'
+      result = result ..'  <priority>'..gatheredSitemapData[i].priority ..'</priority>\n'
+   result = result .. '</url>\n'
+end
+
+   result= result .. '</urlset>\n' 
+
+ --  print(result)
+   writePost(destination..'/sitemap2.xml', result)
+  
+   printPink('written an sitemap file with '..#gatheredSitemapData .. ' items in it.')
+end
+
 function doSimple(template, content, values, valueStorage)
    local t = readAll('templates/' .. template .. '.template')
    local firstPathPart = split(content, '/')[1]
@@ -118,6 +180,16 @@ function doSimple(template, content, values, valueStorage)
       table.insert(valueStorage, values)
    end
 
+   -- todo sitemap stuff WIP
+
+   if frontmatter and (  not frontmatter.draft or frontmatter.draft == false) then
+      table.insert(gatheredSitemapData, {loc=content, lastmod=frontMatterDateToTimestamp(frontmatter.date), priority=frontmatter.score})
+      frontMatterDateToTimestamp(frontmatter.date)
+      printPink(frontmatter.title .. ' => sitemap, score: '..frontmatter.score)
+   end
+  
+   
+   
    local compiled_template = liluat.compile(t)
    local rendered_template = liluat.render(compiled_template, values)
    writePost(destination .. content .. '.html', rendered_template)
@@ -137,7 +209,6 @@ function doBunch(dir)
          end
       end
    end
-
 
    table.sort(result, function(left, right)
       return left.frontmatter.timestamp > right.frontmatter.timestamp
@@ -170,4 +241,6 @@ doSimple('general', 'index', { title = 'Mipolai makes apps' })
 
 
 
-print('Done!, written ' .. writtenFileCount .. ' files in ' .. (os.time() - now) .. ' seconds.')
+printYellow('Done!, written ' .. writtenFileCount .. ' files in ' .. (os.time() - now) .. ' seconds.')
+makeSitemapFromGatheredData( 'https://mipolai.com/')
+

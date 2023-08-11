@@ -1,3 +1,8 @@
+---
+date='11 Aug 2023'
+title='Apps'
+score=0.9
+---
 
 
 ## story time
