@@ -11,10 +11,10 @@ score=0.9
 
 # available 
 # in app store
-<a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![floral structure 1](../assets/images/download-on-the-app-store.png) </a>
+<a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![download on app store](../assets/images/download-on-the-app-store.svg) </a>
 
 ## Puppetmaker
-![ingame](../assets/images/puppetmaker/ingame1.jpg)
+![ingame](../assets/images/puppetmaker/ingame1.jpg#polaroid)
 
 
 Create your own Mipo puppet with Puppetmaker!
@@ -24,6 +24,6 @@ With Puppetmaker, you have the power to design unique puppets from a large colle
 Neither human nor animal, but our own kind of cute monster we call Mipo!
 Now, you can join in on the fun and bring these delightful creatures to life. Embrace the whimsy and charm of Mipo as you craft your very own unique characters. With Puppetmaker, the power to create is in your hands. Get started on your Mipo puppet-making adventure today!
 
-![ingame](../assets/images/puppetmaker/ingame2.jpg)
-![ingame](../assets/images/puppetmaker/ingame3.jpg)
-![ingame](../assets/images/puppetmaker/ingame4.jpg)
+![ingame](../assets/images/puppetmaker/ingame2.jpg#polaroid)
+![ingame](../assets/images/puppetmaker/ingame3.jpg#polaroid)
+![ingame](../assets/images/puppetmaker/ingame4.jpg#polaroid)
