@@ -1,7 +1,7 @@
 <header>
     <h1>
         <a href="/">
-           <img class='logo' alt="a random shape called blub" src="/assets/images/mipolaiblobagain.png" />
+           <img class='logo' alt="a random shape called blub" src="/assets/images/mipolaiblobagain.png" srcset="/assets/images/mipolaiblobagainSmaller.png 254w" />
            <img class='text' alt='text' src='/assets/images/mipolailogo.png'>
         </a>
     </h1>
