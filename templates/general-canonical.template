@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H8SSYZJ6J2"></script>
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H8SSYZJ6J2');
+        </script>
+  <link rel=”canonical” href={{= canon}} />
+
+  <title>{{= title}}</title>
+        {{include: 'templates/headcss.template'}}
+  </head>
+
+  <body>
+                {{include: 'templates/header.template'}}
+                <main>
+		  <div class='{{= firstPathPart}} container'>
+		    <article>{{= html}}</article>
+		  </div>
+		</main>
+                {{include: 'templates/footer.template'}}
+  </body>
+</html>
