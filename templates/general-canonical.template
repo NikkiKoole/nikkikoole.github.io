@@ -9,7 +9,7 @@
         gtag('js', new Date());
         gtag('config', 'G-H8SSYZJ6J2');
         </script>
-  <link rel=”canonical” href={{= canon}} />
+  <link rel="canonical" href={{= canon}} />
 
   <title>{{= title}}</title>
         {{include: 'templates/headcss.template'}}

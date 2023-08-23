@@ -237,7 +237,7 @@ local list = doBunch('stuff')
 doSimple('collection', 'stuff/index', { title = "Stuff", posts = list })
 
 doSimple('general', 'about/index', { title = "About" })
-doSimple('general-canonical', 'index', { title = 'Mipolai makes apps', canon='https://mipolai.com/'})
+doSimple('general-canonical', 'index', { title = 'Mipolai makes apps', canon="\"https://mipolai.com/\""})
 
 
 
