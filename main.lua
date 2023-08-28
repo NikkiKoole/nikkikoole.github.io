@@ -170,6 +170,7 @@ function doSimple(template, content, values, valueStorage)
    local source = readAll('content/' .. content .. '.md')
    local html, frontmatter = readSource(source)
    values.frontmatter = frontmatter
+   values.appleId = frontmatter and frontmatter.appleId
    values.html = html
    values.firstPathPart = firstPathPart
    if (frontmatter and frontmatter.title) then
@@ -205,7 +206,7 @@ function doBunch(dir)
       if (file ~= 'index.md') then
          if ends_with(file, '.md') then
             local content = file:gsub('.md', '')
-            doSimple('general', dir .. '/' .. content, { path = content .. '.html' }, result)
+            doSimple('general', dir .. '/' .. content, { path = content .. '.html', test='123' }, result)
          end
       end
    end

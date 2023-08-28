@@ -12,8 +12,16 @@
 </script>
 
 
+{{if appleId then}}
+<meta name="apple-itunes-app" content="app-id={{=appleId}}">
+
+{{end}}
+
+
+
 <title>{{= title}}</title>
-                {{include: 'templates/headcss.template'}}
+{{include: 'templates/headcss.template'}}
+
 	</head>
 
 	<body>
