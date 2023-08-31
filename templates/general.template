@@ -12,7 +12,7 @@
 </script>
 
 
-{{if appleId then}}
+{{if appleId and false then}}
 <meta name="apple-itunes-app" content="app-id={{=appleId}}">
 
 {{end}}
