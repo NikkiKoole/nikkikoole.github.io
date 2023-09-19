@@ -171,6 +171,7 @@ function doSimple(template, content, values, valueStorage)
    local html, frontmatter = readSource(source)
    values.frontmatter = frontmatter
    values.appleId = frontmatter and frontmatter.appleId
+   values.structuredJSON = frontmatter and frontmatter.structuredJSON
    values.html = html
    values.firstPathPart = firstPathPart
    if (frontmatter and frontmatter.title) then

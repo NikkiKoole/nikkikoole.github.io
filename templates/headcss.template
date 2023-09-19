@@ -1,6 +1,8 @@
 
 <meta charset="UTF-8">
 
+<meta name="apple-itunes-app" content="app-id=6450050163">		
+
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favi/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favi/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favi/favicon-16x16.png">
@@ -13,6 +15,8 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mipolai is Nikki Koole">
+
+
 
 <!-- <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/agate.min.css"> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script> -->
