@@ -11,11 +11,6 @@
 }
 
 @font-face {
-  font-family: sans-shaded;
-  src: url(assets/fonts/SansSerifShaded.ttf);
-}
-
-@font-face {
   font-family: volta;
   src: url(assets/fonts/VoltaT-Regu.ttf);
   font-weight: 400;
@@ -197,7 +192,7 @@ header nav a:hover {
 .post .content b {
     color :#454546;
     font-size: 2rem;
-    font-family: sans-shaded;
+    font-family: volta;
     display: block;
     margin: 1rem;
     transition: all .2s;
@@ -284,7 +279,7 @@ b {
 
 h1 {
     white-space:nowrap;
-    font-family: sans-shaded;
+    font-family: volta;
     margin-top: 0;
 
     max-width: 40em;
@@ -292,6 +287,7 @@ h1 {
     margin-right: auto;
     padding-left: 1em;
     padding-right: 1em;
+    color: #454546;
 }
 h2 {
     font-family: volta;
@@ -380,18 +376,36 @@ article ul {
 .green {
     background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
     background-color: #798C1B;
+   
 }
+
+.greygreen {
+    background-color: #95ab9f;
+}
+
 .blue {
     background-color: #4ACAD9;
     background-color: #57A2FF; 
 }
 
+.aubergine {
+    background-color: #601039;
+}
 .red {
     background-color: #8C5330;
+}
+
+.white {
+    background-color: #f0f5f9;
 }
 .pink {
     background-color: #e7bebe;
 }
+
+.beige {
+    background-color: #d3c7c0;
+}
+
 article .red p {
     color: white;
 }
@@ -399,6 +413,16 @@ article .red h2 {
     color: white;
 }
 article .red h1 {
+    color: white;
+}
+
+article .aubergine p {
+    color: white;
+}
+article .aubergine h2 {
+    color: white;
+}
+article .aubergine h1 {
     color: white;
 }
 
