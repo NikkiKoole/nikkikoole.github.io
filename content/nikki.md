@@ -5,7 +5,8 @@ score=0.7
 ---
 
 
-## Hello, my name is Nikki
+# Hi Hello
+# my name is Nikki
 
 Visit my site mipolai.com [here](https://mipolai.com). (or just click the header above)  
 Check out all my apps on the appstore [here](https://apps.apple.com/us/developer/nikki-koole/id1691714556).  

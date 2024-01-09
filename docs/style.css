@@ -112,6 +112,8 @@ header img.text {
     object-fit: contain;
 }
 
+
+
 header {
     max-width: 40em;
     margin: 0 auto;
@@ -136,7 +138,7 @@ header nav a {
     color: #454546;
     
     font-size: 2em;
-    font-family: volta;
+    font-family: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
     text-decoration: none;
     margin-left: 2rem;
     
@@ -278,8 +280,8 @@ b {
 }
 
 h1 {
-    white-space:nowrap;
-    font-family: volta;
+   
+    font-family: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
     margin-top: 0;
 
     max-width: 40em;
@@ -288,9 +290,10 @@ h1 {
     padding-left: 1em;
     padding-right: 1em;
     color: #454546;
+    word-wrap: break-word;
 }
 h2 {
-    font-family: volta;
+    font-family:  Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
     color: #454546;
     margin-top: 0;
 
@@ -331,6 +334,7 @@ article p {
     padding-left: 1em;
     padding-right: 1em;
 }
+
 article li {
     font-size: 1.25rem;
     font-family: volta;
@@ -417,6 +421,9 @@ article .red h1 {
 }
 
 article .aubergine p {
+    color: white;
+}
+section .aubergine p {
     color: white;
 }
 article .aubergine h2 {
@@ -524,4 +531,40 @@ img.prev-next-month {
     margin-left: 0.1em;
     height: 1.5em;
     cursor: pointer;
+}
+
+.about img {
+    max-width: 70vw;
+    max-height: 70vh;
+    margin-left: 15vw;
+} 
+.about p a {
+    font-weight: bolder;
+    color: white;
+}
+.yellow.poem img {
+    object-fit: cover;
+    width: 25%;
+}
+
+.yellow.poem {
+    display: flex;
+}
+.yellow.poem .yellow {
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+   .yellow.poem {
+       display: block;
+       width: 100%;
+   }
+   .yellow.poem .yellow {
+       width: 100%;
+   }
+   .yellow.poem img {
+       width: 100%;
+   }
 }
