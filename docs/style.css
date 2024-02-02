@@ -1,21 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600;700&display=swap');
-
-@font-face {
-  font-family: cooper;
-  src: url(assets/fonts/cooper-bold-bt.ttf);
-}
-
-@font-face {
-  font-family: moonflower;
-  src: url(assets/fonts/MoonFlower-YzXXq.ttf);
-}
 
 @font-face {
   font-family: volta;
   src: url(assets/fonts/VoltaT-Regu.ttf);
   font-weight: 400;
 }
-
 @font-face {
   font-family: volta;
   src: url(assets/fonts/VoltaT-Bold.ttf);
@@ -273,10 +261,6 @@ video {
 article {
     padding-top: 2em;
     padding-bottom: 5rem;
-}
-
-b {
-    font-family: cooper;
 }
 
 h1 {

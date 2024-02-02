@@ -24,6 +24,7 @@
 
 <title>{{= title}}</title>
 {{include: 'templates/headcss.template'}}
+{{= meta}}
 
 	</head>
 

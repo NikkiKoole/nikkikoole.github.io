@@ -72,7 +72,7 @@ end
 
 function writePost(path, data)
    local file = io.open(path, "w")
---   print(path)
+   --   print(path)
    file:write(data)
    file:close()
 end
@@ -91,12 +91,12 @@ if arg then
          print('you forgot to write a new name')
       else
          local frontmatter =
-         "---\n" ..
-             "timestamp=" .. os.time() .. "\n" ..
-             "date=" .. (os.date("'%d %h %Y'")) .. "\n" ..
+            "---\n" ..
+            "timestamp=" .. os.time() .. "\n" ..
+            "date=" .. (os.date("'%d %h %Y'")) .. "\n" ..
 	    "title='" .. arg[2] .. "'\n" ..
 	    "draft=true" ..
-             "---\n"
+            "---\n"
          local prefix = 'content/'
          if answer == 'a' then prefix = prefix .. 'apps/' end
          if answer == 'b' then prefix = prefix .. 'blog/' end
@@ -123,44 +123,45 @@ end
 
 function frontMatterDateToTimestamp(date)
    local s = date
-      local p="(%d+) (%a+) (%d+)"
-      local day,month,year=s:match(p)
-      local monthIndex = getMonthIndex(month)
-     -- print(day, month,year)
-     return  os.date("%Y-%m-%d", os.time({year=year, day=day, month=monthIndex}))
+   
+   local p="(%d+) (%a+) (%d+)"
+   local day,month,year=s:match(p)
+   local monthIndex = getMonthIndex(month)
+   -- print(day, month,year)
+   return  os.date("%Y-%m-%d", os.time({year=year, day=day, month=monthIndex}))
 end
 
 local gatheredSitemapData = {}
 
 function makeSitemapFromGatheredData(prefix)
-    table.sort(gatheredSitemapData, function(left, right)
-      return left.priority > right.priority
+   table.sort(gatheredSitemapData, function(left, right)
+                 return left.priority > right.priority
    end)
 
- for i=1, #gatheredSitemapData do
-    local loc =  gatheredSitemapData[i].loc:gsub("index", "")
-    gatheredSitemapData[i].loc = prefix..loc
- end
+   for i=1, #gatheredSitemapData do
+      local loc =  gatheredSitemapData[i].loc:gsub("index", "")
+      gatheredSitemapData[i].loc = prefix..loc
+   end
 
 
- local result = ''
- 
- result = result .. '<?xml version="1.0" encoding="UTF-8"?>\n'
-result = result .. '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+   local result = ''
+   
+   result = result .. '<?xml version="1.0" encoding="UTF-8"?>\n'
+   result = result .. '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
-for i=1, #gatheredSitemapData do
-   result = result .. '<url>\n'
+   for i=1, #gatheredSitemapData do
+      result = result .. '<url>\n'
       result = result ..'  <loc>'..gatheredSitemapData[i].loc..'</loc>\n'
       result = result ..'  <lastmod>'..gatheredSitemapData[i].lastmod ..'</lastmod>\n'
       result = result ..'  <priority>'..gatheredSitemapData[i].priority ..'</priority>\n'
-   result = result .. '</url>\n'
-end
+      result = result .. '</url>\n'
+   end
 
    result= result .. '</urlset>\n' 
 
- --  print(result)
+   --  print(result)
    writePost(destination..'/sitemap2.xml', result)
-  
+   
    printPink('written an sitemap file with '..#gatheredSitemapData .. ' items in it.')
 end
 
@@ -169,11 +170,33 @@ function doSimple(template, content, values, valueStorage)
    local firstPathPart = split(content, '/')[1]
    local source = readAll('content/' .. content .. '.md')
    local html, frontmatter = readSource(source)
+
+   local renderedMeta = ''
+   if frontmatter and frontmatter.meta then
+      local url = frontmatter.metaUrl
+      local description = frontmatter.metaDescription
+      local img = frontmatter.metaImg
+      local title = frontmatter.title
+      if (url and description and img and title) then
+         --print('this file has a meta tag in its frontmatter data', template)
+         --print('so lets compile it in')
+         local metaT = readAll('templates/meta.template')
+         local compiled_template = liluat.compile(metaT)
+         local rendered_template = liluat.render(compiled_template, {url=url,img=img,  description=description, title=title})
+         renderedMeta =  rendered_template
+      else
+         --print(rendered_template) else
+         print('this file has a meta tag, but not all required data (url, description,img & title)')
+         print(url,description,img, title)
+      end
+   end
+   
    values.frontmatter = frontmatter
    values.appleId = frontmatter and frontmatter.appleId
    values.structuredJSON = frontmatter and frontmatter.structuredJSON
    values.html = html
    values.firstPathPart = firstPathPart
+   values.meta = renderedMeta
    if (frontmatter and frontmatter.title) then
       values.title = frontmatter.title
    end
@@ -184,12 +207,13 @@ function doSimple(template, content, values, valueStorage)
 
    -- todo sitemap stuff WIP
 
-   if frontmatter and (  not frontmatter.draft or frontmatter.draft == false) then
-      table.insert(gatheredSitemapData, {loc=content, lastmod=frontMatterDateToTimestamp(frontmatter.date), priority=frontmatter.score})
-      frontMatterDateToTimestamp(frontmatter.date)
+   if frontmatter and (  not frontmatter.draft or frontmatter.draft == false )  then
+      table.insert(gatheredSitemapData, {loc=content, lastmod=frontMatterDateToTimestamp(frontmatter.date, frontmatter), priority=frontmatter.score})
+      
+      frontMatterDateToTimestamp(frontmatter.date, frontmatter)
       printPink(frontmatter.title .. ' => sitemap, score: '..frontmatter.score)
    end
-  
+   
    
    
    local compiled_template = liluat.compile(t)
@@ -213,18 +237,20 @@ function doBunch(dir)
    end
 
    table.sort(result, function(left, right)
-      return left.frontmatter.timestamp > right.frontmatter.timestamp
+                 return left.frontmatter.timestamp > right.frontmatter.timestamp
    end)
 
    local list = {}
    for _, post in ipairs(result) do
       if not post.frontmatter.draft then
-         table.insert(list, { title = post.frontmatter.title, path = post.path, frontmatter = post.frontmatter })
+         table.insert(list, { title = post.frontmatter.title, path = post.path, meta=post.frontmatter.meta, frontmatter = post.frontmatter })
       end
    end
 
    return list
 end
+
+
 
 local list = doBunch('makes')
 doSimple('collection', 'makes/index', { title = "Makes", posts = list })
@@ -241,8 +267,6 @@ doSimple('collection', 'stuff/index', { title = "Stuff", posts = list })
 doSimple('general', 'about/index', { title = "About" })
 doSimple('general-canonical', 'index', { title = 'Mipolai makes apps', canon="\"https://mipolai.com/\""})
 doSimple('general-canonical-nikki', 'nikki', { title = 'Nikki', canon="\"https://nikkikoole.com/\""})
-
-
 
 printYellow('Done!, written ' .. writtenFileCount .. ' files in ' .. (os.time() - now) .. ' seconds.')
 makeSitemapFromGatheredData( 'https://mipolai.com/')

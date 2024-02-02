@@ -1,4 +1,12 @@
-
+---
+date='31 Jan 2024'
+meta=true
+metaDescription="Hi I'm Nikki Koole, father of 2, making apps for my kids, and yours. No annoying ads, not trying to turn your kids into little aggressive disturbed idiots. Just good, honest, creative and artistic fun stuff .  Because kids deserve quality stuff on their screens."
+metaImg='/assets/images/aboutus.jpg'
+metaUrl='https://mipolai.com/about'
+title='About Mipolai - Nikki Koole'
+score=0.8
+---
 
 <section class='greygreen'>
 

@@ -1,7 +1,11 @@
 ---
 date='25 Aug 2023'
-title='Nikki Koole'
+title='Nikki Koole - Mipolai'
 score=0.7
+meta=true
+metaDescription="Hi Hello, I'm Nikki Koole"
+metaImg='/assets/images/aboutus.jpg'
+metaUrl='http://nikkikoole.nl'
 ---
 
 
