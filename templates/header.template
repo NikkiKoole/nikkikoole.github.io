@@ -1,14 +1,14 @@
 <header>
     <h1>
         <a href="/">
-           <img class='logo' alt="a random shape called blub" src="/assets/images/mipolaiblobagain.png" srcset="/assets/images/mipolaiblobagainSmaller.png 254w" sizes="(min-width: 680px) 127px, calc(20.83vw - 11px)" />
-           <img class='text' alt='text' src='/assets/images/mipolailogo.png'>
+           <img class='logo' alt="a random shape called blub" src="/assets/images/mipolaiblobagain.webp" srcset="/assets/images/mipolaiblobagainSmaller.webp 254w" sizes="(min-width: 680px) 127px, calc(20.83vw - 11px)" />
+           <img class='text' alt='text' src='/assets/images/mipolailogo.webp'>
         </a>
     </h1>
     <nav>
       <!--  <a href="/makes">makes</a> -->
-	 <a href="/apps">apps</a> 
-	 <a href="/about">about</a> 
+	 <a href="/apps">apps</a>
+	 <a href="/about">about</a>
         <!-- <a href="/stuff"><s>stuff</s></a> -->
     </nav>
 </header>
