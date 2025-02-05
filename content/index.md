@@ -18,40 +18,35 @@ metaUrl='https://mipolai.com'
 <video autoplay loop muted playsinline poster="assets/images/sjoepj.webp">
 <source src="assets/images/sjoep4.mp4" type="video/mp4">
 </video>
+<span>
 
 I bounce around quite a bit,
 
 That's why you may call me ball.
 
-I just a crazy guy
-And don't care at all.
+I am just a silly guy
+and don't really care at all.
 
-Hairs on my knees (what?),
-Butterflies and bees (huh!?),
+Hairs on my knees,
+Butterflies and bees,
 Love me a hill of wine gums, please,
 
 My legs are sometimes tangled,
-And I don't care for some confusion.
-
-Just before, I said I don't care,
-That was a lie, because sometimes I do.
-I care for things and people and places.
-And I kinda sort of deeply care for you.
+And my belly bingle bengled.
 
 Like me, there are many,
 But we are all unique.
-We are men, women, something beastly,
-And something right there in between.
 
 We have hairs and funky pieces,
-Round or skinny, tall or small,
+Round or skinny, various faeces,
 A huge enormous bulb of hairyness,
 
 Or a tiny bumpy ball.
 
-<video autoplay loop muted playsinline poster="assets/images/sjoep2.webp">
-<source src="assets/images/sjoep2.mp4" type="video/mp4">
-</video>
+A glorious Mipo to you all.
+</span>
+
+
 </section>
 
 
@@ -65,10 +60,12 @@ Or a tiny bumpy ball.
 #<a href='/apps/puppetmaker.html'> * Mipo Puppetmaker</a>
 </section>
 
-
+<video autoplay loop muted playsinline poster="assets/images/sjoep2.webp">
+<source src="assets/images/sjoep2.mp4" type="video/mp4">
+</video>
 <section class='yellow'>
 
-You know that tablet your children are glued too?
+# You know that tablet your children are glued too?
 The amount of shitty apps on there is staggering.
 I want to make a change.
 
