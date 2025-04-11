@@ -21,6 +21,9 @@ body {
 
 .container {
     background: #fbf0c7;
+    max-width: 70em;
+    margin: 0 auto;
+    padding: 1em;
 }
 article {
     background: rgba(255, 255, 255, 0.25);
@@ -303,6 +306,11 @@ h2 {
     padding-left: 1em;
     padding-right: 1em;
 }
+
+h3 {
+    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
+        "URW Bookman L", "Georgia Pro", Georgia, serif;
+}
 p {
     font-family: volta;
     color: #454546;
@@ -353,7 +361,17 @@ article ul {
     max-width: 100%;
 }
 .downloadApp img {
-    width: 100%;
+    margin-left: 2em;
+
+    height: 60px;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.downloadApp img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 /* beginning to style the google calendar */
 
@@ -440,7 +458,9 @@ article .green h2 {
 article .green h1 {
     color: white;
 }
-
+figure {
+    background: rgba(255, 255, 255, 0.5);
+}
 .calendar-wrapper {
     width: 420px;
     max-width: calc(100% - 2em);

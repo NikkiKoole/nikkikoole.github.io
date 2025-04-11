@@ -12,7 +12,39 @@ metaUrl='https://mipolai.com'
 # Nikki Koole *and sons* are making
 # *Good apps for children*
 
-# <a href='https://apps.apple.com/by/developer/nikki-koole/id1691714556' class='link'><span>**appstore**</span></a>
+
+
+<section class='call-to-action'>
+<h2>Try <a href='/apps/puppetmaker.html'>Mipo Puppetmaker</a> now — free, fun, and no ads!</h2>
+<img src='/assets/images/460x0w.webp' />
+# <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163"> Download on the App Store</a>
+<a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![Download on app store](../assets/images/download-on-the-app-store.svg) </a>
+</section>
+
+
+<section class='pink'>
+
+
+# Have a good day!
+#<a href='/apps/puppetmaker.html'> * Mipo Puppetmaker</a>
+</section>
+
+<section class='red'>
+##_This is fun_ ⭐⭐⭐⭐⭐
+amc_rfc
+</section>
+
+<section class='red'>
+##_I have never had a kid in my life, but if I did, I let them play this game_ ⭐⭐⭐⭐⭐
+Tetsuya Autera
+</section>
+
+
+
+
+<section class='yellow poem'>
+# <a href='/makes/interview1.html'>📰 An interview with the creator — on kids, iPads, and why Mipos smell weird.)</a>
+</section>
 
 <section class='yellow poem'>
 <video autoplay loop muted playsinline poster="assets/images/sjoepj.webp">
@@ -50,23 +82,15 @@ A glorious Mipo to you all.
 </section>
 
 
-
 </section>
 
-<section class='pink'>
-<a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![download on app store](../assets/images/download-on-the-app-store.svg) </a>
 
-# Have a good day!
-#<a href='/apps/puppetmaker.html'> * Mipo Puppetmaker</a>
-</section>
 
-<video autoplay loop muted playsinline poster="assets/images/sjoep2.webp">
-<source src="assets/images/sjoep2.mp4" type="video/mp4">
-</video>
+
 <section class='yellow'>
 
 # You know that tablet your children are glued too?
-The amount of shitty apps on there is staggering.
+The amount of junk apps on there is staggering.
 I want to make a change.
 
 - no excessive monetization tricks

@@ -29,13 +29,31 @@ However, ~~truly good~~ not shit, handcrafted, jazzy interactive playthings that
 
 – Nikki
 
+
+# What Mipolai Stands For:
+
+- No ads, ever
+- Homecrafted visuals and sounds
+- No data tracking
+- Playful, weird, curious vibes
+- Built by a parent, not a VC-backed content farm
+
+# in short
+Mipolai is making collection of homecrafted apps for curious kids.
+No ads. No tricks. Just good stuff made by a real dad with a real mustache.
+
 (Oh and PS, if you know other good apps like that, please send me a mail)
 
 
+# read more
+
+# <a href='/makes/interview1.html'>📰 An interview with the creator — on kids, iPads, and why Mipos smell weird.)</a>
+
 <section class='red'>
 
+
 Based in Rotterdam (the Netherlands)
-+31647048515
+📞 <span class='phone'>+31 6 4704 8515</span>
 <a href="mailto:nikkikoole@gmail.com">nikkikoole[at]gmail</a>
 
 </section>

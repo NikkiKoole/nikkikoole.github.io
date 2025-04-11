@@ -2,13 +2,13 @@
 timestamp=1686343935
 date='09 Jun 2023'
 title='Privacy Policy'
-score=0.6
+score=0.5
 ---
 
-# Hi hello 
+# Hi hello
 # Privacy Policy
 
--June 2023 
+-June 2023
 
 Thank you for using **Mipolai** apps. This Privacy Policy explains how we collect, use, and disclose information when you use any of our Apps.
 
@@ -35,5 +35,3 @@ We reserve the right to update or modify this Privacy Policy at any time. Any ch
 
 Contact Us
 If you have any questions or concerns regarding this Privacy Policy or our privacy practices, please contact us at nikkikoole at google email dot com
-
-
