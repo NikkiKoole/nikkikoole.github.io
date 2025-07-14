@@ -1,29 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600;700&display=swap');
-
 @font-face {
-  font-family: cooper;
-  src: url(assets/fonts/cooper-bold-bt.ttf);
+    font-family: volta;
+    src: url(assets/fonts/VoltaT-Regu.ttf);
+    font-weight: 400;
 }
-
 @font-face {
-  font-family: moonflower;
-  src: url(assets/fonts/MoonFlower-YzXXq.ttf);
-}
-
-@font-face {
-  font-family: volta;
-  src: url(assets/fonts/VoltaT-Regu.ttf);
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: volta;
-  src: url(assets/fonts/VoltaT-Bold.ttf);
-  font-weight: 700;
+    font-family: volta;
+    src: url(assets/fonts/VoltaT-Bold.ttf);
+    font-weight: 700;
 }
 
 html {
-  overflow-y: scroll;
+    overflow-y: scroll;
 }
 
 body {
@@ -34,19 +21,21 @@ body {
 
 .container {
     background: #fbf0c7;
-  
+    max-width: 70em;
+    margin: 0 auto;
+    padding: 1em;
 }
 article {
-    
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.25);
 }
-html, body {
-  height: 100%;
+html,
+body {
+    height: 100%;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -54,7 +43,7 @@ main {
 }
 
 footer {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 /* begin header footer and nav */
@@ -73,7 +62,6 @@ footer .content {
 }
 
 footer nav {
-
 }
 
 footer ul {
@@ -88,28 +76,30 @@ footer a {
     text-decoration: none;
     color: white;
 }
-
+footer h1 {
+    color: rgba(255, 255, 255, 0.5);
+}
 header img.logo {
-    filter: invert(.5) sepia(1);
-    transition: transform .7s;
-    width: 150px;
-    max-width: 22%;
-    max-height: 22%;
+    filter: invert(0.5) sepia(1);
+    transition: transform 0.7s;
+    width: 100%;
+    /* max-width: 22%;
+    max-height: 22%; */
     height: auto;
     object-fit: contain;
-
 }
 header img.logo:hover {
-    filter: invert(.7) sepia(1);
-    transform: scale(1.1);
+    filter: invert(0.5) sepia(1);
+    transform: scale(1.1) rotate(3deg);
 }
 
 header img.text {
     filter: brightness(0.5) sepia(1) saturate(10000%) hue-rotate(56deg);
-    width: 40em;
-    max-width: 73%;
+    width: 50em;
+    max-width: 100%;
     height: auto;
     object-fit: contain;
+    margin-top: -30vh;
 }
 
 header {
@@ -117,7 +107,6 @@ header {
     margin: 0 auto;
 }
 header {
-
 }
 
 header h1 {
@@ -127,29 +116,48 @@ header h1 a {
     color: #845562;
     text-decoration: none;
 }
-header nav {
+.link {
+    text-decoration: underline;
+}
 
+.link:hover {
+    transform: scale(1.05);
+}
+.link:hover span {
+    color: white;
+    background-color: #8b3900;
+}
+.link span {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+header nav {
     display: flex;
     flex-flow: row wrap;
 }
 header nav a {
     color: #454546;
-    
+
     font-size: 2em;
-    font-family: volta;
+    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
+        "URW Bookman L", "Georgia Pro", Georgia, serif;
     text-decoration: none;
     margin-left: 2rem;
-    
-    background-color: rgba(0,0,0,0.15);
+
+    background-color: rgba(0, 0, 0, 0.15);
     margin-bottom: 1rem;
-    padding: .5rem;
+    padding: 0.5rem;
     border-radius: 25px 25px 25px 5%;
 }
 
 header nav a:hover {
     color: white;
     background-color: #e3ca57;
-    transition: color, background-color .2s;
+    background-color: #8b3900;
+    transition:
+        color,
+        background-color 0.2s;
 }
 
 /* end header and nav */
@@ -165,22 +173,21 @@ header nav a:hover {
     flex-wrap: wrap;
 }
 .post {
-    margin: .5rem;
+    margin: 0.5rem;
     width: calc(100% - 1rem);
     background: #fbfbfb;
     border-radius: 10px;
     box-shadow: 2px 2px 12px rgb(0 0 0 / 5%);
     cursor: pointer;
-    transition: background .2s;
+    transition: background 0.2s;
+    transition: transform 0.5s;
     list-style-type: none;
-
 
     max-width: 40em;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1em;
     padding-right: 1em;
-    
 }
 .post a {
     text-decoration: none;
@@ -190,27 +197,26 @@ header nav a:hover {
     padding: 1rem;
 }
 .post .content b {
-    color :#454546;
+    color: #454546;
     font-size: 2rem;
     font-family: volta;
     display: block;
     margin: 1rem;
-    transition: all .2s;
+    transition: all 0.2s;
 }
 .apps .post .content b {
     color: #534431;
     transform: rotate(1deg);
-
 }
 .post .content p {
     font-family: volta;
-    transition: color .2s;
+    transition: color 0.2s;
 }
 p img {
     max-width: 100%;
 }
 
-img[src$='#polaroid'] {
+img[src$="#polaroid"] {
     border: 10px solid #fff;
     border-bottom: 80px solid #fff;
     box-shadow: 5px 10px 10px rgb(0 0 0 / 10%);
@@ -230,9 +236,8 @@ img[src$='#polaroid'] {
     user-select: none;
     pointer-events: none;
     width: 100%;
-    transition: all .2s;
+    transition: all 0.2s;
     filter: sepia(0.25);
-
 }
 video {
     width: 280px;
@@ -243,9 +248,8 @@ video {
 }
 
 .post .content .date {
-   
     font-family: volta;
-    background: rgba(90,90,70,0.5);
+    background: rgba(90, 90, 70, 0.5);
     color: white;
     width: 110px;
     border-radius: 10px;
@@ -266,6 +270,10 @@ video {
 .apps .post:hover p {
     color: white;
 }
+
+.apps .post:hover {
+    transform: rotate(1deg);
+}
 /* end app cards */
 
 article {
@@ -273,13 +281,9 @@ article {
     padding-bottom: 5rem;
 }
 
-b {
-    font-family: cooper;
-}
-
 h1 {
-    white-space:nowrap;
-    font-family: volta;
+    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
+        "URW Bookman L", "Georgia Pro", Georgia, serif;
     margin-top: 0;
 
     max-width: 40em;
@@ -288,9 +292,11 @@ h1 {
     padding-left: 1em;
     padding-right: 1em;
     color: #454546;
+    word-wrap: break-word;
 }
 h2 {
-    font-family: volta;
+    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
+        "URW Bookman L", "Georgia Pro", Georgia, serif;
     color: #454546;
     margin-top: 0;
 
@@ -299,13 +305,16 @@ h2 {
     margin-right: auto;
     padding-left: 1em;
     padding-right: 1em;
+}
+
+h3 {
+    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
+        "URW Bookman L", "Georgia Pro", Georgia, serif;
 }
 p {
     font-family: volta;
-    color: #454546
+    color: #454546;
 }
-
-
 
 section {
     padding-top: 3em;
@@ -331,12 +340,13 @@ article p {
     padding-left: 1em;
     padding-right: 1em;
 }
+
 article li {
     font-size: 1.25rem;
     font-family: volta;
 }
 article ul {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding-bottom: 10px;
     padding-top: 10px;
 
@@ -348,35 +358,45 @@ article ul {
 .downloadApp {
     display: block;
     min-width: 100px;
-    max-width: 30%;
+    max-width: 100%;
+}
+.downloadApp img {
+    margin-left: 2em;
+
+    height: 60px;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-
+.downloadApp img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
 /* beginning to style the google calendar */
 
 .twomonths {
-    display: flex
+    display: flex;
 }
 
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
- 
-  text-align: center;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 
-  padding-inline-start: 0;
+    text-align: center;
 
-  min-height: 240px;
+    padding-inline-start: 0;
+
+    min-height: 240px;
 }
 
 .yellow {
-    background-color: #e3ca57
+    background-color: #e3ca57;
 }
 
 .green {
     background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
-    background-color: #798C1B;
-   
+    background-color: #798c1b;
 }
 
 .greygreen {
@@ -384,15 +404,15 @@ article ul {
 }
 
 .blue {
-    background-color: #4ACAD9;
-    background-color: #57A2FF; 
+    background-color: #4acad9;
+    background-color: #57a2ff;
 }
 
 .aubergine {
     background-color: #601039;
 }
 .red {
-    background-color: #8C5330;
+    background-color: #8c5330;
 }
 
 .white {
@@ -419,6 +439,9 @@ article .red h1 {
 article .aubergine p {
     color: white;
 }
+section .aubergine p {
+    color: white;
+}
 article .aubergine h2 {
     color: white;
 }
@@ -435,34 +458,34 @@ article .green h2 {
 article .green h1 {
     color: white;
 }
-
-
+figure {
+    background: rgba(255, 255, 255, 0.5);
+}
 .calendar-wrapper {
     width: 420px;
     max-width: calc(100% - 2em);
     font-family: volta;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 1rem;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1em;
     padding-right: 1em;
-    
 }
 .weekday {
-    background: rgba(0,0,0,.25);
+    background: rgba(0, 0, 0, 0.25);
     background-color: #e3ca57;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 .calendar h1 {
-  text-align: center;
+    text-align: center;
 }
 
 .calendar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
 .calendar li {
@@ -478,18 +501,18 @@ article .green h1 {
 }
 
 .deadline.past {
-    background-color: #eeeeee
+    background-color: #eeeeee;
 }
 
 .deadline.past.fail {
-    background-color: pink
+    background-color: pink;
 }
 .deadline.past.success {
-    background-color: lightgreen
+    background-color: lightgreen;
 }
 
 .today {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
     color: white;
     border-radius: 25px;
     cursor: pointer;
@@ -516,7 +539,7 @@ article .green h1 {
     min-height: 2em;
     padding: 1em;
     transform: translate(-1em, -1em);
-    filter: drop-shadow(0px 0px 2px rgba(0,0,0,.3));
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3));
     font-size: 1rem;
 }
 
@@ -524,4 +547,44 @@ img.prev-next-month {
     margin-left: 0.1em;
     height: 1.5em;
     cursor: pointer;
+}
+
+.about img {
+    max-width: 70vw;
+    max-height: 70vh;
+    margin-left: 15vw;
+}
+.about p a {
+    font-weight: bolder;
+    color: white;
+}
+
+/* Base styles for larger screens */
+.yellow.poem {
+    display: grid;
+    grid-template-columns: 25% 50% 25%; /* 3 columns: image, text, image */
+    align-items: center; /* vertically center content if needed */
+}
+
+.yellow.poem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.yellow.poem video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.yellow.poem .yellow {
+    text-align: center;
+}
+
+/* Mobile styles: stack elements vertically */
+@media only screen and (max-width: 800px) {
+    .yellow.poem {
+        grid-template-columns: 1fr; /* single column layout */
+    }
 }

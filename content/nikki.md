@@ -1,11 +1,16 @@
 ---
 date='25 Aug 2023'
-title='Nikki Koole'
+title='Nikki Koole - Mipolai'
 score=0.7
+meta=true
+metaDescription="Hi Hello, I'm Nikki Koole"
+metaImg='/assets/images/aboutus.jpg'
+metaUrl='http://nikkikoole.nl'
 ---
 
 
-## Hello, my name is Nikki
+# Hi Hello
+# my name is Nikki
 
 Visit my site mipolai.com [here](https://mipolai.com). (or just click the header above)  
 Check out all my apps on the appstore [here](https://apps.apple.com/us/developer/nikki-koole/id1691714556).  

@@ -1,11 +1,14 @@
 ---
 date='11 Aug 2023'
-title='Apps'
+title='Apps by Mipolai'
 score=0.9
 ---
 
+# story time
 
-## story time
-Do you dream about toys coming to live when not looking?
+Did you dream about toys coming to life when not looking?
 
-I know I did. Not anymore, it doesn't happen when not looking, it takes a whole lot of elbow grease to make things come to life. Anyway, no ads, no micropayments, no generic illustrations. Just art to play with by you and your little one.
+I know I did. I had my little figurines in my school desk, pretending they were living there in a little room. Once, Miss Coby asked me all about it.
+
+Anyway, now I am all grown up, and I don't dream about that anymore unless it's in a dream. It doesn't happen when I'm not looking (I think). It takes a whole lot of effort to make toys come to life.
+

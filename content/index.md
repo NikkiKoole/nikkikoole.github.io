@@ -1,79 +1,112 @@
 ---
 date='11 Aug 2023'
-title='Mipolai makes apps'
+title='Mipolai, good apps for children.'
 score=1.0
+meta=true
+metaDescription="Hi I'm Nikki Koole, father of 2, making apps for my kids, and yours. No annoying ads, not trying to turn your kids into little aggressive disturbed idiots. Just good, honest, creative and artistic fun stuff .  Because kids deserve quality stuff on their screens."
+metaImg='/assets/images/mipos.jpg'
+metaUrl='https://mipolai.com'
 ---
 
 
+# Nikki Koole *and sons* are making
+# *Good apps for children*
 
 
 
-# Nikki Koole and sons
-## making apps
+<section class='call-to-action'>
+<h2>Try <a href='/apps/puppetmaker.html'>Mipo Puppetmaker</a> now — free, fun, and no ads!</h2>
+<img src='/assets/images/460x0w.webp' />
+# <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163"> Download on the App Store</a>
+<a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![Download on app store](../assets/images/download-on-the-app-store.svg) </a>
+</section>
 
-## Hello, my name is Nikki
 
-Once a talented artist, now a front end developer. I got bigger dreams though. And they make me go mad.
+<section class='pink'>
 
-Anyway, I am building **better** children apps, Sure there are nice ones out there, but they look too generic. There are good looking ones, but they don't feel great. There are even better ones, but they feel dumb somehow. And then there is the vast majority that just tries to throw in as many advertisements and micro-payments as possible. 
 
-I know children, as a matter of fact, I'm a bit of a big one myself, and I love developing, drawing, animating, fantasizing, philosophizing, playing chess, and making music. So I believe I can do better.
+# Have a good day!
+#<a href='/apps/puppetmaker.html'> * Mipo Puppetmaker</a>
+</section>
 
-~~So let's introduce some deadlines, and let's make them tight. See that calendar here? I'll be adding deadlines as we go. Pumping out apps, one per month, or well the first deadline is about this website~~,  Ok so instead of these deadlines, I'll just use this calendar to keep track of stuff that has been started and finished..
+<section class='red'>
+##_This is fun_ ⭐⭐⭐⭐⭐
+amc_rfc
+</section>
+
+<section class='red'>
+##_I have never had a kid in my life, but if I did, I let them play this game_ ⭐⭐⭐⭐⭐
+Tetsuya Autera
+</section>
+
+
+
+
+<section class='yellow poem'>
+# <a href='/makes/interview1.html'>📰 An interview with the creator — on kids, iPads, and why Mipos smell weird.)</a>
+</section>
+
+<section class='yellow poem'>
+<video autoplay loop muted playsinline poster="assets/images/sjoepj.webp">
+<source src="assets/images/sjoep4.mp4" type="video/mp4">
+</video>
+<span>
+
+I bounce around quite a bit,
+
+That's why you may call me ball.
+
+I am just a silly guy
+and don't really care at all.
+
+Hairs on my knees,
+Butterflies and bees,
+Love me a hill of wine gums, please,
+
+My legs are sometimes tangled,
+And my belly bingle bengled.
+
+Like me, there are many,
+But we are all unique.
+
+We have hairs and funky pieces,
+Round or skinny, various faeces,
+A huge enormous bulb of hairyness,
+
+Or a tiny bumpy ball.
+
+A glorious Mipo to you all.
+</span>
+
+
+</section>
+
+
+</section>
+
+
+
 
 <section class='yellow'>
 
-</section>
-<section class='greygreen'>
-</section>
-<section class='aubergine'>
-![ingame](../assets/images/sjoep2.gif)
-![ingame](../assets/images/sjoep3.gif)
-![ingame](../assets/images/sjoep4.gif)
-![ingame](../assets/images/sjoep5.gif)
+# You know that tablet your children are glued too?
+The amount of junk apps on there is staggering.
+I want to make a change.
 
-I bounce around quite a bit,  
-That's why they call me ball.  
-I am a crazy oddity,  
-And just don't care at all.  
-  
-Hairs on my knees,  
-Butterflies and bees,  
-Love me a hill of wine gums, please,  
-When the time comes to feast.  
-  
-My legs are sometimes tangled,  
-And my torso is pattern spangled,  
-Falling often is the best solution,  
-And I don't care for some confusion.  
-  
-At the start, I said I just don't care,  
-That was a lie, because I often do.  
-I care for things and people and places.  
-And I kinda deeply care for you.  
-  
-Like me, there are many,  
-But we are all unique.  
-We are men, women, something beastly,  
-And something right there in between.  
-  
-We have hairs and funky bends,  
-Round or skinny, tall or small,  
-A huge enormous ball of happiness,  
-Or a tiny bump of joy.  
-  
-</section>
-<section class='yellow'>
-<div class='put-calendar-in-here'></div>
-<script>
-    //remember month counting starts from 0
-	let deadlines = [
-        {date:new Date(2022, 9, 1), description: 'started working on the website', success:true},
-        {date:new Date(2022, 9, 31), description: 'website live', success:true},
-        {date:new Date(2022, 10, 1), description: 'started working on puppetmaker', success:true},
-        {date:new Date(2023, 5, 10), description: 'puppetmaker in app store!', success:true},
-        {date:new Date(2023, 5, 13), description: 'started working on next thing', success:true}
-        ];
-	buildCalendar(deadlines);
-</script>
+- no excessive monetization tricks
+- no pretend to be educational
+- no uninspired cookie cutter crap
+- no countless advertisements
+- no ugly looking ill designed things
+- no to the rabbit hole of endless other crap.
+
+Children are not stupid, and we shouldn't train them into stupid either.
+
+- yes to handdrawn and animated silly stuff
+- yes to home crafted music
+- yes to contributions of my own boys
+- yes to all sorts of things to discover
+- yes to being educational without being boring about it
+- yes to subtle and not so subtle jokes
+- yes to funkyness
 </section>

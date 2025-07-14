@@ -12,7 +12,8 @@
   <link rel="canonical" href={{= canon}} />
 
   <title>{{= title}}</title>
-        {{include: 'templates/headcss.template'}}
+  {{include: 'templates/headcss.template'}}
+   {{= meta}}
   </head>
 
   <body>
