@@ -9,41 +9,69 @@ metaUrl='https://mipolai.com'
 ---
 
 
-# Nikki Koole *and sons* are making
-# *Good apps for children*
+<div class='banner'>AD FREE</div>
+# Tablets and phones are great tools for kids.
 
+ <div class='banner'>CRAP FREE</div>
+
+ But too many apps are made to fill their minds with ads and craps,
+ that is why
+
+# Nikki Koole *and sons* create good apps for children!
+<div class='banner'>MICRO TRANSACTION FREE</div>
+ Apps you don’t have to worry about.
+ No ads. No gimmicks, No tricks.
+ Handcrafted with artistic care and an old-school respect for childhood: creative, safe, and a bit weird (in the good way).
+<div class='banner'>OFFLINE FUN</div>
+# Made by parents and kids, for kids and parents
 
 
 <section class='call-to-action'>
-<h2>Try <a href='/apps/puppetmaker.html'>Mipo Puppetmaker</a> now — free, fun, and no ads!</h2>
+<h2>Download <a href='/apps/puppetmaker.html'>Mipo Puppetmaker</a> our first app now!</h2>
 <img src='/assets/images/460x0w.webp' />
 # <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163"> Download on the App Store</a>
 <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![Download on app store](../assets/images/download-on-the-app-store.svg) </a>
 </section>
 
 
-<section class='pink'>
 
 
-# Have a good day!
-#<a href='/apps/puppetmaker.html'> * Mipo Puppetmaker</a>
+# Testimonials
+
+<section class='olive'>
+##My kids like it a lot! ⭐⭐⭐⭐⭐
+Nicodemus
 </section>
 
-<section class='red'>
+<section class='olive'>
+##Weird but fun! ⭐⭐⭐⭐⭐
+Georgia2010
+</section>
+
+<section class='olive'>
+##Genial ⭐⭐⭐⭐⭐
+SusoMeda
+</section>
+
+<section class='olive'>
 ##_This is fun_ ⭐⭐⭐⭐⭐
 amc_rfc
 </section>
 
-<section class='red'>
+<section class='olive'>
 ##_I have never had a kid in my life, but if I did, I let them play this game_ ⭐⭐⭐⭐⭐
 Tetsuya Autera
+</section>
+
+<section class='pink'>
+# Have a good day!
 </section>
 
 
 
 
 <section class='yellow poem'>
-# <a href='/makes/interview1.html'>📰 An interview with the creator — on kids, iPads, and why Mipos smell weird.)</a>
+# <a href='/makes/interview1.html'>📰 An interview with Nikki on kids, iPads, and why Mipos smell weird.</a>
 </section>
 
 <section class='yellow poem'>
@@ -90,7 +118,7 @@ A glorious Mipo to you all.
 <section class='yellow'>
 
 # You know that tablet your children are glued too?
-The amount of junk apps on there is staggering.
+The amount of crap apps on there is staggering.
 I want to make a change.
 
 - no excessive monetization tricks

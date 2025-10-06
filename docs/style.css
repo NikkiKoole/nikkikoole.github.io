@@ -27,6 +27,22 @@ body {
 }
 article {
     background: rgba(255, 255, 255, 0.25);
+    position: relative;
+}
+.banner {
+    width: 100px;
+    text-align: center;
+    right: 0px;
+    position: absolute;
+    border: 2px solid;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: rotate(4deg);
+}
+
+.call-to-action {
+    border: 2px solid white;
+    border-radius: 10px;
 }
 html,
 body {
@@ -140,8 +156,9 @@ header nav a {
     color: #454546;
 
     font-size: 2em;
-    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
-        "URW Bookman L", "Georgia Pro", Georgia, serif;
+    font-family:
+        Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L",
+        "Georgia Pro", Georgia, serif;
     text-decoration: none;
     margin-left: 2rem;
 
@@ -282,8 +299,9 @@ article {
 }
 
 h1 {
-    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
-        "URW Bookman L", "Georgia Pro", Georgia, serif;
+    font-family:
+        Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L",
+        "Georgia Pro", Georgia, serif;
     margin-top: 0;
 
     max-width: 40em;
@@ -295,8 +313,9 @@ h1 {
     word-wrap: break-word;
 }
 h2 {
-    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
-        "URW Bookman L", "Georgia Pro", Georgia, serif;
+    font-family:
+        Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L",
+        "Georgia Pro", Georgia, serif;
     color: #454546;
     margin-top: 0;
 
@@ -308,8 +327,9 @@ h2 {
 }
 
 h3 {
-    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
-        "URW Bookman L", "Georgia Pro", Georgia, serif;
+    font-family:
+        Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L",
+        "Georgia Pro", Georgia, serif;
 }
 p {
     font-family: volta;
@@ -320,6 +340,7 @@ section {
     padding-top: 3em;
     padding-bottom: 3em;
     background-color: #e3ca57;
+    border-radius: 20px;
 }
 
 article h2 {
@@ -398,6 +419,9 @@ article ul {
     background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
     background-color: #798c1b;
 }
+.olive {
+    background-color: #7a8c30;
+}
 
 .greygreen {
     background-color: #95ab9f;
@@ -425,7 +449,15 @@ article ul {
 .beige {
     background-color: #d3c7c0;
 }
-
+article .olive p {
+    color: white;
+}
+article .olive h1 {
+    color: white;
+}
+article .olive h2 {
+    color: white;
+}
 article .red p {
     color: white;
 }
