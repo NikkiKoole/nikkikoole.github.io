@@ -10,24 +10,22 @@ metaUrl='https://mipolai.com'
 
 
 <div class='banner'>AD FREE</div>
-# Tablets and phones are great tools for kids.
+# Tablets are great for kids.
 
- <div class='banner'>CRAP FREE</div>
+<div class='banner'>CRAP FREE</div>
+ But too many apps are made to fill minds with ads and crap,  so that is why
 
- But too many apps are made to fill their minds with ads and craps,
- that is why
-
-# Nikki Koole *and sons* create good apps for children!
+# Nikki Koole and sons create **good apps** for children!
 <div class='banner'>MICRO TRANSACTION FREE</div>
  Apps you don’t have to worry about.
  No ads. No gimmicks, No tricks.
- Handcrafted with artistic care and an old-school respect for childhood: creative, safe, and a bit weird (in the good way).
+ Handcrafted with an artistic eye and old-school respect for childhood : *creative, safe, adventurous and a bit weird* (in the good way).
 <div class='banner'>OFFLINE FUN</div>
-# Made by parents and kids, for kids and parents
+# Made with love for my own kids and yours
 
 
 <section class='call-to-action'>
-<h2>Download <a href='/apps/puppetmaker.html'>Mipo Puppetmaker</a> our first app now!</h2>
+<h2>Download <a href='/makes/puppetmaker.html'>Mipo Puppetmaker</a> our first app now!</h2>
 <img src='/assets/images/460x0w.webp' />
 # <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163"> Download on the App Store</a>
 <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![Download on app store](../assets/images/download-on-the-app-store.svg) </a>
@@ -110,31 +108,4 @@ A glorious Mipo to you all.
 </section>
 
 
-</section>
-
-
-
-
-<section class='yellow'>
-
-# You know that tablet your children are glued too?
-The amount of crap apps on there is staggering.
-I want to make a change.
-
-- no excessive monetization tricks
-- no pretend to be educational
-- no uninspired cookie cutter crap
-- no countless advertisements
-- no ugly looking ill designed things
-- no to the rabbit hole of endless other crap.
-
-Children are not stupid, and we shouldn't train them into stupid either.
-
-- yes to handdrawn and animated silly stuff
-- yes to home crafted music
-- yes to contributions of my own boys
-- yes to all sorts of things to discover
-- yes to being educational without being boring about it
-- yes to subtle and not so subtle jokes
-- yes to funkyness
 </section>

@@ -16,7 +16,7 @@ This repo seems todo all I want and more, lets investigate it a bit
 Oh wait hold up, pwa is a progressive web app, thats not what I am after..
 Offcourse there are like a gazillion generators online...
 
-anyway these are looking ok:  
+anyway these are looking ok:
 
 - [icons.mybrain.nl](https://icons.mybrain.nl/)
 

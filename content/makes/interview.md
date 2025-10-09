@@ -1,7 +1,8 @@
 ---
+order=2
 timestamp=1743683859
 date='03 Apr 2025'
-title='interview'
+title='an Interview by AI'
 score=0.7
 ---
 
@@ -11,7 +12,7 @@ score=0.7
 ---
 
 **Nikki Koole builds weird digital things for small people with even weirder imaginations.**
-A former artist, current father, and low-key rebel against everything ad-driven and soulless, Nikki runs [Mipolai](https://mipolai.com) — a growing collection of handmade apps for kids. Apps without ads. Without tracking. Without synthetic sugar coatings. Just playful, handcrafted, slightly surreal joy.
+A artist, father, and rebel against everything soulless, Nikki runs [Mipolai](https://mipolai.com) — a growing collection of handmade apps for kids. Apps without ads. Without tracking. Without synthetic sugar coatings. Just playful, handcrafted, slightly surreal joy.
 
 We sat down with him (digitally, on a small wooden chair) to talk about fatherhood, Mipos, attention spans, and what it’s like trying to build beautiful things in a sea of algorithmic sludge.
 
@@ -75,5 +76,4 @@ We sat down with him (digitally, on a small wooden chair) to talk about fatherho
 
 ---
 
-*Interview by Chad Djibiti for Gee P. Times*
-*Typed on a very old keyboard with jam between the keys.*
+*Interview by Chad Djibiti for Gee P. Times* (see what I did?)

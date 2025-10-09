@@ -30,6 +30,32 @@ However, ~~truly good~~ not shit, handcrafted, jazzy interactive playthings that
 – Nikki
 
 
+<section class='yellow'>
+
+# You know that tablet your children are glued too?
+The amount of crap apps on there is staggering.
+I want to make a change.
+
+- no excessive monetization tricks
+- no pretend to be educational
+- no uninspired cookie cutter crap
+- no countless advertisements
+- no ugly looking ill designed things
+- no to the rabbit hole of endless other crap.
+
+Children are not stupid, and we shouldn't train them into stupid either.
+
+- yes to handdrawn and animated silly stuff
+- yes to home crafted music
+- yes to contributions of my own boys
+- yes to all sorts of things to discover
+- yes to being educational without being boring about it
+- yes to subtle and not so subtle jokes
+- yes to funkyness
+</section>
+
+
+
 # What Mipolai Stands For:
 
 - No ads, ever

@@ -245,7 +245,11 @@ function doBunch(dir)
     end
 
     table.sort(result, function(left, right)
-        return left.frontmatter.timestamp > right.frontmatter.timestamp
+        if (left.frontmatter.order and right.frontmatter.order) then
+            return left.frontmatter.order < right.frontmatter.order
+        else
+            return left.frontmatter.timestamp > right.frontmatter.timestamp
+        end
     end)
 
     local list = {}

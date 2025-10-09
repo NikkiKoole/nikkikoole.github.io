@@ -6,9 +6,9 @@
         </a>
     </h1>
     <nav>
-      <!--  <a href="/makes">makes</a> -->
-	 <a href="/apps">our apps</a>
-	 <a href="/about">about us</a>
-        <a href="/stuff">news</a>
+      <a href="/makes">makes things</a>
+	 <!--  <a href="/apps">makes things</a> -->
+	 <a href="/about">about</a>
+        <a href="/stuff">our world</a>
     </nav>
 </header>

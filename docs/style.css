@@ -33,15 +33,16 @@ article {
     width: 100px;
     text-align: center;
     right: 0px;
-    position: absolute;
-    border: 2px solid;
+    float: right;
+    border: 10px solid pink;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.5);
     transform: rotate(4deg);
+    font-family: sans-serif;
 }
 
 .call-to-action {
-    border: 2px solid white;
+    border: 10px solid rgba(255, 255, 255, 0.25);
     border-radius: 10px;
 }
 html,
@@ -101,6 +102,8 @@ header img.logo {
     width: 100%;
     /* max-width: 22%;
     max-height: 22%; */
+    width: 70%;
+    margin-left: 15%;
     height: auto;
     object-fit: contain;
 }
@@ -119,7 +122,7 @@ header img.text {
 }
 
 header {
-    max-width: 40em;
+    max-width: 45em;
     margin: 0 auto;
 }
 header {
@@ -337,8 +340,8 @@ p {
 }
 
 section {
-    padding-top: 3em;
-    padding-bottom: 3em;
+    padding-top: 2em;
+    padding-bottom: 2em;
     background-color: #e3ca57;
     border-radius: 20px;
 }
@@ -412,6 +415,7 @@ article ul {
 }
 
 .yellow {
+    border: 10px solid rgba(255, 255, 255, 0.25);
     background-color: #e3ca57;
 }
 
@@ -420,6 +424,7 @@ article ul {
     background-color: #798c1b;
 }
 .olive {
+    border: 10px solid rgba(0, 0, 0, 0.25);
     background-color: #7a8c30;
 }
 
@@ -443,6 +448,7 @@ article ul {
     background-color: #f0f5f9;
 }
 .pink {
+    border: 10px solid rgba(255, 255, 255, 0.25);
     background-color: #e7bebe;
 }
 
@@ -581,11 +587,6 @@ img.prev-next-month {
     cursor: pointer;
 }
 
-.about img {
-    max-width: 70vw;
-    max-height: 70vh;
-    margin-left: 15vw;
-}
 .about p a {
     font-weight: bolder;
     color: white;
