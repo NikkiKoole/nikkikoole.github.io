@@ -194,7 +194,7 @@ header nav a:hover {
 }
 .post {
     margin: 0.5rem;
-    width: calc(50% - 1rem);
+    width: calc(46% - 1rem);
     background: #fbfbfb;
     border-radius: 10px;
     box-shadow: 2px 2px 12px rgb(0 0 0 / 5%);
@@ -212,6 +212,9 @@ header nav a:hover {
 .post a {
     text-decoration: none;
     color: unset;
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 .post .content {
     padding: 1rem;
@@ -281,6 +284,10 @@ video {
 }
 
 .apps .post:hover {
+    background: #e3ca57;
+}
+
+.makes .post:hover {
     background: #e3ca57;
 }
 .apps .post:hover b {
@@ -364,7 +371,13 @@ article p {
     padding-left: 1em;
     padding-right: 1em;
 }
-
+article pre {
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+}
 article li {
     font-size: 1.25rem;
     font-family: volta;

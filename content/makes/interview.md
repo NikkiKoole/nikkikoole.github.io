@@ -3,6 +3,7 @@ order=2
 timestamp=1743683859
 date='03 Apr 2025'
 title='an Interview by AI'
+thumb='../assets/images/interview.png'
 score=0.7
 ---
 

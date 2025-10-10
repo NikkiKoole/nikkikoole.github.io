@@ -16,70 +16,37 @@ ____
 
 </section>
 
-# This is me
+# This is us
 
 Here's a picture of me—the older one sporting a mustache—together with my two boys. ;) Picture taken a few years ago.
 
-I am building **good apps for children** because well, there just aren't enough of them.
+My name is Nikki Koole (1980),  
+the fireman there is Herman (2015)  
+and the youngest one is Theo (2018)  
 
+
+Herman loves finding bugs and issues in software, he has a real talent for it.
+And Theo loves creating art and has ideas about apps he wants to see.
+
+And I,   
+I am building **good apps for children** because well, there just aren't enough of them.
 If you settle for nasty, exploitative apps for your children that turn them into mindless consumers, you have got over 3.7 billion options.
 However, ~~truly good~~ not shit, handcrafted, jazzy interactive playthings that is not bad for children is pretty rare.
 
 **That is what we are making**.
 
-– Nikki
+– Nikki, Herman and Theo
 
 
 <section class='yellow'>
 
-# You know that tablet your children are glued too?
-The amount of crap apps on there is staggering.
-I want to make a change.
 
-- no excessive monetization tricks
-- no pretend to be educational
-- no uninspired cookie cutter crap
-- no countless advertisements
-- no ugly looking ill designed things
-- no to the rabbit hole of endless other crap.
-
-Children are not stupid, and we shouldn't train them into stupid either.
-
-- yes to handdrawn and animated silly stuff
-- yes to home crafted music
-- yes to contributions of my own boys
-- yes to all sorts of things to discover
-- yes to being educational without being boring about it
-- yes to subtle and not so subtle jokes
-- yes to funkyness
-</section>
-
-
-
-# What Mipolai Stands For:
-
-- No ads, ever
-- Homecrafted visuals and sounds
-- No data tracking
-- Playful, weird, curious vibes
-- Built by a parent, not a VC-backed content farm
-
-# in short
-Mipolai is making collection of homecrafted apps for curious kids.
-No ads. No tricks. Just good stuff made by a real dad with a real mustache.
-
-(Oh and PS, if you know other good apps like that, please send me a mail)
-
-
-# read more
-
-# <a href='/makes/interview1.html'>📰 An interview with the creator — on kids, iPads, and why Mipos smell weird.)</a>
 
 <section class='red'>
 
 
 Based in Rotterdam (the Netherlands)
-📞 <span class='phone'>+31 6 4704 8515</span>
+<span class='phone'>+31 6 4704 8515</span>
 <a href="mailto:nikkikoole@gmail.com">nikkikoole[at]gmail</a>
 
 </section>

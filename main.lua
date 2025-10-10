@@ -96,7 +96,8 @@ if arg then
                 "timestamp=" .. os.time() .. "\n" ..
                 "date=" .. (os.date("'%d %h %Y'")) .. "\n" ..
                 "title='" .. arg[2] .. "'\n" ..
-                "draft=true" ..
+                "draft=true\n" ..
+                "score=0" ..
                 "---\n"
             local prefix = 'content/'
             if answer == 'a' then prefix = prefix .. 'apps/' end

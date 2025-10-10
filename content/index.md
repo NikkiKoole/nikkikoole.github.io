@@ -15,7 +15,7 @@ metaUrl='https://mipolai.com'
 <div class='banner'>CRAP FREE</div>
  But too many apps are made to fill minds with ads and crap,  so that is why
 
-# Nikki Koole and sons create **good apps** for children!
+# Nikki Koole (1980) and sons create **good apps** for children!
 <div class='banner'>MICRO TRANSACTION FREE</div>
  Apps you don’t have to worry about.
  No ads. No gimmicks, No tricks.
