@@ -378,6 +378,13 @@ article pre {
     padding-left: 1em;
     padding-right: 1em;
 }
+article iframe {
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+}
 article li {
     font-size: 1.25rem;
     font-family: volta;

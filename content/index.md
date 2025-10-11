@@ -69,7 +69,7 @@ Tetsuya Autera
 
 
 <section class='yellow poem'>
-# <a href='/makes/interview1.html'>📰 An interview with Nikki on kids, iPads, and why Mipos smell weird.</a>
+# <a href='/makes/interview.html'>📰 An interview with Nikki on kids, iPads, and why Mipos smell weird.</a>
 </section>
 
 <section class='yellow poem'>
