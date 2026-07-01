@@ -5,7 +5,7 @@ score=0.7
 meta=true
 metaDescription="Hi Hello, I'm Nikki Koole"
 metaImg='/assets/images/aboutus.jpg'
-metaUrl='http://nikkikoole.nl'
+metaUrl='https://nikkikoole.nl'
 ---
 
 

@@ -4,15 +4,19 @@ Notes from an SEO/findability pass (2026-07-01). Not urgent unless marked.
 
 ## Infra
 
-- [ ] **Fix the SSL cert on nikkikoole.nl — in progress, see `PLAN.md`'s
-      "Status at a glance" for the actual current state and exact next
-      action (not repeated here to avoid the two docs drifting apart).**
-      Originally: expired Plesk placeholder cert (expired 2025-03-07),
-      `https://nikkikoole.nl` throws a hard TLS error, only `http://` works.
-      Fix is a DNS-only move to Cloudflare (free auto-SSL) — underway.
-- [ ] Once the cert is fixed, switch `nikki.md`'s `metaUrl` and the `canon`
-      value in `main.lua` (the `general-canonical-nikki` call) from
-      `http://nikkikoole.nl` to `https://nikkikoole.nl`.
+- [x] **Fix the SSL cert on nikkikoole.nl — DONE 2026-07-02.** Was an
+      expired Plesk placeholder cert (expired 2025-03-07), `https://` threw
+      a hard TLS error, only `http://` worked. Fixed by moving DNS to
+      Cloudflare and setting the two `A` records (apex + wildcard) to
+      Proxied. Cloudflare's SSL/TLS mode auto-selected **Full** (works —
+      Full is non-strict, so it ignores the origin's still-expired cert
+      while serving browsers a valid edge cert; do NOT switch to Flexible or
+      Full-strict). Verified: edge serves a valid **Google Trust Services**
+      cert (valid 2026-07-01 → 2026-09-29, auto-renews), HTTP 200. See
+      `PLAN.md` "Status at a glance" for the full move record.
+- [x] Switch `nikki.md`'s `metaUrl` and the `canon` value in `main.lua`
+      (the `general-canonical-nikki` call) from `http://nikkikoole.nl` to
+      `https://nikkikoole.nl`. Done 2026-07-02, now that the cert works.
 
 ## Content decisions (need you, not just code)
 

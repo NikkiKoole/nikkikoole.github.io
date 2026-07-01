@@ -21,6 +21,29 @@ get lost. See "Not doing now" at the bottom for what's explicitly parked.
   propagated (both 8.8.8.8 and 1.1.1.1 show the new nameservers), and
   confirmed the live site is completely unaffected (still 200, still
   Hostnet's IP, correct title). This is staging-list steps 4–6 below, done.
+- **`nikkikoole.nl`'s Cloudflare DNS move + cert fix are now DONE
+  (2026-07-02)** — this was the paused item from 2026-07-01. Completed the
+  whole flow: turned DNSSEC off at Hostnet and confirmed the `.nl` registry
+  DS record cleared on all three resolvers (1.1.1.1 / 8.8.8.8 / 9.9.9.9);
+  added `nikkikoole.nl` to Cloudflare; the scan matched a fresh `dig`
+  exactly (apex `A` → `91.184.0.113`, wildcard `A` → `91.184.0.200`,
+  `www`/`ftp` CNAMEs → apex, SPF + DMARC `p=reject` TXT, no MX); set all
+  records DNS-only first; switched nameservers at Hostnet to
+  `brady`/`cruz.ns.cloudflare.com` and confirmed propagation on all three
+  resolvers with the site unaffected throughout. Then the deliberate
+  cert-fixing step: flipped the two `A` records (apex + wildcard) to
+  **Proxied**, left `ftp` DNS-only (FTP can't be proxied). Cloudflare's
+  SSL/TLS auto-mode selected **Full** — leave it there: Full is non-strict
+  so it accepts the origin's still-expired Plesk cert while serving a valid
+  edge cert, and it's more secure than Flexible (encrypts the CF↔origin
+  hop too). Do NOT switch to Flexible or Full-strict. Verified via a direct
+  edge-IP probe: valid **Google Trust Services** cert (2026-07-01 →
+  2026-09-29, auto-renews), HTTP 200, `ssl_verify=0`. Also flipped
+  `nikki.md`'s `metaUrl` and `main.lua`'s `general-canonical-nikki` canon
+  from `http://` to `https://` now that HTTPS works (`TODO.md` infra items,
+  both closed). Registration deliberately stays at Hostnet — `.nl` can't
+  register/renew at Cloudflare (TransIP is the fallback registrar if ever
+  wanted; not needed).
 - Learned two real gotchas along the way, saved to Claude's memory too:
   attaching a GitHub Pages custom domain redirects the *entire*
   `username.github.io` namespace, not just one repo (broke dreamengine
@@ -31,26 +54,9 @@ get lost. See "Not doing now" at the bottom for what's explicitly parked.
 1. The actual GitHub Pages cutover for `mipolai.com` (staging step 7) —
    point Cloudflare's DNS at GitHub Pages, re-add `docs/CNAME` at the same
    time. Nothing to prep ahead of this; just say go when ready.
-2. **`nikkikoole.nl`'s Cloudflare move (step 8) — started, paused mid-way,
-   2026-07-01. Pick up here next time:**
-   - Confirmed fresh: DNSSEC is ON for `nikkikoole.nl` (non-empty `DS`
-     record) — unlike `mipolai.com`, this one needs handling *before*
-     touching nameservers. Also reconfirmed the DNS snapshot: `A` →
-     `91.184.0.113`, SPF + DMARC (`p=reject`) TXT, no MX (no live email).
-   - **Very next action: go to `nikkikoole.nl`'s Hostnet panel →
-     "DNSSEC beheren" → turn DNSSEC off.** Do this before adding the site
-     to Cloudflare or touching nameservers at all.
-   - Then: same flow as `mipolai.com` — add `nikkikoole.nl` to Cloudflare,
-     review the scanned records (expect the snapshot above, maybe more
-     found), toggle everything to DNS only, get the assigned nameservers,
-     switch them at Hostnet, verify propagation.
-   - **Important difference from `mipolai.com`: staying DNS-only will NOT
-     fix the expired-cert problem.** That needs Cloudflare to actually
-     terminate SSL at its edge, which only happens on a **Proxied** record,
-     not DNS-only. So after the DNS-only move is confirmed stable, there's
-     one more deliberate step: flip the `A` record to Proxied to get a
-     working certificate. Don't skip straight to that — DNSSEC-off and the
-     DNS-only nameserver move need to land safely first.
+2. ~~`nikkikoole.nl`'s Cloudflare move (step 8)~~ **DONE 2026-07-02** —
+   full DNS-only move + Proxied cert fix completed and verified. See the
+   dedicated bullet under "Done" above for the whole record.
 3. Optional/later: registrar transfer for `mipolai.com` (step 9), deciding
    whether to turn proxying on for any records.
 4. Separately, not blocking any of the above: the homepage repositioning
@@ -362,15 +368,15 @@ account access and Hostnet's domain panel aren't things an agent can drive:
    it's redirecting the whole `nikkikoole.github.io` namespace to a domain
    that isn't pointed at GitHub yet. Reversible by pointing DNS back at
    Hostnet's IP if anything looks wrong.
-8. **`nikkikoole.nl` — started, paused mid-way 2026-07-01, see "Status at a
-   glance" above for exactly where to resume.** Same overall move as
+8. ~~`nikkikoole.nl`~~ **DONE 2026-07-02.** Same overall move as
    `mipolai.com` (DNS-only to Cloudflare, registration stays at Hostnet —
-   no `.nl` alternative on Cloudflare), but with two differences: (a)
-   DNSSEC is ON for this domain and must be disabled at Hostnet *before*
-   touching nameservers (not needed for `mipolai.com`, which had none),
-   and (b) DNS-only alone won't fix the expired cert — that needs the `A`
-   record set to **Proxied** afterward, as a deliberate follow-up step,
-   since only proxied records get Cloudflare's edge SSL termination.
+   no `.nl` alternative on Cloudflare), plus the two differences that were
+   flagged and handled: (a) DNSSEC was ON, so it was disabled at Hostnet
+   and confirmed cleared at the `.nl` registry *before* the nameserver
+   switch; (b) DNS-only alone didn't fix the expired cert, so the two `A`
+   records were flipped to **Proxied** as the deliberate follow-up. Result:
+   valid Cloudflare edge cert (Google Trust Services, auto-renewing), Full
+   SSL/TLS mode, HTTPS working. Full record under "Done" at top.
 9. **(Optional, later) Registrar transfer for `mipolai.com` only** — EPP
    code from Hostnet, unlock domain, transfer via Cloudflare Registrar
    (~1 week, includes a 1-year renewal at cost price). Not required for the
@@ -407,3 +413,19 @@ triage/curation conversation for it is already happening over there.
   concrete, low-risk next step, offered but not yet greenlit.
 - The Cloudflare migration staged above — plan is written, nothing clicked
   through yet.
+- **`nikkikoole.nl` as a future personal site — new intent (2026-07-02),
+  undecided, parked.** The domain was originally pointed at Cloudflare just
+  to fix its expired cert (done); it currently serves only a Hostnet
+  placeholder and is NOT built from this repo. Idea floated: turn it into a
+  proper personal site for Nikki (separate from the Mipolai studio). Not
+  started, no content, no host chosen. Two viable hosts when the time comes:
+  (a) a *separate* GitHub repo with `nikkikoole.nl` as its own custom domain
+  — the "one custom domain per repo" limit is per-repo, not per-account, and
+  a project repo on its own custom domain sits outside the
+  `nikkikoole.github.io` namespace-redirect gotcha; or (b) Cloudflare Pages
+  (tidy since DNS already lives there, but slightly less agent-friendly —
+  needs `wrangler`/API-token setup). Either way the DNS + valid cert are
+  already in place. Note: `/nikki`'s canonical tag in this repo already
+  points at `https://nikkikoole.nl/`, which currently resolves to the
+  placeholder — worth revisiting if that page gets real content or if the
+  canonical should instead stay on mipolai.com.

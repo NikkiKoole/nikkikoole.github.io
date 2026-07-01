@@ -306,7 +306,7 @@ doSimple('collection', 'stuff/index', { title = "Stuff", posts = list })
 
 doSimple('general', 'about/index', { title = "About" })
 doSimple('general-canonical', 'index', { title = 'Mipolai makes apps', canon = "\"https://mipolai.com/\"" })
-doSimple('general-canonical-nikki', 'nikki', { title = 'Nikki', canon = "\"http://nikkikoole.nl/\"" })
+doSimple('general-canonical-nikki', 'nikki', { title = 'Nikki', canon = "\"https://nikkikoole.nl/\"" })
 
 printYellow('Done!, written ' .. writtenFileCount .. ' files in ' .. (os.time() - now) .. ' seconds.')
 makeSitemapFromGatheredData('https://mipolai.com/')
