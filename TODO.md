@@ -4,11 +4,12 @@ Notes from an SEO/findability pass (2026-07-01). Not urgent unless marked.
 
 ## Infra
 
-- [ ] **Fix the SSL cert on nikkikoole.nl.** It's an expired Plesk placeholder
-      (expired 2025-03-07), so `https://nikkikoole.nl` throws a hard TLS error
-      in every browser and crawler. Only `http://` currently works. This is
-      probably a bigger ranking/trust hit than anything sitemap-related.
-      If on Plesk, there's usually a one-click Let's Encrypt option.
+- [ ] **Fix the SSL cert on nikkikoole.nl — in progress, see `PLAN.md`'s
+      "Status at a glance" for the actual current state and exact next
+      action (not repeated here to avoid the two docs drifting apart).**
+      Originally: expired Plesk placeholder cert (expired 2025-03-07),
+      `https://nikkikoole.nl` throws a hard TLS error, only `http://` works.
+      Fix is a DNS-only move to Cloudflare (free auto-SSL) — underway.
 - [ ] Once the cert is fixed, switch `nikki.md`'s `metaUrl` and the `canon`
       value in `main.lua` (the `general-canonical-nikki` call) from
       `http://nikkikoole.nl` to `https://nikkikoole.nl`.
@@ -35,7 +36,8 @@ Notes from an SEO/findability pass (2026-07-01). Not urgent unless marked.
 
 ## Housekeeping
 
-- [ ] Commit the pending changes from the SEO pass (sitemap fix, canonical
+- [x] Commit the pending changes from the SEO pass (sitemap fix, canonical
       tags, meta tags, orphan-page redirects, deleted stale sitemap.xml).
-- [ ] `git add` the new `docs/assets/images/track1.jpg` / `track2.jpg` /
-      `track3.jpg` (currently untracked, referenced by `achtbaan.md`).
+      Done 2026-07-01.
+- [x] `git add` the new `docs/assets/images/track1.jpg` / `track2.jpg` /
+      `track3.jpg`. Done 2026-07-01.
