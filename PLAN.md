@@ -1,8 +1,44 @@
 # Mipolai studio — plan (as of 2026-07-01)
 
 Notes from a thinking-out-loud session, written up so the direction doesn't
-get lost. Nothing here is being executed yet — see "Not doing now" at the
-bottom for what's explicitly parked.
+get lost. See "Not doing now" at the bottom for what's explicitly parked.
+
+## Status at a glance (end of session, 2026-07-01)
+
+**Done:**
+- SEO fixes (sitemap/canonical/meta tags), `TODO.md`, and this plan doc —
+  written and pushed to `origin/master`.
+- Confirmed this repo's GitHub Pages hosting was already working the whole
+  time, no setup needed (see "Site/domain architecture").
+- **`mipolai.com` is now on Cloudflare for DNS** — signed up, reviewed the
+  auto-scanned records (matched my independent check, plus 3 bonus
+  records: `autoconfig`/`webmail` CNAMEs, an `_autodiscover` SRV — all
+  legit Hostnet email-client-convenience records), set every record to
+  **DNS only** (not proxied — deliberately, to keep this step invisible),
+  confirmed `mipolai.com` has no DNSSEC (unlike `nikkikoole.nl`, so no
+  blocker there), switched Hostnet's nameservers to Cloudflare's
+  (`brady.ns.cloudflare.com` / `cruz.ns.cloudflare.com`), confirmed
+  propagated (both 8.8.8.8 and 1.1.1.1 show the new nameservers), and
+  confirmed the live site is completely unaffected (still 200, still
+  Hostnet's IP, correct title). This is staging-list steps 4–6 below, done.
+- Learned two real gotchas along the way, saved to Claude's memory too:
+  attaching a GitHub Pages custom domain redirects the *entire*
+  `username.github.io` namespace, not just one repo (broke dreamengine
+  briefly); and the legacy `/pages` REST API can report stale "errored"
+  status when the real `/deployments` API shows success.
+
+**Not done yet, in order:**
+1. The actual GitHub Pages cutover for `mipolai.com` (staging step 7) —
+   point Cloudflare's DNS at GitHub Pages, re-add `docs/CNAME` at the same
+   time. Nothing to prep ahead of this; just say go when ready.
+2. Same DNS-only Cloudflare move for `nikkikoole.nl` (step 8) — this one
+   actually fixes something (its expired cert).
+3. Optional/later: registrar transfer for `mipolai.com` (step 9), deciding
+   whether to turn proxying on for any records.
+4. Separately, not blocking any of the above: the homepage repositioning
+   copy (studio framing, tagline already chosen) and building out any
+   actual brand subdirectories (`/tinyjam/` etc.) — both wait on those
+   brands being further along, not on the DNS work.
 
 ## The shift
 
@@ -282,14 +318,22 @@ setup task:
 **From here on, every remaining step needs Nikki's own hands** — Cloudflare
 account access and Hostnet's domain panel aren't things an agent can drive:
 
-4. Sign up for Cloudflare (if not already), add `mipolai.com` as a site.
-5. Let Cloudflare auto-scan the existing DNS, then double-check it actually
-   caught the MX/SPF/DMARC records correctly (see snapshot above) before
-   trusting it — worth re-verifying with `dig` afterward.
-6. Grab the two Cloudflare-assigned nameservers, switch them over in
-   Hostnet's domain panel. This is the one real point-of-no-return-feeling
-   moment, though it's still reversible by pointing nameservers back.
-7. Once propagated: re-add `docs/CNAME` (`mipolai.com`) AND add either the
+4. ~~Sign up for Cloudflare, add `mipolai.com` as a site~~ **Done, 2026-07-01.**
+5. ~~Review the auto-scanned DNS records~~ **Done, 2026-07-01.** Matched my
+   independent `dig` snapshot exactly, plus found 3 legitimate extra
+   records (`autoconfig`/`webmail` CNAMEs, `_autodiscover` SRV — Hostnet
+   email-client-convenience records I hadn't checked for). Cloudflare
+   defaulted the web-facing records (`A`×3, `AAAA`×2, the two CNAMEs) to
+   **Proxied** — toggled all 7 to **DNS only** instead, to keep this move
+   invisible/zero-behavior-change as planned. Confirmed via dig: `A`
+   record still correctly resolves through to Hostnet's `77.111.243.35`.
+6. ~~Switch nameservers at Hostnet~~ **Done, 2026-07-01.** Confirmed no
+   DNSSEC on `mipolai.com` first (empty DS/DNSKEY — unlike `nikkikoole.nl`,
+   so no blocker here). Nameservers: `brady.ns.cloudflare.com` /
+   `cruz.ns.cloudflare.com`, replacing `ns01`/`ns02.hostnet.nl`. Propagated
+   fast — confirmed via both 8.8.8.8 and 1.1.1.1 within minutes. Live site
+   re-verified working identically afterward (200, correct title, same IP).
+7. **Next up.** Once ready: re-add `docs/CNAME` (`mipolai.com`) AND add either the
    4 GitHub Pages `A` records
    (`185.199.108.153` / `.109.153` / `.110.153` / `.111.153`) or use
    Cloudflare's CNAME-flattening to point the apex at
