@@ -76,16 +76,26 @@ level specifically, where that framing is accurate.
   come out of *this one repo's* build — there's no way for a different
   repo's content to just appear at a subpath of mipolai.com without that
   content physically landing inside this repo's `docs/` first.
-- **dreamengine already demonstrates the git-push-to-deploy pattern**: it's
-  a separate repo, automatically served at `nikkikoole.github.io/dreamengine/`,
-  with its own GitHub Actions workflow (`pages.yml`) that deploys the
-  committed `site/` folder on push — no manual step beyond `git push`. This
-  repo (mipolai.com) doesn't have that yet; see "Not doing now."
-- **mipolai.com itself is currently NOT on this pattern** — it's hosted on
-  Hostnet, deployed by hand via FTP. Bringing it in line with dreamengine
-  (GitHub Actions builds + deploys `docs/` to GitHub Pages automatically)
-  is the concrete next step to get the "push and that's it" workflow
-  everywhere.
+- **dreamengine demonstrates the git-push-to-deploy pattern via a custom
+  GitHub Actions workflow** (`pages.yml`) — it needs one because its WASM
+  build step can't run in GitHub's environment, so it builds locally and
+  commits the output, and the workflow just uploads `site/` on push.
+- **This repo (nikkikoole.github.io) already has the same "push and it's
+  live" behavior, with even less setup than dreamengine — confirmed
+  2026-07-01.** Checked via `gh api repos/NikkiKoole/nikkikoole.github.io/pages`:
+  Pages is already enabled, `status: built`, source = `master` branch's
+  `/docs` folder, no custom Actions workflow involved at all — this is
+  GitHub's own built-in ("legacy") Pages builder, which just republishes
+  `docs/` automatically on every push. Verified live: `https://nikkikoole.github.io/`
+  is serving today's exact content, including this session's fixes. No
+  workflow needs to be written for this repo — it was already doing the
+  thing the whole time.
+- **mipolai.com's live traffic is NOT on this pattern yet** — the *domain*
+  still points at Hostnet, deployed by hand via FTP (`cname: null` in the
+  Pages API response confirms no custom domain is attached to this repo's
+  Pages site). The only remaining gap is attaching `mipolai.com` as this
+  repo's custom domain (a `CNAME` file + a DNS record) — not building any
+  new automation.
 - **The static site generator (`main.lua`, hand-rolled Lua) is not the
   bottleneck** and doesn't need replacing. The bugs found and fixed this
   session (sitemap URLs, canonical tags, stale domain) were logic-drift
@@ -138,16 +148,17 @@ paid Workers plan starts around $5/month — exact paid-tier build caps
 weren't independently verified against official docs, so treat that number
 as directional, not confirmed.
 
-**Which is easier for an AI agent (Claude) to drive:** GitHub Pages, at
-least in this environment today. `git`/`gh` are already authenticated and
-usable from the terminal — an agent can write the Actions YAML, push it,
-watch the run, and read failure logs without touching a browser. Cloudflare
-Pages would need either the human clicking through Cloudflare's dashboard,
-or `wrangler` + a Cloudflare API token set up first so an agent can drive it
-via CLI too — not a hard limitation of Cloudflare, just a setup gap that
-doesn't exist for GitHub today. DNS changes are unavoidable manual/dashboard
-work either way, regardless of which hosting is picked. This tipped the
-decision below toward using Cloudflare only for domains/DNS, not for hosting.
+**Which is easier for an AI agent (Claude) to drive:** GitHub Pages, even
+more so than first thought — for this repo there's nothing to build at all,
+it's already live (see above). `git`/`gh` are already authenticated and
+usable from the terminal, so an agent can verify/manage it entirely without
+touching a browser. Cloudflare Pages would need either the human clicking
+through Cloudflare's dashboard, or `wrangler` + a Cloudflare API token set
+up first so an agent can drive it via CLI too — not a hard limitation of
+Cloudflare, just a setup gap that doesn't exist for GitHub today. DNS
+changes are unavoidable manual/dashboard work either way, regardless of
+which hosting is picked. This tipped the decision below toward using
+Cloudflare only for domains/DNS, not for hosting.
 
 ## Decided architecture (2026-07-01, updated same day)
 
@@ -237,30 +248,54 @@ Both `mipolai.com` and `nikkikoole.nl` currently sit on Hostnet (registrar
   3600s (fast propagation, no need to pre-lower it), no CAA record, Google
   Search Console verified via TXT.
 
-**Planned staging (not started):**
+**Planned staging — reordered 2026-07-01 to de-risk further: prove GitHub
+Pages *before* touching DNS at all**, rather than moving DNS first and
+figuring out hosting after. Turns out step 1 below is already done, not a
+setup task:
 
-1. **DNS-only move for `mipolai.com`**: add it to Cloudflare, verify the
-   auto-imported records match the snapshot above (MX/SPF/DMARC especially),
-   set SSL mode to **Full** (the Hostnet origin already serves valid HTTPS,
-   so Full — not Flexible — avoids redirect-loop issues), then switch
-   nameservers at Hostnet to Cloudflare's. Site keeps running on the same
-   Hostnet server throughout — this step only changes who answers DNS
-   queries and terminates SSL at the edge. Fully reversible by pointing
-   nameservers back.
-2. **Same DNS-only move for `nikkikoole.nl`**, same way, which incidentally
+1. ~~Set up GitHub Pages hosting for this repo~~ **Already done, confirmed
+   2026-07-01** — this repo has had GitHub's built-in Pages builder enabled
+   the whole time (`master` branch, `/docs` source, no custom workflow
+   needed), and `https://nikkikoole.github.io/` is live and current.
+   `mipolai.com`'s DNS still points at Hostnet, so this has been running in
+   parallel, invisibly, with zero effect on live traffic — exactly the
+   de-risking this reordering was going for, just already true by accident
+   of how the repo was originally set up.
+2. **Verify it end-to-end** — spot checks done this session look correct
+   (site renders, sitemap/canonical tags correct, no broken links).
+3. **Done, 2026-07-01: added `docs/CNAME` containing `mipolai.com`** — the
+   repo-side half of attaching the custom domain, safe to do ahead of any
+   DNS change (confirmed `main.lua` never wipes `docs/`, so this survives
+   future rebuilds). Shows as an unverified/pending custom domain in this
+   repo's GitHub Pages settings until DNS actually points here — doesn't
+   affect mipolai.com's live traffic at all in the meantime, since Hostnet
+   is still what DNS resolves to.
+
+**From here on, every remaining step needs Nikki's own hands** — Cloudflare
+account access and Hostnet's domain panel aren't things an agent can drive:
+
+4. Sign up for Cloudflare (if not already), add `mipolai.com` as a site.
+5. Let Cloudflare auto-scan the existing DNS, then double-check it actually
+   caught the MX/SPF/DMARC records correctly (see snapshot above) before
+   trusting it — worth re-verifying with `dig` afterward.
+6. Grab the two Cloudflare-assigned nameservers, switch them over in
+   Hostnet's domain panel. This is the one real point-of-no-return-feeling
+   moment, though it's still reversible by pointing nameservers back.
+7. Once propagated: add either the 4 GitHub Pages `A` records
+   (`185.199.108.153` / `.109.153` / `.110.153` / `.111.153`) or use
+   Cloudflare's CNAME-flattening to point the apex at
+   `nikkikoole.github.io` — this is the actual cutover, where mipolai.com
+   starts serving from GitHub Pages instead of Hostnet. The `CNAME` file
+   from step 3 lets GitHub verify and activate the custom domain once this
+   resolves. Reversible by pointing DNS back at Hostnet's IP if anything
+   looks wrong.
+8. **Same DNS-only move for `nikkikoole.nl`**, same way, which incidentally
    fixes its expired Plesk cert via Cloudflare's free auto-SSL. Registration
    stays at Hostnet (no `.nl` alternative on Cloudflare).
-3. **(Optional, later) Registrar transfer for `mipolai.com` only** — EPP
+9. **(Optional, later) Registrar transfer for `mipolai.com` only** — EPP
    code from Hostnet, unlock domain, transfer via Cloudflare Registrar
    (~1 week, includes a 1-year renewal at cost price). Not required for the
-   DNS/SSL benefits above; can be done anytime after step 1 is stable, or
-   never.
-4. **(Separate decision, still parked) Actually hosting the site on GitHub
-   Pages instead of Hostnet's server** — once Cloudflare is already the DNS
-   provider, this becomes a quick `A`/`CNAME` record edit rather than a full
-   migration project. This is *why* doing step 1 now is worth it even
-   before greenlighting GitHub Pages: it decouples "get off Hostnet's DNS"
-   from "decide on GitHub Pages timing."
+   DNS/SSL benefits above; can be done anytime, or never.
 
 ## Curated beta/marketing showcase
 
@@ -284,9 +319,12 @@ triage/curation conversation for it is already happening over there.
   (subdirectory of this repo, fetch-and-copy for content built elsewhere
   like dreamengine), but none exist yet; waiting on those brands being
   further along.
-- Setting up the GitHub Actions deploy workflow for this repo (mirroring
-  dreamengine's `pages.yml`, plus the fetch-and-copy step for brands whose
-  content lives in another repo) and wiring mipolai.com's DNS to it — a
+- Adding the fetch-and-copy CI step for brands whose content lives in
+  another repo (e.g. TinyJam via dreamengine) — needed once a brand
+  actually has content to pull in, not before. (No general-purpose deploy
+  workflow needed beyond this — GitHub's built-in Pages builder already
+  handles the base case, see "Site/domain architecture" above.)
+- Wiring `mipolai.com`'s DNS to this repo's already-working Pages site — a
   concrete, low-risk next step, offered but not yet greenlit.
 - The Cloudflare migration staged above — plan is written, nothing clicked
   through yet.
