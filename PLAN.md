@@ -263,13 +263,21 @@ setup task:
    of how the repo was originally set up.
 2. **Verify it end-to-end** — spot checks done this session look correct
    (site renders, sitemap/canonical tags correct, no broken links).
-3. **Done, 2026-07-01: added `docs/CNAME` containing `mipolai.com`** — the
-   repo-side half of attaching the custom domain, safe to do ahead of any
-   DNS change (confirmed `main.lua` never wipes `docs/`, so this survives
-   future rebuilds). Shows as an unverified/pending custom domain in this
-   repo's GitHub Pages settings until DNS actually points here — doesn't
-   affect mipolai.com's live traffic at all in the meantime, since Hostnet
-   is still what DNS resolves to.
+3. **Tried and reverted, 2026-07-01: `docs/CNAME` containing `mipolai.com`.**
+   This was NOT the safe, zero-risk prep step it was expected to be —
+   attaching a custom domain made GitHub start 301-redirecting the *entire*
+   `nikkikoole.github.io` namespace to `mipolai.com`, including other
+   repos' project pages. Broke `nikkikoole.github.io/dreamengine/` (dead-
+   ended in a 404 on Hostnet, which has no `/dreamengine/` content) for as
+   long as the file was live. Reverted immediately. **Corrected learning:
+   adding a `CNAME` has an immediate, real side effect independent of
+   whatever DNS is doing — it is NOT safe to stage ahead of time. It needs
+   to go back in as part of the SAME step as the actual DNS cutover (step 7
+   below), atomically, not in advance.** Also added `docs/.nojekyll` in the
+   same session while debugging an unrelated GitHub Pages build error
+   (turned out to be a stale-API-status red herring, not a real build
+   failure — see build history for the full story) — harmless and correct
+   to keep regardless of whether it was the actual fix.
 
 **From here on, every remaining step needs Nikki's own hands** — Cloudflare
 account access and Hostnet's domain panel aren't things an agent can drive:
@@ -281,14 +289,17 @@ account access and Hostnet's domain panel aren't things an agent can drive:
 6. Grab the two Cloudflare-assigned nameservers, switch them over in
    Hostnet's domain panel. This is the one real point-of-no-return-feeling
    moment, though it's still reversible by pointing nameservers back.
-7. Once propagated: add either the 4 GitHub Pages `A` records
+7. Once propagated: re-add `docs/CNAME` (`mipolai.com`) AND add either the
+   4 GitHub Pages `A` records
    (`185.199.108.153` / `.109.153` / `.110.153` / `.111.153`) or use
    Cloudflare's CNAME-flattening to point the apex at
    `nikkikoole.github.io` — this is the actual cutover, where mipolai.com
-   starts serving from GitHub Pages instead of Hostnet. The `CNAME` file
-   from step 3 lets GitHub verify and activate the custom domain once this
-   resolves. Reversible by pointing DNS back at Hostnet's IP if anything
-   looks wrong.
+   starts serving from GitHub Pages instead of Hostnet. Re-adding the
+   `CNAME` file at this exact moment (not before) lets GitHub verify and
+   activate the custom domain once DNS resolves, without any window where
+   it's redirecting the whole `nikkikoole.github.io` namespace to a domain
+   that isn't pointed at GitHub yet. Reversible by pointing DNS back at
+   Hostnet's IP if anything looks wrong.
 8. **Same DNS-only move for `nikkikoole.nl`**, same way, which incidentally
    fixes its expired Plesk cert via Cloudflare's free auto-SSL. Registration
    stays at Hostnet (no `.nl` alternative on Cloudflare).
