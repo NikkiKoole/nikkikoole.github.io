@@ -18,15 +18,15 @@ ____
 
 # This is us
 
-Here's a picture of me—the older one sporting a mustache—together with my two boys. ;) Picture taken a few years ago.
+Here's a picture of me, the older one sporting a mustache, together with my two boys. ;)   
+Picture taken a few years ago.
 
 My name is Nikki Koole (1980),  
-the fireman there is Herman (2015)  
-and the youngest one is Theo (2018)  
+the fireman there is Herman (2014)  
+and the youngest one is Theo (2017)  
 
-
-Herman loves finding bugs and issues in software, he has a real talent for it.
-And Theo loves creating art and has ideas about apps he wants to see.
+Herman loves finding bugs and issues in software, he has a real knack for it.
+And Theo loves creating art and singing and has many ideas about apps he wants to see.
 
 And I,   
 I am building **good apps for children** because well, there just aren't enough of them.

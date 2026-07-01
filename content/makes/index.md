@@ -2,6 +2,10 @@
 date='03 Apr 2024'
 title='Makes by Mipolai'
 score=0.5
+meta=true
+metaDescription="Apps, tools and experiments made by Nikki Koole and his sons: Mipo Puppetmaker, a rollercoaster game, a lo-fi music tool, a made-up language, and more."
+metaImg='/assets/images/mipos.jpg'
+metaUrl='https://mipolai.com/makes/'
 ---
 
 #Hi hello,

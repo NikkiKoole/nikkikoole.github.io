@@ -5,6 +5,11 @@ title='a 2d rollercoaster experiment'
 draft=false
 thumb='../assets/images/achtbaan.png'
 score=0
+order=4
+meta=true
+metaDescription="A 2d rollercoaster game built with my son Theo, who draws rollercoasters and knows every detail about them. Watch the drawings come to life."
+metaImg='/assets/images/achtbaan.png'
+metaUrl='https://mipolai.com/makes/achtbaan.html'
 ---
 
 
@@ -12,9 +17,12 @@ score=0
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qAwHNiUHVbQ?si=cllYAbRxVVD-nu6Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-He knows all the minute details on various rollercoasters world-wide.
-And he's been making great drawings of them.   
+He's been making drawings of them for years now, here are some older ones.   
+![ingame](../assets/images/track1.jpg)
+![ingame](../assets/images/track2.jpg)
+![ingame](../assets/images/track3.jpg)
 
+He also knows many minute details on various rollercoasters world-wide.
 At some point I figured I wanted to help him make these drawings come to life.
 So we've been making a little 2d rollercoaster game thingie. 
 

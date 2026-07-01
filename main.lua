@@ -133,6 +133,19 @@ function frontMatterDateToTimestamp(date)
     return os.date("%Y-%m-%d", os.time({ year = year, day = day, month = monthIndex }))
 end
 
+-- the site has no server-side rewriting: every page is served as a literal
+-- '.html' file except directory roots (which the host serves as index.html).
+-- both the sitemap and the canonical tags need to agree on that, so both go
+-- through this one function instead of duplicating the rule.
+function contentPathToUrl(content, domain)
+    domain = domain or 'https://mipolai.com/'
+    local path = content:gsub("index$", "")
+    if not (path == "" or path:sub(-1) == "/") then
+        path = path .. ".html"
+    end
+    return domain .. path
+end
+
 local gatheredSitemapData = {}
 
 function makeSitemapFromGatheredData(prefix)
@@ -141,8 +154,7 @@ function makeSitemapFromGatheredData(prefix)
     end)
 
     for i = 1, #gatheredSitemapData do
-        local loc = gatheredSitemapData[i].loc:gsub("index", "")
-        gatheredSitemapData[i].loc = prefix .. loc
+        gatheredSitemapData[i].loc = contentPathToUrl(gatheredSitemapData[i].loc, prefix)
     end
 
 
@@ -180,6 +192,15 @@ function doSimple(template, content, values, valueStorage)
         local img = frontmatter.metaImg
         local title = frontmatter.title
         if (url and description and img and title) then
+            -- og:image/twitter:image must be absolute or social crawlers won't fetch them;
+            -- derive the domain from this page's own metaUrl rather than hardcoding one,
+            -- since nikki.md is meant to live on a different domain than the rest of the site.
+            if not img:match("^https?://") then
+                local domain = url:match("^(https?://[^/]+)")
+                if domain then
+                    img = domain .. img
+                end
+            end
             --print('this file has a meta tag in its frontmatter data', template)
             --print('so lets compile it in')
             local metaT = readAll('templates/meta.template')
@@ -200,6 +221,7 @@ function doSimple(template, content, values, valueStorage)
     values.html = html
     values.firstPathPart = firstPathPart
     values.meta = renderedMeta
+    values.canonicalUrl = '"' .. contentPathToUrl(content) .. '"'
     if (frontmatter and frontmatter.title) then
         values.title = frontmatter.title
     end
@@ -284,7 +306,7 @@ doSimple('collection', 'stuff/index', { title = "Stuff", posts = list })
 
 doSimple('general', 'about/index', { title = "About" })
 doSimple('general-canonical', 'index', { title = 'Mipolai makes apps', canon = "\"https://mipolai.com/\"" })
-doSimple('general-canonical-nikki', 'nikki', { title = 'Nikki', canon = "\"https://nikkikoole.com/\"" })
+doSimple('general-canonical-nikki', 'nikki', { title = 'Nikki', canon = "\"http://nikkikoole.nl/\"" })
 
 printYellow('Done!, written ' .. writtenFileCount .. ' files in ' .. (os.time() - now) .. ' seconds.')
 makeSitemapFromGatheredData('https://mipolai.com/')

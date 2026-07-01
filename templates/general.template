@@ -20,7 +20,7 @@
 {{= structuredJSON}}
 {{end}}
 
-
+<link rel="canonical" href={{= canonicalUrl}} />
 
 <title>{{= title}}</title>
 {{include: 'templates/headcss.template'}}

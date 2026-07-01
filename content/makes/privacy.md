@@ -1,12 +1,15 @@
 ---
-order=3
 timestamp=1686343935
 date='09 Jun 2023'
 title='a Privacy Policy'
 score=0.5
+order=99
+meta=true
+metaDescription="The Mipolai privacy policy. Our apps collect no personal data, no tracking, no cookies, and are safe for children under 13."
+metaImg='/assets/images/mipos.jpg'
+metaUrl='https://mipolai.com/makes/privacy.html'
 ---
 
-# Hi hello
 # Privacy Policy
 
 -June 2023

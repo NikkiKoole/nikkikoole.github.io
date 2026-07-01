@@ -5,6 +5,11 @@ title='A music tool called Jizzjazztoo'
 draft=false
 score=0
 thumb='../assets/images/jizzjazztoo.png'
+order=3
+meta=true
+metaDescription="Jizzjazztoo is a lo-fi music tool for making jazzy, mellow loops - rhythm grids, cheesy preset patterns, a MIDI-friendly melody part, and built-in warble and EQ effects."
+metaImg='/assets/images/jizzjazztoo.png'
+metaUrl='https://mipolai.com/makes/jizzjazz.html'
 ---
 
 ## You could call it procrastination

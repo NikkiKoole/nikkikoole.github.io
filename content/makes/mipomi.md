@@ -5,6 +5,11 @@ title='a Language + Speechsynth + Lipsyncing experiment !'
 thumb='../assets/images/mipomithumb.png'
 draft=false
 score=0.5
+order=2
+meta=true
+metaDescription="Mipomi is a tiny made-up language for the Mipos, built to make lipsyncing and animation work, complete with speech synthesis and a glossary of words."
+metaImg='/assets/images/mipomithumb.png'
+metaUrl='https://mipolai.com/makes/mipomi.html'
 ---
 
 

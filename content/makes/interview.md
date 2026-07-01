@@ -1,10 +1,15 @@
 ---
-order=2
+
 timestamp=1743683859
 date='03 Apr 2025'
 title='an Interview by AI'
 thumb='../assets/images/interview.png'
 score=0.7
+order=98
+meta=true
+metaDescription="An interview with Nikki Koole, creator of Mipolai, on building ad-free apps for kids, fatherhood, the Mipos, and why he'd rather children put the iPad down and go draw."
+metaImg='/assets/images/interview.png'
+metaUrl='https://mipolai.com/makes/interview.html'
 ---
 
 # An Interview with Nikki Koole, Creator of Mipolai
