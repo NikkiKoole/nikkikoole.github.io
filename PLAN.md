@@ -1,9 +1,34 @@
-# Mipolai studio — plan (as of 2026-07-01)
+# Mipolai studio — plan (as of 2026-07-02)
 
 Notes from a thinking-out-loud session, written up so the direction doesn't
 get lost. See "Not doing now" at the bottom for what's explicitly parked.
 
-## Status at a glance (end of session, 2026-07-01)
+## ⏭️ PICK UP HERE NEXT SESSION (2026-07-02)
+
+Both domains are on Cloudflare DNS now; `nikkikoole.nl`'s cert is fixed and
+fully done. **The one open live-infra task is the `mipolai.com` GitHub Pages
+cutover (staging step 7).** It's currently still served by Hostnet
+(apex `A` → `77.111.243.35`, FTP-deployed). Everything is staged for the
+cutover — nothing is blocking it, it just wasn't started yet.
+
+**The next part to do (safe, no traffic impact, does NOT commit to the
+cutover):** add GitHub Pages' domain-verification TXT record in Cloudflare.
+This proves domain ownership to GitHub (prevents anyone else claiming
+`mipolai.com` on their Pages) and changes nothing about where the site
+resolves. Get the exact record from GitHub → repo **Settings → Pages →
+"Verified domains" / "Add a domain"**, which gives a
+`_github-pages-challenge-NikkiKoole.mipolai.com` TXT value to paste into
+Cloudflare DNS. Good standalone step for a short session.
+
+**The actual cutover (the bigger step, when ready) is step 7 below** — it's
+atomic (DNS records + `docs/CNAME` together) and reversible (point DNS back
+at Hostnet's `77.111.243.35`). Re-read step 7's full detail before doing it;
+the key gotcha is that `docs/CNAME` must NOT be added ahead of the DNS
+change (it redirects the entire `nikkikoole.github.io` namespace). Ask
+Claude to re-verify the current `mipolai.com` DNS state with `dig` at the
+start of that session.
+
+## Status at a glance (end of session, 2026-07-02)
 
 **Done:**
 - SEO fixes (sitemap/canonical/meta tags), `TODO.md`, and this plan doc —
@@ -51,9 +76,10 @@ get lost. See "Not doing now" at the bottom for what's explicitly parked.
   status when the real `/deployments` API shows success.
 
 **Not done yet, in order:**
-1. The actual GitHub Pages cutover for `mipolai.com` (staging step 7) —
-   point Cloudflare's DNS at GitHub Pages, re-add `docs/CNAME` at the same
-   time. Nothing to prep ahead of this; just say go when ready.
+1. **The GitHub Pages cutover for `mipolai.com` (staging step 7) — this is
+   the resume point, see "⏭️ PICK UP HERE" at the top.** Point Cloudflare's
+   DNS at GitHub Pages + re-add `docs/CNAME` atomically. Optional safe
+   warm-up first: add GitHub's domain-verification TXT (no traffic impact).
 2. ~~`nikkikoole.nl`'s Cloudflare move (step 8)~~ **DONE 2026-07-02** —
    full DNS-only move + Proxied cert fix completed and verified. See the
    dedicated bullet under "Done" above for the whole record.
