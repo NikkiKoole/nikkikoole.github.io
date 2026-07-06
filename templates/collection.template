@@ -23,7 +23,7 @@
 	      <div class='content'>
 		  {{if post.frontmatter.thumb then}}
 		<div class='picture_container'>
-		  <img class="picture"  src={{= post.frontmatter.thumb}}>
+		  <img class="picture" src={{= post.frontmatter.thumb}} alt="{{= post.title}}">
 		</div>
 		{{end}}
 
