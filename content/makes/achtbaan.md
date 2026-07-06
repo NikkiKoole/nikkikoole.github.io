@@ -30,4 +30,7 @@ The weirdest issue i had thinkng about it was how to solve the issue where you a
 It's solved very simple, so that is nice.
 
 The thing is very much not illustrated (yet)  
+
+I've since redone it for my little fantasy console, [dreamengine](dreamengine.html), and you can play that version right in your browser here: [play the coaster](https://mipolai.com/dreamengine/coaster/).
+
 Let's see where it goes.
