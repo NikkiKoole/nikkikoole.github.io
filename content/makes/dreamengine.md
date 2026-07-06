@@ -59,7 +59,7 @@ The picture you see is the screenshot, the source code is in there too. You can 
 
 Me. I planned on making it a pre-teen learning device or something, not really happening as of yet, they play the carts though, little games, toys, drum machines, radios that play themselves, Oh and that [rollercoaster game](achtbaan.html) i mentioned in another post but redone for this console.
 
-![all the carts](../assets/images/dreamengine-wall.png)
+![all the carts](../assets/images/dreamengine-wall.webp)
 
 You can play a bunch of them in your browser over here: [dreamengine gallery](https://nikkikoole.github.io/dreamengine/).
 
