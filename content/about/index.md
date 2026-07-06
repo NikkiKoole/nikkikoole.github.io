@@ -8,6 +8,8 @@ title='About Mipolai - Nikki Koole'
 score=0.8
 ---
 
+# This is us
+
 <section class='greygreen'>
 
 ![ingame](../assets/images/nikki-herman-theo.jpeg)
@@ -15,8 +17,6 @@ ____
 
 
 </section>
-
-# This is us
 
 Here's a picture of me, the older one sporting a mustache, together with my two boys. ;)   
 Picture taken a few years ago.

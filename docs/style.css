@@ -1,3 +1,30 @@
+/* the little "where the name came from" note, living in the site footer */
+footer .namestory {
+    max-width: 44em;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: Superclarendon, "Bookman Old Style", "URW Bookman",
+        "URW Bookman L", "Georgia Pro", Georgia, serif;
+}
+footer .namestory h2 {
+    font-family: inherit;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 0.5rem;
+}
+footer .namestory p {
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 0.6rem;
+}
+footer .namestory em {
+    color: white;
+    font-style: italic;
+}
+
 /* studio-root brand chooser: two colored panels side by side */
 .doors {
     display: flex;
