@@ -33,4 +33,6 @@ The thing is very much not illustrated (yet)
 
 I've since redone it for my little fantasy console, [dreamengine](dreamengine.html), and you can play that version right in your browser here: [play the coaster](https://mipolai.com/dreamengine/coaster/).
 
+![the coaster running in dreamengine](../assets/images/coaster-dreamengine.png)
+
 Let's see where it goes.
