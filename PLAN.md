@@ -36,10 +36,10 @@ verified:
 - Rollback if ever needed: point apex `A` back at Hostnet's
   `77.111.243.35` and remove `docs/CNAME`.
 
-Remaining optional items: the Hostnet wind-down (safe now — see its own
-section below), registrar transfer (step 9), deciding on proxying (leave
-grey until there's a reason), wildcard-record cleanup (fold into the
-wind-down), and the still-parked content work under "Not doing now."
+Remaining optional items: the mail-DNS cleanup (see the wind-down section
+below — the hosting itself is cancelled), registrar transfer (step 9),
+deciding on proxying (leave grey until there's a reason), and the
+still-parked content work under "Not doing now."
 
 ## ✅ STUDIO SPLIT SHIPPED (2026-07-06)
 
@@ -63,34 +63,38 @@ pulled + verified live from this one):
   `https_enforced` lag noted above has resolved); the live homepage carries
   the latest commit.
 
-## Hostnet wind-down for mipolai.com — safe to start (2026-07-06)
+## ✅ HOSTNET WIND-DOWN DONE (2026-07-06)
 
-With mipolai.com verified serving from GitHub Pages, the three Hostnet
-contracts on the mipolai.com account:
+Executed the same day as the studio split, once mipolai.com was verified
+serving from GitHub Pages. What was done:
 
-- **PHP Extended Support** (monthly, renews 06-08-2026): **cancel now** —
-  it's a Plesk/PHP add-on for the old hosting, useless for a static site
-  that isn't even served there anymore. Cancelling before 06-08 stops the
-  next monthly charge.
-- **Webhosting Mini** (yearly, renews 10-10-2026): **safe to cancel** —
-  nothing serves from it (site is on GitHub Pages, email confirmed not in
-  use despite the MX records). Two things to accept/do alongside:
-  (a) cancelling removes the documented rollback ("point the apex back at
-  `77.111.243.35`") — fine, the new setup is verified stable; (b) delete
-  the `*.mipolai.com` wildcard `A` → Hostnet record in Cloudflare at the
-  same time (it would point at a dead server), which closes the
-  wildcard-cleanup item above. Hostnet cancellations typically take effect
-  at end of term, so it runs (paid-for) until 10-10-2026 anyway — no rush,
-  but nothing blocks it.
-- **mipolai.com (the domain registration)**: **do NOT cancel** — that row
-  is the domain itself; cancelling loses the name. Either keep renewing it
-  at Hostnet, or do the optional Cloudflare Registrar transfer (step 9 —
-  the "Verhuizen" link on that same row is the Hostnet side of it).
-- Caveat: `nikkikoole.nl` still serves its placeholder FROM a Hostnet
-  server (behind Cloudflare's proxy) — it's a different server
-  (`91.184.0.113` vs mipolai's `77.111.243.35`), so it should be a separate
-  contract under "Andere dienst", but confirm it's not riding on this
-  Webhosting Mini package before pulling the trigger.
+- **Wildcard DNS deleted**: the `*.mipolai.com` `A` → `77.111.243.35`
+  record removed in Cloudflare. Verified: random subdomains no longer
+  resolve; apex (4 GitHub IPs), `www` CNAME, and the live site (200 over
+  HTTPS) all unaffected. Closes the wildcard-cleanup item.
+- **Webhosting Mini cancelled** (was yearly, renewal 10-10-2026) and
+  **PHP Extended Support cancelled** (was monthly, renewal 06-08-2026).
+  Safe because: site on GitHub Pages, email confirmed not in use, wildcard
+  already gone. Checked first that `nikkikoole.nl` is its own separate
+  Hostnet dienst (it is — as are `rekenbeest.nl` and `whatdididream.com`),
+  so nothing else rides on this package. Hostnet cancellations run to end
+  of term, so the hosting stays technically alive (unused) until
+  10-10-2026. Note this removes the old rollback path ("point the apex
+  back at `77.111.243.35`") — accepted deliberately.
+- **mipolai.com domain registration kept** (NOT cancelled — that row is
+  the name itself). Hostnet is now registrar-only for us. Optional
+  Cloudflare Registrar transfer remains step 9 (the "Verhuizen" link).
+- **Still to do, any time before 10-10-2026** (harmless until the hosting
+  actually dies): clean up the now-pointless mail DNS in Cloudflare —
+  delete the MX records + the `autoconfig`/`webmail` CNAMEs + the
+  `_autodiscover` SRV, and harden the anti-spoofing pair: SPF →
+  `v=spf1 -all`, keep DMARC `p=reject`. (A never-sends domain with
+  explicit SPF/DMARC is harder to impersonate than one with none.)
+- Side note from the services overview: `whatdididream.com` showed a
+  yellow status banner at Hostnet ("Meer info over de status van je
+  dienst") — check what it wants; and `rekenbeest.nl` /
+  `whatdididream.com` are domains with no role in this plan — decide
+  someday whether they're worth renewing.
 
 ## Status at a glance (end of session, 2026-07-02)
 

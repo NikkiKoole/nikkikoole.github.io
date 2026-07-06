@@ -17,14 +17,16 @@ Notes from an SEO/findability pass (2026-07-01). Not urgent unless marked.
 - [x] Switch `nikki.md`'s `metaUrl` and the `canon` value in `main.lua`
       (the `general-canonical-nikki` call) from `http://nikkikoole.nl` to
       `https://nikkikoole.nl`. Done 2026-07-02, now that the cert works.
-- [ ] **Hostnet wind-down for mipolai.com** (safe as of 2026-07-06 — full
-      reasoning in `PLAN.md` § "Hostnet wind-down"): cancel **PHP Extended
-      Support** (monthly — before 06-08 to stop the next charge) and
-      **Webhosting Mini** (yearly, renews 10-10-2026); delete the
-      `*.mipolai.com` wildcard `A` record in Cloudflare alongside. Do NOT
-      cancel the `mipolai.com` domain-registration row — keep or transfer
-      (step 9). First confirm nikkikoole.nl's hosting is a separate
-      contract, not riding on this package.
+- [x] **Hostnet wind-down for mipolai.com — DONE 2026-07-06** (full record
+      in `PLAN.md` § "HOSTNET WIND-DOWN DONE"): Webhosting Mini + PHP
+      Extended Support cancelled (run out at end of term), `*.mipolai.com`
+      wildcard `A` deleted in Cloudflare + verified, domain registration
+      kept, nikkikoole.nl confirmed a separate dienst.
+- [ ] **Mail-DNS cleanup for mipolai.com** (any time before 10-10-2026,
+      when the cancelled hosting actually ends): in Cloudflare delete the
+      MX records, `autoconfig`/`webmail` CNAMEs, `_autodiscover` SRV;
+      harden SPF to `v=spf1 -all` and keep DMARC `p=reject` (anti-spoofing
+      for a domain that never sends mail).
 
 ## Content decisions (need you, not just code)
 
