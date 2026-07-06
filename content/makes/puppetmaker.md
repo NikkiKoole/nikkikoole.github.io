@@ -40,10 +40,10 @@ You can have them play in an outdoor space, annoy them, and even make them enjoy
 Upcoming updates maybe introduce clothes, but for now, they enjoy  being naked and just hairy, some bald.
 
 <section class='aubergine'>
-![ingame](../assets/images/sjoep2.gif)
-![ingame](../assets/images/sjoep3.gif)
-![ingame](../assets/images/sjoep4.gif)
-![ingame](../assets/images/sjoep5.gif)
+<video autoplay loop muted playsinline poster="../assets/images/sjoep2-poster.webp" style="width:382px;max-width:100%"><source src="../assets/images/sjoep2.mp4" type="video/mp4"></video>
+<video autoplay loop muted playsinline poster="../assets/images/sjoep3-poster.webp" style="width:382px;max-width:100%"><source src="../assets/images/sjoep3.mp4" type="video/mp4"></video>
+<video autoplay loop muted playsinline poster="../assets/images/sjoep4-poster.webp" style="width:382px;max-width:100%"><source src="../assets/images/sjoep4.mp4" type="video/mp4"></video>
+<video autoplay loop muted playsinline poster="../assets/images/sjoep5-poster.webp" style="width:382px;max-width:100%"><source src="../assets/images/sjoep5.mp4" type="video/mp4"></video>
 </section>
 
 
