@@ -174,7 +174,7 @@ function makeSitemapFromGatheredData(prefix)
     result = result .. '</urlset>\n'
 
     --  print(result)
-    writePost(destination .. '/sitemap2.xml', result)
+    writePost(destination .. '/sitemap.xml', result)
 
     printPink('written an sitemap file with ' .. #gatheredSitemapData .. ' items in it.')
 end
