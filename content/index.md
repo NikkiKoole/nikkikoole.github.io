@@ -6,6 +6,7 @@ meta=true
 metaDescription="Nikki Koole makes things — toys for small kids, toys for big kids, mostly toys for ourselves. One artistic dad who's been writing software since he typed it out of magazines, with two kids playtesting and co-building. No ads, no gimmicks, no tricks."
 metaImg='/assets/images/mipos.jpg'
 metaUrl='https://mipolai.com'
+structuredJSON = '<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://mipolai.com/#org","name":"Mipolai","url":"https://mipolai.com/","logo":"https://mipolai.com/assets/images/mipolailogo.png","founder":{"@type":"Person","name":"Nikki Koole"}},{"@type":"WebSite","@id":"https://mipolai.com/#website","name":"Mipolai","url":"https://mipolai.com/","publisher":{"@id":"https://mipolai.com/#org"}}]}</script>'
 ---
 
 # Nikki Koole makes things.
