@@ -1,6 +1,6 @@
 ---
 date='06 Jul 2026'
-title='Mipolai — a tiny studio by Nikki Koole'
+title='Mipolai — by Nikki Koole'
 score=1.0
 meta=true
 metaDescription="Nikki Koole makes things — toys for small kids, toys for big kids, mostly toys for ourselves. One artistic dad who's been writing software since he typed it out of magazines, with two kids playtesting and co-building. No ads, no gimmicks, no tricks."
