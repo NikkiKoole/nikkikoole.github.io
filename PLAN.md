@@ -3,30 +3,40 @@
 Notes from a thinking-out-loud session, written up so the direction doesn't
 get lost. See "Not doing now" at the bottom for what's explicitly parked.
 
-## ⏭️ PICK UP HERE NEXT SESSION (2026-07-02)
+## ✅ CUTOVER DONE (2026-07-06) — mipolai.com now serves from GitHub Pages
 
-Both domains are on Cloudflare DNS now; `nikkikoole.nl`'s cert is fixed and
-fully done. **The one open live-infra task is the `mipolai.com` GitHub Pages
-cutover (staging step 7).** It's currently still served by Hostnet
-(apex `A` → `77.111.243.35`, FTP-deployed). Everything is staged for the
-cutover — nothing is blocking it, it just wasn't started yet.
+Step 7 executed 2026-07-06, atomically as planned (Cloudflare DNS edits +
+`docs/CNAME` push within the same minute). Record of what was done and
+verified:
 
-**The next part to do (safe, no traffic impact, does NOT commit to the
-cutover):** add GitHub Pages' domain-verification TXT record in Cloudflare.
-This proves domain ownership to GitHub (prevents anyone else claiming
-`mipolai.com` on their Pages) and changes nothing about where the site
-resolves. Get the exact record from GitHub → repo **Settings → Pages →
-"Verified domains" / "Add a domain"**, which gives a
-`_github-pages-challenge-NikkiKoole.mipolai.com` TXT value to paste into
-Cloudflare DNS. Good standalone step for a short session.
+- Cloudflare DNS: apex `A` → the four GitHub Pages IPs
+  (`185.199.108.153`/`.109`/`.110`/`.111`), all **DNS only** (three were
+  accidentally added Proxied first — Cloudflare's default — and flipped to
+  grey before the CNAME push). Apex + www `AAAA` (Hostnet) deleted; `www` is
+  now a CNAME → `nikkikoole.github.io` (DNS only). The `*.mipolai.com`
+  wildcard `A` → Hostnet was deliberately LEFT in place (explicit records
+  beat it; cleanup for later). Mail records (MX/SPF/DMARC/autoconfig/
+  webmail/SRV) untouched.
+- `docs/CNAME` (`mipolai.com`) pushed the moment the DNS records were saved.
+- Verified same session: apex resolves to the 4 GitHub IPs on 1.1.1.1;
+  `http://mipolai.com` serves from `Server: GitHub.com` with the current
+  build (including that day's new makes article); Let's Encrypt cert for
+  `mipolai.com` issued within minutes (valid 2026-07-06 → 2026-10-04,
+  auto-renews); `https_enforced` set to true via the API (http→https
+  redirect may lag the flag by a few minutes — re-check if curious).
+- The namespace redirect behaved as predicted, non-destructively this time:
+  `nikkikoole.github.io/dreamengine/` and `/aandelending/` 301 →
+  `mipolai.com/<name>/` and serve 200 there. All project pages now live
+  under mipolai.com paths — known, accepted trade-off (escape hatch per
+  repo: own custom domain, or Pages off).
+- Google Search Console: verification TXT survived (DNS-based, untouched).
+  Small follow-up: check/submit `https://mipolai.com/sitemap2.xml` in GSC.
+- Rollback if ever needed: point apex `A` back at Hostnet's
+  `77.111.243.35` and remove `docs/CNAME`.
 
-**The actual cutover (the bigger step, when ready) is step 7 below** — it's
-atomic (DNS records + `docs/CNAME` together) and reversible (point DNS back
-at Hostnet's `77.111.243.35`). Re-read step 7's full detail before doing it;
-the key gotcha is that `docs/CNAME` must NOT be added ahead of the DNS
-change (it redirects the entire `nikkikoole.github.io` namespace). Ask
-Claude to re-verify the current `mipolai.com` DNS state with `dig` at the
-start of that session.
+Remaining optional items: registrar transfer (step 9), deciding on
+proxying (leave grey until there's a reason), wildcard-record cleanup,
+and the parked content work under "Not doing now."
 
 ## Status at a glance (end of session, 2026-07-02)
 
