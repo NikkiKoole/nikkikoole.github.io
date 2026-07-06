@@ -17,6 +17,14 @@ Notes from an SEO/findability pass (2026-07-01). Not urgent unless marked.
 - [x] Switch `nikki.md`'s `metaUrl` and the `canon` value in `main.lua`
       (the `general-canonical-nikki` call) from `http://nikkikoole.nl` to
       `https://nikkikoole.nl`. Done 2026-07-02, now that the cert works.
+- [ ] **Hostnet wind-down for mipolai.com** (safe as of 2026-07-06 — full
+      reasoning in `PLAN.md` § "Hostnet wind-down"): cancel **PHP Extended
+      Support** (monthly — before 06-08 to stop the next charge) and
+      **Webhosting Mini** (yearly, renews 10-10-2026); delete the
+      `*.mipolai.com` wildcard `A` record in Cloudflare alongside. Do NOT
+      cancel the `mipolai.com` domain-registration row — keep or transfer
+      (step 9). First confirm nikkikoole.nl's hosting is a separate
+      contract, not riding on this package.
 
 ## Content decisions (need you, not just code)
 
@@ -36,7 +44,8 @@ Notes from an SEO/findability pass (2026-07-01). Not urgent unless marked.
 - [ ] The meta-tag pass only touched published (non-draft) pages. If any
       draft post above gets published, it'll need its own `meta=true` +
       `metaDescription` + `metaImg` + `metaUrl` block (see `content/makes/achtbaan.md`
-      for the pattern).
+      for the pattern). (The 2026-07-06 studio-split pages `/mipo/` and
+      `/tinyjam/` shipped with correct meta blocks — pattern followed.)
 
 ## Housekeeping
 

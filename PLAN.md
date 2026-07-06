@@ -30,13 +30,67 @@ verified:
   under mipolai.com paths — known, accepted trade-off (escape hatch per
   repo: own custom domain, or Pages off).
 - Google Search Console: verification TXT survived (DNS-based, untouched).
-  Small follow-up: check/submit `https://mipolai.com/sitemap2.xml` in GSC.
+  ~~Small follow-up: check/submit the sitemap in GSC~~ **DONE 2026-07-06** —
+  note the sitemap was renamed `sitemap2.xml` → `sitemap.xml` in the studio
+  split batch (robots.txt updated to match); Nikki submitted it in GSC.
 - Rollback if ever needed: point apex `A` back at Hostnet's
   `77.111.243.35` and remove `docs/CNAME`.
 
-Remaining optional items: registrar transfer (step 9), deciding on
-proxying (leave grey until there's a reason), wildcard-record cleanup,
-and the parked content work under "Not doing now."
+Remaining optional items: the Hostnet wind-down (safe now — see its own
+section below), registrar transfer (step 9), deciding on proxying (leave
+grey until there's a reason), wildcard-record cleanup (fold into the
+wind-down), and the still-parked content work under "Not doing now."
+
+## ✅ STUDIO SPLIT SHIPPED (2026-07-06)
+
+The homepage repositioning + brand subdirectories — flagged below as the
+"real prerequisite" of the decided architecture and parked under "Not doing
+now" — shipped the same day as the cutover (done on the other machine,
+pulled + verified live from this one):
+
+- Root `index.html` is now the studio chooser, titled "Mipolai — by Nikki
+  Koole" (commit `396e3d0` + follow-ups). The kids copy/content moved down
+  to `/mipo/`; `/tinyjam/` got its landing page ("pocket-sized music toys").
+- Both new pages carry full `meta=true` blocks (description/img/url per the
+  house pattern) and are in the sitemap.
+- Same batch: Organization + WebSite JSON-LD on the root, a large
+  image-optimization pass (multi-MB saved, GIFs → mp4), Lighthouse a11y
+  fixes (contrast, alt text), `fetchpriority` on the LCP logo, and a
+  `/puppetmaker` redirect stub (restores the old Hostnet redirect lost in
+  the cutover).
+- Verified live 2026-07-06: `/`, `/mipo/`, `/tinyjam/` all 200 from
+  `Server: GitHub.com`; http→https redirect now active (the
+  `https_enforced` lag noted above has resolved); the live homepage carries
+  the latest commit.
+
+## Hostnet wind-down for mipolai.com — safe to start (2026-07-06)
+
+With mipolai.com verified serving from GitHub Pages, the three Hostnet
+contracts on the mipolai.com account:
+
+- **PHP Extended Support** (monthly, renews 06-08-2026): **cancel now** —
+  it's a Plesk/PHP add-on for the old hosting, useless for a static site
+  that isn't even served there anymore. Cancelling before 06-08 stops the
+  next monthly charge.
+- **Webhosting Mini** (yearly, renews 10-10-2026): **safe to cancel** —
+  nothing serves from it (site is on GitHub Pages, email confirmed not in
+  use despite the MX records). Two things to accept/do alongside:
+  (a) cancelling removes the documented rollback ("point the apex back at
+  `77.111.243.35`") — fine, the new setup is verified stable; (b) delete
+  the `*.mipolai.com` wildcard `A` → Hostnet record in Cloudflare at the
+  same time (it would point at a dead server), which closes the
+  wildcard-cleanup item above. Hostnet cancellations typically take effect
+  at end of term, so it runs (paid-for) until 10-10-2026 anyway — no rush,
+  but nothing blocks it.
+- **mipolai.com (the domain registration)**: **do NOT cancel** — that row
+  is the domain itself; cancelling loses the name. Either keep renewing it
+  at Hostnet, or do the optional Cloudflare Registrar transfer (step 9 —
+  the "Verhuizen" link on that same row is the Hostnet side of it).
+- Caveat: `nikkikoole.nl` still serves its placeholder FROM a Hostnet
+  server (behind Cloudflare's proxy) — it's a different server
+  (`91.184.0.113` vs mipolai's `77.111.243.35`), so it should be a separate
+  contract under "Andere dienst", but confirm it's not riding on this
+  Webhosting Mini package before pulling the trigger.
 
 ## Status at a glance (end of session, 2026-07-02)
 
@@ -95,10 +149,10 @@ and the parked content work under "Not doing now."
    dedicated bullet under "Done" above for the whole record.
 3. Optional/later: registrar transfer for `mipolai.com` (step 9), deciding
    whether to turn proxying on for any records.
-4. Separately, not blocking any of the above: the homepage repositioning
+4. ~~Separately, not blocking any of the above: the homepage repositioning
    copy (studio framing, tagline already chosen) and building out any
-   actual brand subdirectories (`/tinyjam/` etc.) — both wait on those
-   brands being further along, not on the DNS work.
+   actual brand subdirectories (`/tinyjam/` etc.)~~ **DONE 2026-07-06** —
+   see "STUDIO SPLIT SHIPPED" above (root chooser + `/mipo/` + `/tinyjam/`).
 
 ## The shift
 
@@ -430,25 +484,23 @@ triage/curation conversation for it is already happening over there.
 
 ## Not doing now (explicitly parked)
 
-- Reworking mipolai.com's root homepage/about copy from "kids app company"
-  to "studio, here's what we make" + migrating the current kid-specific
-  content/copy down to `/mipo/` — now a real prerequisite of the decided
-  architecture (see above), not just a someday nice-to-have, but still not
-  started. Blocked on TinyJam etc. being further along publicly.
-- Actually creating the per-brand subdirectories and their content
-  (`/tinyjam/`, the GTA1 game, the adult art brand) — shape is decided
-  (subdirectory of this repo, fetch-and-copy for content built elsewhere
-  like dreamengine), but none exist yet; waiting on those brands being
-  further along.
+- ~~Reworking mipolai.com's root homepage/about copy … + migrating the
+  kid-specific content down to `/mipo/`~~ **DONE 2026-07-06** — see
+  "STUDIO SPLIT SHIPPED" above.
+- Per-brand subdirectories: `/mipo/` and `/tinyjam/` **exist as of
+  2026-07-06** (landing pages). Still parked: whatever the GTA1 game and
+  the adult-art brand end up called, and real (beyond-landing) TinyJam
+  content — waiting on those brands being further along.
 - Adding the fetch-and-copy CI step for brands whose content lives in
   another repo (e.g. TinyJam via dreamengine) — needed once a brand
   actually has content to pull in, not before. (No general-purpose deploy
   workflow needed beyond this — GitHub's built-in Pages builder already
   handles the base case, see "Site/domain architecture" above.)
-- Wiring `mipolai.com`'s DNS to this repo's already-working Pages site — a
-  concrete, low-risk next step, offered but not yet greenlit.
-- The Cloudflare migration staged above — plan is written, nothing clicked
-  through yet.
+- ~~Wiring `mipolai.com`'s DNS to this repo's already-working Pages site~~
+  **DONE 2026-07-06** — the cutover at the top of this doc.
+- ~~The Cloudflare migration staged above~~ **DONE** — both domains moved
+  (mipolai.com 2026-07-01, nikkikoole.nl 2026-07-02); only the optional
+  registrar transfer (step 9) remains.
 - **`nikkikoole.nl` as a future personal site — new intent (2026-07-02),
   undecided, parked.** The domain was originally pointed at Cloudflare just
   to fix its expired cert (done); it currently serves only a Hostnet
