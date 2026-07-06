@@ -10,14 +10,14 @@ footer .namestory {
 footer .namestory h2 {
     font-family: inherit;
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.85);
     margin: 0 0 0.5rem;
 }
 footer .namestory p {
     font-family: inherit;
     font-size: 0.95rem;
     line-height: 1.55;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     margin: 0 0 0.6rem;
 }
 footer .namestory em {
@@ -206,7 +206,7 @@ footer a {
     color: white;
 }
 footer h1 {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.8);
 }
 header img.logo {
     filter: invert(0.5) sepia(1);
