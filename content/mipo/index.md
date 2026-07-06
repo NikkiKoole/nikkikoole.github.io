@@ -26,7 +26,7 @@ metaUrl='https://mipolai.com/mipo/'
 
 <section class='call-to-action'>
 <h2>Download <a href='/makes/puppetmaker.html'>Mipo Puppetmaker</a> our first app now!</h2>
-<img src='/assets/images/460x0w.webp' />
+<img src='/assets/images/460x0w.webp' alt='Mipo Puppetmaker app icon' />
 # <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163"> Download on the App Store</a>
 <a class='downloadApp' href="https://apps.apple.com/us/app/puppetmaker/id6450050163" target="_blank" rel="get it over at the app store"> ![Download on app store](/assets/images/download-on-the-app-store.svg) </a>
 </section>
