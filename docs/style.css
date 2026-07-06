@@ -1,3 +1,88 @@
+/* studio-root brand chooser: two colored panels side by side */
+.doors {
+    display: flex;
+    gap: 1.2rem;
+    align-items: stretch;
+    max-width: 66em;
+    margin: 1rem auto;
+}
+.door {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 1.5em 2em;
+    border-radius: 20px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+@media only screen and (max-width: 800px) {
+    .doors {
+        flex-direction: column;
+    }
+}
+.door:hover {
+    transform: scale(1.02) rotate(-0.5deg);
+}
+.door .door-link {
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    text-decoration: none;
+    color: inherit;
+}
+.door-icon {
+    flex: 0 0 auto;
+    width: 110px;
+    height: 110px;
+    border-radius: 22px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+.door-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.door-text h1,
+.door-text p {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+}
+.door-text h1 {
+    margin-bottom: 0.3em;
+}
+/* the App Store badge, sitting inside the Mipos panel under the text */
+.door .downloadApp {
+    margin-top: 1.2em;
+    margin-left: calc(110px + 1.2em);
+}
+.door .downloadApp img {
+    margin-left: 0;
+    height: 60px;
+}
+@media only screen and (max-width: 600px) {
+    .door .door-link {
+        flex-direction: column;
+        text-align: center;
+    }
+    .door-icon {
+        width: 96px;
+        height: 96px;
+    }
+    .door .downloadApp {
+        margin-left: 0;
+        text-align: center;
+    }
+}
+.soon {
+    font-size: 0.5em;
+    vertical-align: middle;
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    padding: 0.15em 0.6em;
+    border-radius: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 @font-face {
     font-family: volta;
     src: url(assets/fonts/VoltaT-Regu.ttf);

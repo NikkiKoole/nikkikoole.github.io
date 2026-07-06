@@ -305,6 +305,12 @@ local list = doBunch('stuff')
 doSimple('collection', 'stuff/index', { title = "Stuff", posts = list })
 
 doSimple('general', 'about/index', { title = "About" })
+
+-- brand landing pages (studio root -> /mipo/ kids world, /tinyjam/ music toys).
+-- their docs/ output dirs must exist first (writePost won't create them) — see mkdir in the build steps / README.
+doSimple('general', 'mipo/index', { title = "the Mipos" })
+doSimple('general', 'tinyjam/index', { title = "TinyJam" })
+
 doSimple('general-canonical', 'index', { title = 'Mipolai makes apps', canon = "\"https://mipolai.com/\"" })
 doSimple('general-canonical-nikki', 'nikki', { title = 'Nikki', canon = "\"https://nikkikoole.nl/\"" })
 
