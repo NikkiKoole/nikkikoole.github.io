@@ -3,7 +3,7 @@ date='06 Jul 2026'
 title='TinyJam — pocket-sized music toys'
 score=0.5
 meta=true
-metaDescription="TinyJam is a growing collection of pocket-sized music toys — tiny synths, drum machines and grooveboxes that play the second you open them. Coming soon, from the studio behind the Mipos."
+metaDescription="TinyJam is a growing collection of pocket-sized music toys — start a tiny jam anywhere with tiny synths, drum machines and grooveboxes that play the second you open them. Coming soon, from the studio behind the Mipos."
 metaImg='/assets/images/tinyjam-icon.png'
 metaUrl='https://mipolai.com/tinyjam/'
 ---
@@ -16,7 +16,7 @@ metaUrl='https://mipolai.com/tinyjam/'
 
 ## A growing collection of pocket-sized music toys.
 
-Each one is a small, playable instrument — a groovebox, a synth, a drum machine — that fits in your pocket and starts making sound the second you open it. No menus to learn, no projects to manage: tap a step, turn a knob, and it plays.
+Each one is a small, playable instrument — a groovebox, a synth, a drum machine — that fits in your pocket and starts making sound the second you open it. No menus to learn, no projects to manage: tap a step, turn a knob, and it plays. Start a tiny jam wherever you are.
 
 New instruments join the collection over time, so it grows with you.
 
