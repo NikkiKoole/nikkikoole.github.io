@@ -46,23 +46,23 @@
   <priority>0.5</priority>
 </url>
 <url>
-  <loc>https://mipolai.com/makes/privacy.html</loc>
-  <lastmod>2023-06-09</lastmod>
-  <priority>0.5</priority>
-</url>
-<url>
   <loc>https://mipolai.com/tinyjam/</loc>
   <lastmod>2026-07-06</lastmod>
   <priority>0.5</priority>
 </url>
 <url>
-  <loc>https://mipolai.com/makes/mipomi.html</loc>
-  <lastmod>2025-10-10</lastmod>
+  <loc>https://mipolai.com/makes/privacy.html</loc>
+  <lastmod>2023-06-09</lastmod>
   <priority>0.5</priority>
 </url>
 <url>
   <loc>https://mipolai.com/makes/</loc>
   <lastmod>2024-04-03</lastmod>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://mipolai.com/makes/mipomi.html</loc>
+  <lastmod>2025-10-10</lastmod>
   <priority>0.5</priority>
 </url>
 <url>
@@ -74,6 +74,11 @@
   <loc>https://mipolai.com/blog/</loc>
   <lastmod>2026-07-01</lastmod>
   <priority>0.4</priority>
+</url>
+<url>
+  <loc>https://mipolai.com/tinyjam/support/</loc>
+  <lastmod>2026-07-08</lastmod>
+  <priority>0.3</priority>
 </url>
 <url>
   <loc>https://mipolai.com/makes/jizzjazz.html</loc>

@@ -310,6 +310,9 @@ doSimple('general', 'about/index', { title = "About" })
 -- their docs/ output dirs must exist first (writePost won't create them) — see mkdir in the build steps / README.
 doSimple('general', 'mipo/index', { title = "the Mipos" })
 doSimple('general', 'tinyjam/index', { title = "TinyJam" })
+-- support page for the Tiny Jam iOS app (Apple's required support URL). distinct
+-- path from the /tinyjam/ marketing page. docs/tinyjam/support/ must exist first.
+doSimple('general', 'tinyjam/support/index', { title = "Tiny Jam — Support" })
 
 doSimple('general-canonical', 'index', { title = 'Mipolai makes apps', canon = "\"https://mipolai.com/\"" })
 doSimple('general-canonical-nikki', 'nikki', { title = 'Nikki', canon = "\"https://nikkikoole.nl/\"" })
