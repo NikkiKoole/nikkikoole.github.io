@@ -46,13 +46,13 @@
   <priority>0.5</priority>
 </url>
 <url>
-  <loc>https://mipolai.com/tinyjam/</loc>
-  <lastmod>2026-07-06</lastmod>
+  <loc>https://mipolai.com/makes/privacy.html</loc>
+  <lastmod>2023-06-09</lastmod>
   <priority>0.5</priority>
 </url>
 <url>
-  <loc>https://mipolai.com/makes/privacy.html</loc>
-  <lastmod>2023-06-09</lastmod>
+  <loc>https://mipolai.com/tinyjam/</loc>
+  <lastmod>2026-07-06</lastmod>
   <priority>0.5</priority>
 </url>
 <url>
@@ -63,6 +63,11 @@
 <url>
   <loc>https://mipolai.com/makes/mipomi.html</loc>
   <lastmod>2025-10-10</lastmod>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://mipolai.com/makes/strumthingie.html</loc>
+  <lastmod>2026-07-22</lastmod>
   <priority>0.5</priority>
 </url>
 <url>

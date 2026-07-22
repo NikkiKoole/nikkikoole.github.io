@@ -61,6 +61,4 @@ Me. I planned on making it a pre-teen learning device or something, not really h
 
 ![all the carts](../assets/images/dreamengine-wall.webp)
 
-You can play a bunch of them in your browser over here: [dreamengine gallery](https://nikkikoole.github.io/dreamengine/).
-
 Let's see where this goes, Have a good day!
