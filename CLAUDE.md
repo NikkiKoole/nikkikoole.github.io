@@ -89,5 +89,13 @@ The common reason this site gets touched: a cart shipped in the **dreamengine** 
 3. Land as `draft=true`, drop the `.mp4` + poster into `docs/assets/images/`, rebuild, eyeball.
 4. Flip `draft=false`, rebuild, commit both trees, push.
 
-Voice for the write-up: short, honest, playful — a stranger should get what the cart *is* and why
+**Nikki writes the prose. An agent does NOT.** Hand over everything around the words: frontmatter
+(SEO fields, thumb/order/score), the built assets (hero clip, poster, thumbnail), the playable
+build, the section skeleton, and a bullet list of *verified* facts about the cart (what it does,
+exact key bindings, real preset names, counts read from the source). Then stop, and let him write.
+AI-drafted paragraphs read as AI-drafted and get rewritten wholesale, so writing them is wasted
+work. Same rule the dreamengine repo already applies to store listings and press kits: emit
+vocabulary, never prose.
+
+Voice, when he writes it: short, honest, playful — a stranger should get what the cart *is* and why
 it's fun. (dreamengine mirrors this recipe in its `docs/other-projects.md`.)
