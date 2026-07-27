@@ -1,0 +1,16 @@
+{
+  "name": "Tiny Acid Jam",
+  "short_name": "Tiny Acid Jam",
+  "display": "fullscreen",
+  "background_color": "#1b1c1f",
+  "theme_color": "#1b1c1f",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "cart.png",
+      "sizes": "320x200",
+      "type": "image/png"
+    }
+  ],
+  "players": 1
+}

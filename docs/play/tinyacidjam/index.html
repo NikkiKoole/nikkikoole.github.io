@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- WORKLET-CAPABLE shell (cfg.worklet carts). NOT an emscripten --shell-file: it's a
+       hand-written loader that ships BOTH builds and picks one at runtime. See
+       docs/design/audio-threading.md Stage 3/4. self-heal + coi-serviceworker FIRST so the
+       page becomes cross-origin isolated (shared memory) before the chooser runs. -->
+  <script>
+    /* ───────── audio backend preference (must run BEFORE coi-serviceworker.js) ─────────
+       The worklet build (dedicated audio thread) is the win on desktop/Android, but on iOS
+       Safari it is SILENT or won't start across many versions (verified 2026-06-11: iPhone
+       iOS 15.4.1 runs-but-silent; even iOS 18 has open AudioWorklet-no-sound reports; WebKit
+       #237144 = a SharedArrayBuffer isn't actually shared with the worklet). The plain
+       (ScriptProcessor) build sounds identical — only looser timing — and ALWAYS plays on
+       iOS. So 'auto' tries the worklet everywhere EXCEPT genuinely-old iOS (< 16 — e.g. the
+       iOS 15.4.1 iPhone this was found on, where the worklet is silent and a controlling SW
+       also mutes the plain path). Modern iOS/iPadOS get the worklet by default; old iOS
+       auto-falls-back to plain (sound, no toggle needed). Override via toggle/param:
+         pref = ?audio= (persisted to localStorage) → localStorage['de:audio'] → 'auto'
+           auto    → worklet everywhere, except iOS < 16 → plain
+           worklet → force isolation (register SW) + worklet everywhere
+           plain   → force the plain build everywhere (no SW)
+       Set site-wide from the gallery's Audio toggle, or per-link with ?audio=worklet.
+       Gotcha: the coi service worker enables isolation, but a SW *controlling the page* also
+       mutes Web Audio on older iOS — so whenever the resolved pref wants NO service worker we
+       must actively unregister any stale SW and reload, or 'plain' stays silent right after a
+       'worklet' attempt (this also subsumes the old not-isolated self-heal). */
+    (function(){
+      var sp; try { sp = new URLSearchParams(location.search); } catch(e) {}
+      var qp = sp && sp.get('audio');
+      if (qp === 'worklet' || qp === 'plain' || qp === 'auto') { try { localStorage.setItem('de:audio', qp); } catch(e){} }
+      var pref = qp;
+      if (!pref) { try { pref = localStorage.getItem('de:audio'); } catch(e){} }
+      if (pref !== 'worklet' && pref !== 'plain') pref = 'auto';
+      window.deAudioPref = pref;
+
+      // iPadOS 13+ hides as "Macintosh" (no OS version) → no match → treated as modern → worklet.
+      var m = navigator.userAgent.match(/(?:iPhone OS|CPU OS) (\d+)_/);
+      var oldIOS = !!m && parseInt(m[1], 10) < 16;   // only genuinely-old iOS falls back by default
+      var wantSW = pref === 'plain' ? false : pref === 'worklet' ? true : !oldIOS;
+      window.coi = { shouldRegister: function(){ return wantSW; } };  // coi reads this synchronously
+
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(function(rs){
+          if (!wantSW && rs.length) {                       // SW present but unwanted → it can mute audio
+            if (sessionStorage.getItem('deAudioHeal')) return;  // already healing — don't loop
+            sessionStorage.setItem('deAudioHeal','1');
+            Promise.all(rs.map(function(r){return r.unregister();}))
+              .then(function(){return window.caches?caches.keys().then(function(k){return Promise.all(k.map(function(x){return caches.delete(x);}));}):0;})
+              .then(function(){location.reload();});
+          } else {
+            sessionStorage.removeItem('deAudioHeal');        // clean state → re-arm for the next switch
+          }
+        });
+      }
+    })();
+  </script>
+  <script src="coi-serviceworker.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1b1c1f">
+  <title>Tiny Acid Jam — dreamengine</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="cart.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; background: #1b1c1f;
+                 overscroll-behavior: none;
+                 touch-action: none;
+                 -webkit-user-select: none;
+                 user-select: none;
+                 -webkit-touch-callout: none;
+                 -webkit-tap-highlight-color: transparent; }
+    body { display: flex; justify-content: center; align-items: center; }
+    #canvas {
+      display: block;
+      image-rendering: pixelated;
+      max-width: 100%;
+      max-height: 100%;
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+  <div id="rotate-hint" style="display:none; position:fixed; top:12px; left:50%; transform:translateX(-50%);
+       background:#25262b; color:#e8e6e3; border:1px solid #ff6c24; border-radius:8px;
+       padding:8px 14px; font:13px ui-monospace,Menlo,monospace; pointer-events:none;">&#8635; rotate your phone</div>
+  <button id="fs" title="fullscreen" style="position:fixed; right:10px; bottom:10px; width:34px; height:34px;
+       background:#25262b; color:#9a948c; border:1px solid #34353b; border-radius:8px;
+       font:16px ui-monospace,Menlo,monospace; cursor:pointer; opacity:.6;">&#x26F6;</button>
+  <div id="roombar" style="display:none; position:fixed; top:10px; right:10px; z-index:6;
+       background:#25262b; color:#9a948c; border:1px solid #34353b; border-radius:8px;
+       padding:6px 10px; font:12px ui-monospace,Menlo,monospace;"></div>
+  <script>
+    // multiplayer room bar (netplay rung 5a) — identical block in web_shell.html;
+    // see the comment there. Kept duplicated because the two shells are separate
+    // self-contained files by design (loader vs emscripten --shell-file).
+    (function () {
+      var RELAY = 'dreamengine-relay.onrender.com';
+      var bar = document.getElementById('roombar');
+      var room = new URLSearchParams(location.search).get('room');
+      function mkbtn(label) {
+        var b = document.createElement('button');
+        b.textContent = label;
+        b.setAttribute('style', 'background:transparent; border:1px solid #06b5e0; color:#06b5e0;' +
+          'font:inherit; padding:2px 8px; border-radius:6px; cursor:pointer;');
+        return b;
+      }
+      if (room) {
+        bar.style.display = 'block';
+        var code = document.createElement('span');
+        code.textContent = 'room ' + room + ' ';
+        var b = mkbtn('copy invite link');
+        b.onclick = function () {
+          var link = location.href;
+          (navigator.clipboard ? navigator.clipboard.writeText(link)
+                               : Promise.reject()).then(function () {
+            b.textContent = 'copied!';
+            setTimeout(function () { b.textContent = 'copy invite link'; }, 1500);
+          }).catch(function () { prompt('invite link:', link); });
+        };
+        bar.appendChild(code); bar.appendChild(b);
+      } else {
+        fetch('manifest.json').then(function (r) { return r.json(); }).then(function (m) {
+          if (!m || !(m.players >= 2)) return;
+          bar.style.display = 'block';
+          var b = mkbtn('👥 play together');
+          b.onclick = function () {
+            var c = Math.random().toString(36).replace(/[^a-z0-9]/g, '').slice(0, 4) || 'play';
+            location.href = '?room=' + c + (location.host !== RELAY ? '&relay=wss://' + RELAY : '');
+          };
+          bar.appendChild(b);
+        }).catch(function () {});
+      }
+    })();
+  </script>
+  <script>
+    var Module = { canvas: document.getElementById('canvas') };
+    Module.deTouchCeiling = (function () {
+      var ua = navigator.userAgent, mtp = navigator.maxTouchPoints || 0;
+      if (/iPhone|iPod/.test(ua)) return 5;
+      if (/iPad/.test(ua) || (/Macintosh/.test(ua) && mtp > 1)) return 10;
+      return mtp;
+    })();
+    function rotateHint() {
+      var c = Module.canvas, h = document.getElementById('rotate-hint');
+      var portrait = window.innerHeight > window.innerWidth;
+      var coarse   = window.matchMedia('(pointer: coarse)').matches;
+      h.style.display = (coarse && portrait && c.width > c.height) ? 'block' : 'none';
+    }
+    window.addEventListener('resize', rotateHint);
+    setTimeout(rotateHint, 1000);
+    var fsBtn = document.getElementById('fs');
+    if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) {
+      fsBtn.style.display = 'none';
+    } else fsBtn.addEventListener('click', function () {
+      var d = document, el = d.documentElement;
+      if (d.fullscreenElement || d.webkitFullscreenElement)
+        (d.exitFullscreen || d.webkitExitFullscreen).call(d);
+      else
+        (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+    });
+    Module.canvas.addEventListener('pointerdown', function (e) {
+      try { Module.canvas.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    Module.deTouches = [];
+    ['touchstart', 'touchmove', 'touchend', 'touchcancel'].forEach(function (ev) {
+      Module.canvas.addEventListener(ev, function (e) {
+        var c = Module.canvas, rect = c.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        var out = [];
+        for (var i = 0; i < e.touches.length; i++) {
+          var t = e.touches[i];
+          if (t.target !== c) continue;
+          out.push(t.identifier,
+                   (t.clientX - rect.left) * (c.width / rect.width),
+                   (t.clientY - rect.top) * (c.height / rect.height));
+        }
+        Module.deTouches = out;
+      }, { passive: true });
+    });
+    (function () {
+      function openOverlay() {
+        if (window.deDebug) { window.deDebug.toggle(); return; }
+        var s = document.createElement('script');
+        s.src = '../debug-overlay.js';
+        s.onerror = function () { console.warn('debug-overlay.js not found here'); };
+        document.body.appendChild(s);
+      }
+      if (/[?&#]debug/.test(location.search + location.hash))
+        window.addEventListener('load', openOverlay);
+      var taps = [];
+      function cornerTap(x, y) {
+        if (x > 60 || y > 60) return;
+        var now = Date.now();
+        taps = taps.filter(function (t) { return now - t < 650; });
+        taps.push(now);
+        if (taps.length >= 3) { taps = []; openOverlay(); }
+      }
+      window.addEventListener('touchstart', function (e) {
+        var t = e.touches[0]; if (t) cornerTap(t.clientX, t.clientY);
+      }, { passive: true, capture: true });
+      window.addEventListener('mousedown', function (e) { cornerTap(e.clientX, e.clientY); }, true);
+    })();
+
+    // microphone INPUT (mic-and-sampling.md Tier-1) — getUserMedia → de_audio_input, on a SEPARATE
+    // AudioContext from the game's audio worklet. Opens lazily on de_mic_wanted(); zero-gain sink so
+    // the mic is never echoed to output. Same glue as the plain shell (web_shell.html).
+    Module.onRuntimeInitialized = (function (prev) { return function () {
+      if (prev) prev();
+      var C = function (fn, ret, sig, args) { try { return Module.ccall(fn, ret, sig, args); } catch (e) { return 0; } };
+      var ctx = null, srcNode = null, proc = null, sink = null, stream = null, opening = false, running = false;
+      function push(chunk, sr) {
+        var ptr = C('de_mic_scratch', 'number', [], []);
+        var cap = C('de_mic_scratch_cap', 'number', [], []);
+        var n = Math.min(chunk.length, cap);
+        Module.HEAPF32.set(chunk.subarray(0, n), ptr >> 2);
+        C('de_audio_input', null, ['number', 'number', 'number'], [ptr, n, sr | 0]);
+      }
+      function open() {
+        if (opening || running || !navigator.mediaDevices) return;
+        opening = true;
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(function (s) {
+          opening = false;
+          if (!C('de_mic_wanted', 'number', [], [])) { s.getTracks().forEach(function (t) { t.stop(); }); return; }
+          stream = s;
+          ctx = new (window.AudioContext || window.webkitAudioContext)();
+          srcNode = ctx.createMediaStreamSource(s);
+          proc = ctx.createScriptProcessor(2048, 1, 1);
+          proc.onaudioprocess = function (e) { push(e.inputBuffer.getChannelData(0), ctx.sampleRate); };
+          sink = ctx.createGain(); sink.gain.value = 0;
+          srcNode.connect(proc); proc.connect(sink); sink.connect(ctx.destination);
+          running = true;
+          C('de_mic_set_active', null, ['number'], [1]);
+        }).catch(function () { opening = false; });
+      }
+      function close() {
+        if (!running) return;
+        try { proc.disconnect(); srcNode.disconnect(); sink.disconnect(); } catch (e) {}
+        if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+        if (ctx) ctx.close();
+        ctx = srcNode = proc = sink = stream = null; running = false;
+        C('de_mic_set_active', null, ['number'], [0]);
+      }
+      setInterval(function () {
+        var w = C('de_mic_wanted', 'number', [], []);
+        if (w && !running && !opening) open();
+        else if (!w && running) close();
+      }, 100);
+    }; })(Module.onRuntimeInitialized);
+  </script>
+  <script>
+    // THE CHOOSER: load the AudioWorklet build when the page is cross-origin isolated
+    // (shared memory available), else the ScriptProcessor fallback. Both are plain
+    // emscripten outputs (no per-build html). pref==='plain' forces the fallback even when
+    // isolated (the debug / iOS-default path). See docs/design/audio-threading.md.
+    (function () {
+      var isolated = (window.crossOriginIsolated && typeof SharedArrayBuffer !== 'undefined');
+      var useWorklet = (window.deAudioPref === 'plain') ? false : isolated;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = useWorklet ? 'worklet.js' : 'plain.js';
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
