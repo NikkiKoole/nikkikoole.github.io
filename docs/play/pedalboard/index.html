@@ -18,6 +18,18 @@
   <meta property="twitter:image" content="https://mipolai.com/assets/images/pedalboard-og.png">
   <link rel="icon" href="cart.png">
   <link rel="apple-touch-icon" href="cart.png">
+  <script>
+    /* Hold the tab title. raylib's InitWindow() pushes its window title into document.title
+       when the wasm boots, so without this the tab reads "Pedalboard" for a moment and is then
+       overwritten (with "dreamengine" on any cart built before build-site.js started baking
+       -DDE_WINDOW_TITLE, or with the cart's own lower-case de:meta title after). Re-assert it
+       whenever something changes it; settles immediately since the reset is a no-op once equal. */
+    (function () {
+      var want = document.title;
+      new MutationObserver(function () { if (document.title !== want) document.title = want })
+        .observe(document.head, { subtree: true, childList: true, characterData: true });
+    })();
+  </script>
   <!-- mipolai:standalone-end -->
   <!-- WORKLET-CAPABLE shell (cfg.worklet carts). NOT an emscripten --shell-file: it's a
        hand-written loader that ships BOTH builds and picks one at runtime. See

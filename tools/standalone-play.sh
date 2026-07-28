@@ -35,8 +35,12 @@ mani="$root/docs/play/$slug/manifest.json"
 url="https://mipolai.com/play/$slug/"
 img="https://mipolai.com/assets/images/$og"
 
-# the injected head block, between markers so a re-run replaces it cleanly
-block=$(cat <<HEAD
+# The injected head block, between markers so a re-run replaces it cleanly. Written to a temp
+# FILE rather than captured with $(cat <<HEAD): /bin/sh here is bash 3.2, which mis-parses a
+# heredoc inside command substitution when the body carries parens (the guard script below did
+# exactly that, and the block ran as shell commands instead of being captured).
+blockfile=$(mktemp)
+cat > "$blockfile" <<HEAD
   <!-- mipolai:standalone-start (tools/standalone-play.sh — re-run after copying a fresh build) -->
   <title>$title</title>
   <meta name="description" content="$desc">
@@ -53,20 +57,32 @@ block=$(cat <<HEAD
   <meta property="twitter:image" content="$img">
   <link rel="icon" href="cart.png">
   <link rel="apple-touch-icon" href="cart.png">
+  <script>
+    /* Hold the tab title. raylib's InitWindow() pushes its window title into document.title
+       when the wasm boots, so without this the tab reads "$title" for a moment and is then
+       overwritten (with "dreamengine" on any cart built before build-site.js started baking
+       -DDE_WINDOW_TITLE, or with the cart's own lower-case de:meta title after). Re-assert it
+       whenever something changes it; settles immediately since the reset is a no-op once equal. */
+    (function () {
+      var want = document.title;
+      new MutationObserver(function () { if (document.title !== want) document.title = want })
+        .observe(document.head, { subtree: true, childList: true, characterData: true });
+    })();
+  </script>
   <!-- mipolai:standalone-end -->
 HEAD
-)
 
 tmp=$(mktemp)
-BLOCK="$block" awk '
+awk -v blockfile="$blockfile" '
   /mipolai:standalone-start/ { skip = 1 }               # drop a previous injection
   /mipolai:standalone-end/   { skip = 0; next }
   skip                       { next }
   /<title>/                  { next }                   # our block owns the title now
   { print }
-  /<meta charset=/ && !done   { print ENVIRON["BLOCK"]; done = 1 }
+  /<meta charset=/ && !done  { while ((getline l < blockfile) > 0) print l; done = 1 }
 ' "$page" > "$tmp"
 mv "$tmp" "$page"
+rm -f "$blockfile"
 
 # the home-screen name (display:fullscreen PWA); keep the rest of the manifest untouched
 tmp=$(mktemp)
