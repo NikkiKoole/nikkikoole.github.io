@@ -2,6 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- mipolai:standalone-start (tools/standalone-play.sh — re-run after copying a fresh build) -->
+  <title>Pedalboard</title>
+  <meta name="description" content="A guitar you play through a pedalboard you build: drag stompboxes into the chain, reorder them, hear the order change the tone.">
+  <link rel="canonical" href="https://mipolai.com/play/pedalboard/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mipolai.com/play/pedalboard/">
+  <meta property="og:title" content="Pedalboard">
+  <meta property="og:description" content="A guitar you play through a pedalboard you build: drag stompboxes into the chain, reorder them, hear the order change the tone.">
+  <meta property="og:image" content="https://mipolai.com/assets/images/pedalboard-og.png">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://mipolai.com/play/pedalboard/">
+  <meta property="twitter:title" content="Pedalboard">
+  <meta property="twitter:description" content="A guitar you play through a pedalboard you build: drag stompboxes into the chain, reorder them, hear the order change the tone.">
+  <meta property="twitter:image" content="https://mipolai.com/assets/images/pedalboard-og.png">
+  <link rel="icon" href="cart.png">
+  <link rel="apple-touch-icon" href="cart.png">
+  <!-- mipolai:standalone-end -->
   <!-- WORKLET-CAPABLE shell (cfg.worklet carts). NOT an emscripten --shell-file: it's a
        hand-written loader that ships BOTH builds and picks one at runtime. See
        docs/design/audio-threading.md Stage 3/4. self-heal + coi-serviceworker FIRST so the
@@ -61,7 +78,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#1b1c1f">
-  <title>pedalboard — dreamengine</title>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="cart.png">
   <style>
