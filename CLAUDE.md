@@ -86,13 +86,42 @@ Drop the `.mp4` into `docs/assets/images/`; make the poster from a still:
 The common reason this site gets touched: a cart shipped in the **dreamengine** repo
 (`/Users/nikkikoole/Projects/dreamengine`) wants a `content/makes/<cart>.md` page. Recipe:
 
-1. In dreamengine, bake a looping clip (`make-gif.js --mp4`) and pull a hero frame
-   (`ffmpeg -ss 3 -i clip.mp4 -frames:v 1 frame.png`). No clip? A crisp still via `optimize-image.sh
-   … shot` is fine.
-2. Copy frontmatter from **`content/makes/acidcandy.md`** — the end-to-end cart reference (shot +
-   hero video/poster + full SEO).
+1. In dreamengine, bake a looping clip (`node tools/make-gif.js <cart> --recipe <NN-label> --format
+   mp4` — there is no `--mp4` flag) and pull a hero frame (`ffmpeg -ss 3 -i clip.mp4 -frames:v 1
+   frame.png`). No clip? A crisp still via `optimize-image.sh … shot` is fine.
+2. Copy frontmatter from **`content/makes/tinyacidjam.md`** — the end-to-end cart reference (shot +
+   hero video/poster + full SEO + the playable embed). It's the `acidcandy` cart, so note the
+   website slug needn't match the cart name.
 3. Land as `draft=true`, drop the `.mp4` + poster into `docs/assets/images/`, rebuild, eyeball.
-4. Flip `draft=false`, rebuild, commit both trees, push.
+4. **Ship the playable too** (below) — the makes page embeds it, and its URL is also the standalone
+   link that gets posted to a subreddit or forum.
+5. Flip `draft=false`, rebuild, commit both trees, push.
+
+### The playable: `docs/play/<slug>/`
+
+The only directory under `docs/` the Lua build does NOT generate — a dreamengine wasm build copied
+in by hand, serving both the makes-page `<iframe>` and a standalone page at
+`mipolai.com/play/<slug>/` that is just the cart, nothing else.
+
+```sh
+node tools/build-site.js <cart>          # in dreamengine/ (~2 min of emcc) → site/<cart>/
+cd /Users/nikkikoole/Projects/love/nikkikoole.github.io
+mkdir -p docs/play/<slug> && cp /Users/nikkikoole/Projects/dreamengine/site/<cart>/* docs/play/<slug>/
+tools/standalone-play.sh <slug> "<Title>" "<description>" [<og-image.png>]
+```
+
+**Always re-run `standalone-play.sh` after copying a build**, including over an existing one: a raw
+copy is an unbranded artifact (engine tab title, no description, no OpenGraph), so the link
+previews as a blank card when pasted, and a fresh copy wipes a previous patch. Embed it with:
+
+```html
+<iframe src="../play/<slug>/" style="width:100%;max-width:720px;aspect-ratio:16/10;border:0;border-radius:6px;background:#000" allow="autoplay; fullscreen" title="<Title>, playable"></iframe>
+```
+
+Sound needs one user gesture (browsers block autoplay) — say so next to the frame. `?audio=plain`
+only if silence is reported; the shell picks its own backend. The script also injects a title guard,
+because raylib's `InitWindow()` writes the cart's window title into `document.title` a beat after
+load and would otherwise overwrite the page title.
 
 **Draft the copy, but expect Nikki to rewrite it.** A draft is wanted: the page needs words to
 react to, and an empty page is harder to start from. It is raw material, not the final voice, so
