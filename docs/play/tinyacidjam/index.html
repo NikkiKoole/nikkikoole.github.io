@@ -13,13 +13,16 @@
        iOS 15.4.1 runs-but-silent; even iOS 18 has open AudioWorklet-no-sound reports; WebKit
        #237144 = a SharedArrayBuffer isn't actually shared with the worklet). The plain
        (ScriptProcessor) build sounds identical — only looser timing — and ALWAYS plays on
-       iOS. So 'auto' tries the worklet everywhere EXCEPT genuinely-old iOS (< 16 — e.g. the
-       iOS 15.4.1 iPhone this was found on, where the worklet is silent and a controlling SW
-       also mutes the plain path). Modern iOS/iPadOS get the worklet by default; old iOS
-       auto-falls-back to plain (sound, no toggle needed). Override via toggle/param:
+       iOS. So 'auto' tries the worklet everywhere EXCEPT iOS, which always gets plain.
+       ⚠ 2026-07-30: this used to fall back only on iOS < 16, which meant every MODERN iPhone
+       was routed into the exact path the paragraph above documents as silent — reported from
+       the wild as "up-to-date iPhone, just wasn't getting any audio". The version gate was
+       always wrong: WebKit #237144 is open on current iOS too, so the fallback is now
+       version-free. Any iOS/iPadOS (incl. iOS Chrome/Firefox, all WebKit) → plain.
+       Override via toggle/param:
          pref = ?audio= (persisted to localStorage) → localStorage['de:audio'] → 'auto'
-           auto    → worklet everywhere, except iOS < 16 → plain
-           worklet → force isolation (register SW) + worklet everywhere
+           auto    → worklet everywhere, except iOS (any version) → plain
+           worklet → force isolation (register SW) + worklet everywhere (iOS: expect silence)
            plain   → force the plain build everywhere (no SW)
        Set site-wide from the gallery's Audio toggle, or per-link with ?audio=worklet.
        Gotcha: the coi service worker enables isolation, but a SW *controlling the page* also
@@ -35,10 +38,14 @@
       if (pref !== 'worklet' && pref !== 'plain') pref = 'auto';
       window.deAudioPref = pref;
 
-      // iPadOS 13+ hides as "Macintosh" (no OS version) → no match → treated as modern → worklet.
-      var m = navigator.userAgent.match(/(?:iPhone OS|CPU OS) (\d+)_/);
-      var oldIOS = !!m && parseInt(m[1], 10) < 16;   // only genuinely-old iOS falls back by default
-      var wantSW = pref === 'plain' ? false : pref === 'worklet' ? true : !oldIOS;
+      // ANY iOS/iPadOS → plain (no version gate: the worklet is silent on current iOS too).
+      // iPhone/iPod/iPad match the UA directly; iPadOS 13+ hides as "Macintosh", so catch it by
+      // the one thing a real Mac never reports — a multi-touch screen. iOS Chrome/Firefox are
+      // WebKit underneath and carry "iPhone"/"iPad" in the UA, so they're covered by the same test.
+      var ua = navigator.userAgent || '';
+      var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+                  (/Mac/.test(ua) && navigator.maxTouchPoints > 1);   // iPadOS 13+ masquerading
+      var wantSW = pref === 'plain' ? false : pref === 'worklet' ? true : !isIOS;
       window.coi = { shouldRegister: function(){ return wantSW; } };  // coi reads this synchronously
 
       if (navigator.serviceWorker) {
@@ -224,10 +231,21 @@
         Module.HEAPF32.set(chunk.subarray(0, n), ptr >> 2);
         C('de_audio_input', null, ['number', 'number', 'number'], [ptr, n, sr | 0]);
       }
+      // RAW capture. `audio: true` accepts the browser's voice-call defaults, and all three are
+      // wrong for an instrument input:
+      //   echoCancellation — the expensive one. With AEC live the browser ducks and re-routes
+      //     system OUTPUT so it can subtract it from the mic, which the player experiences as
+      //     "opening the mic quietly turned my speakers down" (reported 2026-07-30, Firefox/macOS).
+      //   autoGainControl  — rides the level, so a decaying string pumps back up as it fades.
+      //   noiseSuppression — trained on speech; it gates a quiet ring-out as noise.
+      // Plain booleans (not {exact:}) so a browser that lacks one ignores it instead of throwing
+      // OverconstrainedError. Mono: de_audio_input reads channel 0 only.
+      var MIC_CONSTRAINTS = { audio: { echoCancellation: false, autoGainControl: false,
+                                       noiseSuppression: false, channelCount: 1 }, video: false };
       function open() {
         if (opening || running || !navigator.mediaDevices) return;
         opening = true;
-        navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(function (s) {
+        navigator.mediaDevices.getUserMedia(MIC_CONSTRAINTS).then(function (s) {
           opening = false;
           if (!C('de_mic_wanted', 'number', [], [])) { s.getTracks().forEach(function (t) { t.stop(); }); return; }
           stream = s;

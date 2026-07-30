@@ -25,10 +25,10 @@ and off.
 
 ### Have a play
 
-<iframe src="../play/tinyacidjam/?audio=plain" style="width:100%;max-width:720px;aspect-ratio:16/10;border:0;border-radius:6px;background:#000" allow="autoplay; fullscreen" title="Tiny Acid Jam, playable"></iframe>
+<iframe src="../play/tinyacidjam/?audio=auto" style="width:100%;max-width:720px;aspect-ratio:16/10;border:0;border-radius:6px;background:#000" allow="autoplay; fullscreen" title="Tiny Acid Jam, playable"></iframe>
 
 *(Sound needs a tap first, since browsers block audio until you click. If it misbehaves in the
-little frame, [open it fullscreen](../play/tinyacidjam/?audio=plain).)*
+little frame, [open it fullscreen](../play/tinyacidjam/?audio=auto).)*
 
 ### How it works
 
