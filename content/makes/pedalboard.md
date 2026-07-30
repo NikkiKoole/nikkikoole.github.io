@@ -24,10 +24,10 @@ changes the sound. Nothing is faked, you are rewiring the thing.
 
 ### Have a play
 
-<iframe src="../play/pedalboard/?audio=plain" style="width:100%;max-width:720px;aspect-ratio:16/10;border:0;border-radius:6px;background:#000" allow="autoplay; fullscreen" title="Pedalboard, playable"></iframe>
+<iframe src="../play/pedalboard/?audio=auto" style="width:100%;max-width:720px;aspect-ratio:16/10;border:0;border-radius:6px;background:#000" allow="autoplay; fullscreen" title="Pedalboard, playable"></iframe>
 
 *(Sound needs a tap first, since browsers block audio until you click. If it misbehaves in the
-little frame, [open it fullscreen](../play/pedalboard/?audio=plain).)* It boots strumming itself,
+little frame, [open it fullscreen](../play/pedalboard/?audio=auto).)* It boots strumming itself,
 so you can just start turning things on. Keys 1 to 9 stomp the footswitches by position, the
 `Z X C V B N M` row walks up the neck, `A S D F G` picks the chord shape, space strums.
 
