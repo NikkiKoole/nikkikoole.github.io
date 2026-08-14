@@ -16,7 +16,7 @@ metaUrl='https://mipolai.com/tinyjam/'
 
 ## A growing collection of pocket-sized music toys.
 
-Each one is a small, playable instrument — a groovebox, a synth, a drum machine — that fits in your pocket and starts making sound the second you open it. No menus to learn, no projects to manage: tap a step, turn a knob, and it plays. Start a tiny jam wherever you are.
+Each one is a small, playable instrument:  a groovebox, a synth, a drum machine, a modelled instrument, that fits in your pocket and starts making sound the second you open it. No menus to learn, no projects to manage: tap a step, turn a knob, and it plays. Start a tiny jam wherever you are.
 
 New instruments join the collection over time, so it grows with you.
 
@@ -24,5 +24,5 @@ New instruments join the collection over time, so it grows with you.
 
 <section class='pink'>
 # Coming soon.
-No download yet — it's still being made. This is one of the "toys for big kids" from the same studio that makes [the Mipos](/mipo/).
+No download yet, it's still being made. This is one of the "toys for big kids" from the same studio that makes [the Mipos](/mipo/).
 </section>
